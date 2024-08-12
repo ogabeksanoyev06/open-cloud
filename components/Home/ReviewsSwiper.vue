@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">
 		<div class="container">
-			<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium mb-10">Наш клиенты отзыв</h3>
+			<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium mb-10">{{translations['home.reviews-title']}}</h3>
 			<Swiper
 				:modules="[SwiperAutoplay]"
 				:space-between="6"
@@ -58,4 +58,8 @@ defineProps({
 		required: true
 	}
 });
+
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
 </script>

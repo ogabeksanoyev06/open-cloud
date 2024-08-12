@@ -17,21 +17,30 @@
 		<section class="sm:mt-20 mt-10">
 			<div class="container">
 				<div class="bg-white p-10 flex flex-col gap-6 sm:gap-10">
-					<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">Преимущества сервисов Opencloud</h3>
+					<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
+						{{ translations['home.advantages-title'] }}
+					</h3>
+
 					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 						<div class="flex flex-col gap-4">
 							<div class="p-4 sm:p-6 bg-grey-0 rounded-2xl flex flex-col justify-between gap-10">
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">Удобное управление услугами</h3>
-									<p class="to-grey text-sm sm:text-base">В личном кабинете или облачной панели, через API сформирует коммерческое предложение и будет вас сопровождать на всех</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{
+										translations['home.advantages-card-title'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc']
+										}}</p>
 								</div>
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
-							<div class="flex flex-col gap-6 border border-b-0 border-grey-1 p-4 sm:p-6 rounded-t-2xl" style="background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%)">
+
+							<div class="flex flex-col gap-6 border border-b-0 border-grey-1 p-4 sm:p-6 rounded-t-2xl"
+								style="background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%)">
 								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">Удобное управление услугами</h3>
-									<p class="to-grey text-sm sm:text-base">В личном кабинете или облачной панели, через API сформирует коммерческое предложение и будет вас сопровождать на всех</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{
+										translations['home.advantages-card-title'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc']
+										}}</p>
 								</div>
 							</div>
 						</div>
@@ -46,36 +55,30 @@
 
 		<section class="sm:mt-20 mt-10">
 			<div class="container">
-				<div class="min-h-96 p-4 lg:px-20 rounded-3xl bg-[url('~/assets/images/custom_green_bg.png')] bg-top bg-cover bg-no-repeat flex lg:items-center relative">
-					<div class="max-w-[524px] flex flex-col items-start gap-2 pb-[340px] lg:pb-0">
-						<h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">Индивидуальный подход к каждому клиенту</h1>
-						<p class="mb-6 lg:mb-10">Проведем бесплатную консультацию по вашему проекту, ответим на вопросы и подберем лучшие решения.</p>
-						<ModalConsultationForm />
-					</div>
-					<div class="">
-						<img
-							class="absolute bottom-0 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-[130px] h-[300px] lg:h-auto z-0 max-w-[300px] lg:max-w-[450px]"
-							src="~/assets/images/phone.png"
-							alt="phone image"
-						/>
-					</div>
-				</div>
+				<HomeClientBanner />
 			</div>
 		</section>
 
 		<section class="sm:mt-20 mt-10">
 			<div class="container flex flex-col gap-6 sm:gap-10">
-				<h3 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">Поможем на всех этапах</h3>
+				<h3 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">
+					{{ translations['home.help-title'] }}
+				</h3>
+
 				<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1">
 					<div class="flex flex-col items-start gap-6 border border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 						<div class="flex flex-col gap-4">
-							<h3 class="text-xl sm:text-2xl font-medium">База знаний</h3>
-							<p class="to-grey text-base">Подробные инструкции по работе с сервисами OpenCloud.uz</p>
+							<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
+							<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 						</div>
+
 						<Button class="!bg-transparent p-0 shadow-none">
-							Найти ответ
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-								<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							{{ translations['home.help-card-btn'] }}
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+								fill="none">
+								<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992"
+									stroke="#272727" stroke-width="1.5" stroke-linecap="round"
+									stroke-linejoin="round" />
 							</svg>
 						</Button>
 					</div>
@@ -98,7 +101,7 @@
 		<section>
 			<div class="container max-w-[1760px] mt-10">
 				<div class="bg-background py-20 rounded-[40px]">
-					<SectionNewsSwiper :title="'Новости/Блог'" :data="data?.news?.results" />
+					<SectionNewsSwiper :title="translations['home.news-title']" :data="data?.news?.results" />
 				</div>
 			</div>
 		</section>
@@ -115,13 +118,16 @@ import { useClientsStore } from '~/stores/clients';
 import { useReviewsStore } from '~/stores/reviews';
 import { useBannerStore } from '~/stores/banners';
 import { useProductsStore } from '~/stores/products.js';
+import { useTranslationsStore } from "~/stores/translations.js"
 
 const newsStore = useNewsStore();
 const clientsStore = useClientsStore();
 const reviewStore = useReviewsStore();
 const bannerStore = useBannerStore();
 const productsStore = useProductsStore();
+const translationsStore = useTranslationsStore();
 
+const { translations } = storeToRefs(translationsStore)
 const { getNews } = newsStore;
 const { getClients } = clientsStore;
 const { getReviews } = reviewStore;

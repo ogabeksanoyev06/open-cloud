@@ -1,23 +1,18 @@
 <template>
 	<div class="container max-w-[1760px]">
 		<div class="relative">
-			<Swiper
-				class="rounded-[40px] relative overflow-hidden z-1"
-				:modules="[SwiperAutoplay]"
-				:slides-per-view="1"
-				:loop="true"
-				:speed="2000"
-				:autoplay="{
+			<Swiper class="rounded-[40px] relative overflow-hidden z-1" :modules="[SwiperAutoplay]" :slides-per-view="1"
+				:loop="true" :speed="2000" :autoplay="{
 					delay: 5000,
 					disableOnInteraction: false
-				}"
-			>
+				}">
 				<div class="absolute bottom-6 left-6 sm:bottom-20 sm:left-20 z-[20]">
-					<p class="text-xs sm:text-base text-white">Слайдер кейсов</p>
-					<h4 class="max-w-[700px] text-base sm:text-2xl lg:text-3xl font-medium text-white">Opencloud - Ваш надежный локальный поставщик облачных решений</h4>
+					<p class="text-xs sm:text-base text-white">{{ translations['home.swiper-title'] }}</p>
+					<h4 class="max-w-[700px] text-base sm:text-2xl lg:text-3xl font-medium text-white">{{ translations['home.swiper-desc'] }}</h4>
 				</div>
 				<SwiperSlide v-for="(item, i) in data" :key="i">
-					<div class="relative before:h-full before:w-full before:left-0 before:top-0 before:absolute before:z-1 before:bg-gradient-to-b before:from-[rgba(39,39,39,0)] before:to-[rgba(39,39,39,0.8)]">
+					<div
+						class="relative before:h-full before:w-full before:left-0 before:top-0 before:absolute before:z-1 before:bg-gradient-to-b before:from-[rgba(39,39,39,0)] before:to-[rgba(39,39,39,0.8)]">
 						<div class="w-full h-[300px] md:h-[650px]">
 							<img :src="item.image" alt="" class="w-full h-full object-cover" />
 						</div>
@@ -42,6 +37,10 @@
 </template>
 
 <script setup>
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
+
 defineProps({
 	data: {
 		type: Array,

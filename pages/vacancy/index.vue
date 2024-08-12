@@ -2,7 +2,7 @@
 	<div class="container grid gap-3 sm:gap-10">
 		<div class="flex flex-col gap-10">
 			<div></div>
-			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">Вакансии</h1>
+			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['about.vacansy'] }}</h1>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
 			<div class="flex flex-col gap-6 bg-grey-0 border border-grey-1 rounded-lg sm:rounded-none p-6 sm:p-8 hover:bg-white transition-300" v-for="item in vacancies.results" :key="item.id">
@@ -23,6 +23,10 @@
 
 <script setup>
 import { useVacancyStore } from '~/stores/vacancies.js';
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+
+const { translations } = storeToRefs(translationsStore)
 
 const { data: vacancies } = await useAsyncData('vacancies', async () => {
 	return await useVacancyStore().getVacancies();

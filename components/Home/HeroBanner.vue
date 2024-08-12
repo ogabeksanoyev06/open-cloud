@@ -5,12 +5,12 @@
 		<div class="container relative">
 			<div class="flex flex-col gap-6 md:gap-20 relative z-10 max-w-[700px] mb-6">
 				<div>
-					<h1 class="text-white text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-medium">Облачные решения и <span class="text-green">IT инфраструктура</span> для бизнеса</h1>
-					<p class="text-base sm:text-xl mt-5 text-white">Строим и поддерживаем IT-инфраструктуру компаний, которые создают и развивают цифровые продукты.</p>
+					<h1 class="text-white text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-medium">{{ translations['home.hero-title1'] }} <span class="text-green">{{ translations['home.hero-title2'] }}</span> {{ translations['home.hero-title3'] }}</h1>
+					<p class="text-base sm:text-xl mt-5 text-white">{{translations['home.hero-desc']}}</p>
 				</div>
 				<div class="flex flex-col sm:flex-row gap-4 md:gap-6">
 					<Button>
-						Подробнее
+						{{translations['home.more-btn']}}
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M5.8335 14.1666L9.16683 9.99996L5.8335 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M10.8335 14.1666L14.1668 9.99996L10.8335 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -24,6 +24,10 @@
 	</section>
 </template>
 
-<script setup></script>
+<script setup>
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
+</script>
 
 <style></style>
