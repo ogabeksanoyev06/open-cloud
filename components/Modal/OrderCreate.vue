@@ -18,7 +18,9 @@ const isOpen = ref(false);
 
 const form = reactive({
 	name: '',
-	phone: '+998'
+	phone: '+998',
+	email: '',
+	company: ''
 });
 
 const formatPhoneNumber = (phone) => {
@@ -37,6 +39,8 @@ const sendOrderCreate = async () => {
 		await orderCreate({
 			name: form.name,
 			phone: formatPhoneNumber(form.phone),
+			email: form.email,
+			company: form.company,
 			configs: configurations
 		});
 		showToast('Mahsulotlar muvaffaqiyatli yuborildi!', 'success');
@@ -78,6 +82,20 @@ const sendOrderCreate = async () => {
 									<Label for="phone"> Номер телефона </Label>
 									<Input placeholder="имя" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
 									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
+								</VField>
+							</div>
+							<div class="grid gap-2">
+								<VField name="email" rules="required|email" v-model="form.email">
+									<Label for="email"> Электрон почта </Label>
+									<Input v-model="form.email" id="email" type="text" placeholder="Э-почта" />
+									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
+								</VField>
+							</div>
+							<div class="grid gap-2">
+								<VField name="company" rules="required" v-model="form.company">
+									<Label for="company"> Название компании </Label>
+									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
+									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 

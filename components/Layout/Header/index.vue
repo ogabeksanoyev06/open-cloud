@@ -158,15 +158,10 @@
 									</span>
 								</Button>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end">
-								<div class="flex flex-col gap-1">
-									<div class="flex items-center gap-1" v-for="(lang, i) in langs" :key="i">
-										<span></span>
-										<span>
-											{{ lang }}
-										</span>
-									</div>
-								</div>
+							<DropdownMenuContent align="end" class="flex flex-col gap-1">
+								<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
+									{{ lang.label }}
+								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
 						<div class="shrink-0 bg-[#E2E2EE] relative h-px w-full"></div>

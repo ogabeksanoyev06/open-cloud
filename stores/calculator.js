@@ -11,44 +11,44 @@ export const useCalculatorStore = defineStore(
 		const tab1Configurations = ref([
 			{
 				id: 1,
-				vcpu: 1,
-				ram: 16,
-				ssdNodes: 16,
-				hddNodes: 16,
-				publicIP: false,
-				price: {
-					vcpu_price: 0,
-					ram_price: 0,
-					ssd_price: 0,
-					hdd_price: 0,
-					public_ip_price: 0
-				}
+				tarifData: []
 			}
 		]);
 
-		const tab2Configurations = ref([
-			{
-				id: 1,
-				vcpu: 1,
-				ram: 16,
-				ssdNodes: 16,
-				hddNodes: 16,
-				publicIP: false,
-				price: {
-					vcpu_price: 0,
-					ram_price: 0,
-					ssd_price: 0,
-					hdd_price: 0,
-					public_ip_price: 0
-				}
-			}
-		]);
+		const tab2Configurations = ref([]);
 
 		const specification_prices = ref({});
 
 		const getTarifCategories = async () => {
 			try {
 				let res = await useAxios().getRequest('/calculator/configuration_tarif_categories');
+				const tarifData = res.data.results.map((tarif) => ({
+					id: tarif.id,
+					title: tarif.title,
+					ssdNodes: 16,
+					hddNodes: 16,
+					publicIP: false,
+					tarifs: tarif.tarifs.map((item) => ({
+						id: item.id,
+						ram: item.ram,
+						vcpu: item.vcpu,
+						price: item.price,
+						category: item.category
+					})),
+					price: {
+						vcpu_price: specification_prices.value.vcpu_price || 0,
+						ram_price: specification_prices.value.ram_price || 0,
+						ssd_price: specification_prices.value.ssd_price || 0,
+						hdd_price: specification_prices.value.hdd_price || 0,
+						public_ip_price: specification_prices.value.public_ip_price || 0
+					}
+				}));
+				tab1Configurations.value = [
+					{
+						tarifData: tarifData
+					}
+				];
+				console.log(tarifData);
 				return res.data;
 			} catch (error) {
 				console.log(error);
@@ -85,22 +85,45 @@ export const useCalculatorStore = defineStore(
 			const lastConfig = configurations[configurations.length - 1];
 			const newId = lastConfig ? lastConfig.id + 1 : 1;
 			const price = specification_prices.value;
+			console.log(configurations);
 
-			configurations.push({
-				id: newId,
-				vcpu: 1,
-				ram: 16,
-				ssdNodes: 16,
-				hddNodes: 16,
-				publicIP: false,
-				price: {
-					vcpu_price: price.vcpu_price || 0,
-					ram_price: price.ram_price || 0,
-					ssd_price: price.ssd_price || 0,
-					hdd_price: price.hdd_price || 0,
-					public_ip_price: price.public_ip_price || 0
-				}
-			});
+			if (tab === 1) {
+				const baseConfig = {
+					title: '',
+					tarifs: [],
+					ssdNodes: 16,
+					hddNodes: 16,
+					publicIP: false,
+					price: {
+						vcpu_price: specification_prices.value.vcpu_price || 0,
+						ram_price: specification_prices.value.ram_price || 0,
+						ssd_price: specification_prices.value.ssd_price || 0,
+						hdd_price: specification_prices.value.hdd_price || 0,
+						public_ip_price: specification_prices.value.public_ip_price || 0
+					}
+				};
+
+				configurations.push({
+					id: newId,
+					tarifData: baseConfig
+				});
+			} else {
+				configurations.push({
+					id: newId,
+					vcpu: 1,
+					ram: 16,
+					ssdNodes: 16,
+					hddNodes: 16,
+					publicIP: false,
+					price: {
+						vcpu_price: price.vcpu_price || 0,
+						ram_price: price.ram_price || 0,
+						ssd_price: price.ssd_price || 0,
+						hdd_price: price.hdd_price || 0,
+						public_ip_price: price.public_ip_price || 0
+					}
+				});
+			}
 			showToast("Konfiguratsiya qo'shildi", 'success');
 		};
 

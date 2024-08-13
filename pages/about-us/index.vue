@@ -38,7 +38,7 @@
 						</svg>
 					</Button>
 				</div>
-				<div class="h-[125px] mx-auto">
+				<div class="h-[125px] mlПолучите консультацию менеджера-auto">
 					<img class="object-cover h-full w-full" src="~/assets/images/certificate.png" alt="certificate img" />
 				</div>
 			</div>

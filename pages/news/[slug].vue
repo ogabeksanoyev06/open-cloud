@@ -11,19 +11,19 @@
 					</Button>
 				</NuxtLink>
 				<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">
-					{{ data.title }}
+					{{ data?.title }}
 				</h1>
 				<span class="text-grey text-sm font-normal leading-130 text-center">
-					{{ data.created_at }}
+					{{ data?.created_at }}
 				</span>
 			</div>
 			<div class="flex flex-col gap-6 mt-10">
-				<img :src="data.image" alt="" class="w-full h-full rounded-2xl mx-auto" />
+				<img :src="data?.image" alt="" class="w-full h-full rounded-2xl mx-auto" />
 				<h4 class="text-lg sm:text-xl font-medium">
 					Пользователям будут доступны единая консоль управления, контроля и учета используемых вычислительных ресурсов, набор инфраструктурных сервисов, позволяющих реализовать стандартизацию
 					технологических процессов, а также широкой выбор платформенных сервисов с поддержкой от отечественного вендора, протестированных промышленными нагрузками и готовых к любым задачам.
 				</h4>
-				<div class="text-base" v-html="data.text"></div>
+				<div class="text-base" v-html="data?.text"></div>
 			</div>
 		</div>
 		<div class="container max-w-[1760px] mt-10">

@@ -119,7 +119,15 @@
 						<div class="max-w-[524px] flex flex-col items-start gap-2 pb-[340px] lg:pb-0">
 							<h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">Индивидуальный подход к каждому клиенту</h1>
 							<p class="mb-6 lg:mb-10">Проведем бесплатную консультацию по вашему проекту, ответим на вопросы и подберем лучшие решения.</p>
-							<ModalConsultationForm />
+							<ModalConsultationForm>
+								<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">
+									Получить консультацию
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M5.83325 14.1665L9.16659 9.99984L5.83325 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M10.8333 14.1665L14.1666 9.99984L10.8333 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</Button>
+							</ModalConsultationForm>
 						</div>
 						<div class="">
 							<img

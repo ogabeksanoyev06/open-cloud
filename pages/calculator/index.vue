@@ -202,18 +202,7 @@ import { useCalculatorStore } from '~/stores/calculator.js';
 
 const calculatorStore = useCalculatorStore();
 
-const { configurations } = storeToRefs(calculatorStore);
-const { addConfiguration, deleteConfiguration } = calculatorStore;
-
-const selectedType = ref(0);
-const nodeValue = ref(1);
-const ssdNodeValue = ref(16);
-
-const selectType = (type) => {
-	selectedType.value = type;
-};
-
-const { data } = await useAsyncData('home', async () => {
+const { data } = await useAsyncData('calculator', async () => {
 	const [tariff, prices] = await Promise.all([calculatorStore.getTarifCategories(), calculatorStore.getSpecificationPrice()]);
 
 	return { tariff, prices };

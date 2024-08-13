@@ -22,22 +22,32 @@
 						</div>
 						<div>
 							<Accordion type="single" class="w-full" collapsible>
-								<AccordionItem v-for="item in configurations" :key="item.id" :value="item.id">
-									<AccordionTrigger class="sm:text-xl">Конфигурация {{ item.id }}</AccordionTrigger>
+								<AccordionItem v-for="(item, i) in tab1Configurations" :key="i" :value="i">
+									<AccordionTrigger class="sm:text-xl">Конфигурация {{ i + 1 }} </AccordionTrigger>
 									<AccordionContent class="flex flex-col gap-6">
-										<div class="flex flex-col gap-4">
-											<ul>
-												<li></li>
-											</ul>
-											<p class="text-grey sm:text-sm">Конфигурации, сбалансированные по соотношению ядер и памяти</p>
+										<div class="">
+											<div class="relative overflow-hidden max-w-[600px] lg:max-w-none">
+												<ul class="flex items-center gap-4 h-full w-full" style="overflow: scroll">
+													<li class="flex items-center font-medium cursor-pointer" v-for="(tarif, i) in item.tarifData" @click="activeTab(i)">
+														{{ tarif.title }}
+													</li>
+												</ul>
+											</div>
+											<div></div>
 										</div>
+
+										<p class="text-grey sm:text-sm">Конфигурации, сбалансированные по соотношению ядер и памяти</p>
 										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-											<div class="flex flex-col items-center gap-4 p-4 sm:p-6 rounded-2xl border-2 border-grey-1 cursor-pointer hover:shadow-lg transition-300">
+											<div
+												class="flex flex-col items-center gap-4 p-4 sm:p-6 rounded-2xl border-2 border-grey-1 cursor-pointer hover:shadow-lg transition-300"
+												v-for="cate in item.tarifData[selectedIndex]?.tarifs"
+												:key="cate.id"
+											>
 												<div class="flex items-center justify-center gap-2">
-													<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">1 ГБ Ram</span>
-													<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">1 vCPU</span>
+													<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">{{ cate.ram }} ГБ Ram</span>
+													<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">{{ cate.vcpu }} vCPU</span>
 												</div>
-												<h4 class="text-base font-medium">1 925 250 сум/месяц</h4>
+												<h4 class="text-base font-medium">{{ formatPrice(cate.price) }} сум/месяц</h4>
 											</div>
 										</div>
 										<div class="flex flex-col gap-6">
@@ -118,7 +128,7 @@
 									</AccordionContent>
 								</AccordionItem>
 							</Accordion>
-							<Button @click="addConfiguration" class="mt-10 w-full">
+							<Button @click="addConfiguration(1)" class="mt-10 w-full">
 								Ещё конфигурация
 								<svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
 									<path
@@ -132,15 +142,15 @@
 						</div>
 					</div>
 					<div class="lg:sticky top-28 left-0 h-[calc(100vh-100px)] overflow-hidden rounded-2xl">
-						<div class="bg-grey-0 rounded-2xl p-6 flex flex-col gap-6 overflow-auto h-full">
-							<div class="flex items-center justify-between">
+						<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 overflow-auto h-full">
+							<div class="flex items-center justify-between p-6">
 								<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
-								<Button variant="link" class="text-destructive hover:no-underline font-normal p-0">Очистка</Button>
+								<Button variant="link" class="text-destructive hover:no-underline font-normal p-0" @click="deleteAllConfigurations(2)">Очистка</Button>
 							</div>
-							<div class="flex flex-col gap-6" v-for="item in configurations" :key="item.id" :value="item.id">
+							<div class="flex flex-col gap-6 p-6">
 								<div class="flex items-center justify-between">
-									<h4 class="text-base sm:text-xl">Конфигурация {{ item.id }}</h4>
-									<Button @click="deleteConfiguration(item.id)" variant="ghost" class="p-0 h-auto">
+									<h4 class="text-base sm:text-xl">Конфигурация</h4>
+									<Button @click="deleteConfiguration(1)" variant="ghost" class="p-0 h-auto">
 										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 											<path
 												d="M19 9L18.2841 18.3068C18.1238 20.3908 16.386 22 14.2959 22H9.70412C7.61398 22 5.87621 20.3908 5.71591 18.3068L5 9M21 7C18.4021 5.73398 15.3137 5 12 5C8.68635 5 5.59792 5.73398 3 7M10 5V4C10 2.89543 10.8954 2 12 2C13.1046 2 14 2.89543 14 4V5M10 11L10 17M14 11V17"
@@ -152,26 +162,32 @@
 									</Button>
 								</div>
 								<ul class="flex flex-col gap-4">
+									<li class="flex flex-col items-center gap-2 p-4 rounded-2xl border border-grey-1 transition-300">
+										<div class="flex items-center justify-center gap-2">
+											<span class="bg-grey-1 rounded sm:px-4 px-3 py-2">1 ГБ Ram</span>
+											<span class="bg-grey-1 rounded sm:px-4 px-3 py-2">1 vCPU</span>
+										</div>
+										<h4 class="text-base font-medium">1 925 250 сум/месяц</h4>
+									</li>
+
 									<li class="flex items-center justify-between">
-										<span class="text-grey text-base">1 vCPU</span>
-										<span class="text-base">250,000 сум</span>
+										<span class="text-grey text-base">4 ГБ HDD</span>
+										<span class="text-base">5 сум</span>
+									</li>
+									<li class="flex items-center justify-between">
+										<span class="text-grey text-base">8 ГБ SDD</span>
+										<span class="text-base">8 сум</span>
 									</li>
 								</ul>
 								<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 							</div>
-							<div class="flex flex-col gap-6 mt-auto">
+							<div class="flex flex-col gap-6 mt-auto p-6 sticky bottom-0 bg-grey-0">
 								<div class="flex flex-col gap-2">
 									<h4 class="text-sm sm:text-base text-grey">Цена за месяц</h4>
-									<h3 class="text-xl sm:text-2xl font-medium">500,000 сум/месяц</h3>
+									<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab2) }} сум/месяц</h3>
 								</div>
 								<div class="flex flex-col gap-4">
-									<Button>
-										Заказать
-										<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-											<path d="M6.33331 14.166L9.66665 9.99935L6.33331 5.83268" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-											<path d="M11.3333 14.166L14.6666 9.99935L11.3333 5.83268" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										</svg>
-									</Button>
+									<ModalOrderCreate />
 									<Button variant="outline"> Скачать расчет </Button>
 								</div>
 							</div>
@@ -372,19 +388,19 @@
 								<ul class="flex flex-col gap-4">
 									<li class="flex items-center justify-between">
 										<span class="text-grey text-base">{{ item.vcpu }} vCPU</span>
-										<span class="text-base"> {{ item.price.vcpu_price * item.vcpu }}сум </span>
+										<span class="text-base"> {{ item.price?.vcpu_price * item.vcpu }}сум </span>
 									</li>
 									<li class="flex items-center justify-between">
 										<span class="text-grey text-base">{{ item.ram }} ГБ RAM</span>
-										<span class="text-base">{{ item.price.ram_price * item.ram }} сум</span>
+										<span class="text-base">{{ item.price?.ram_price * item.ram }} сум</span>
 									</li>
 									<li class="flex items-center justify-between">
 										<span class="text-grey text-base">{{ item.hddNodes }} ГБ HDD</span>
-										<span class="text-base">{{ item.price.hdd_price * item.hddNodes }} сум</span>
+										<span class="text-base">{{ item.price?.hdd_price * item.hddNodes }} сум</span>
 									</li>
 									<li class="flex items-center justify-between">
 										<span class="text-grey text-base">{{ item.ssdNodes }} ГБ SDD</span>
-										<span class="text-base">{{ item.price.ssd_price * item.ssdNodes }} сум</span>
+										<span class="text-base">{{ item.price?.ssd_price * item.ssdNodes }} сум</span>
 									</li>
 								</ul>
 								<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
@@ -412,22 +428,21 @@ import { useCalculatorStore } from '~/stores/calculator.js';
 
 const calculatorStore = useCalculatorStore();
 
-const { configurations, tab2FormattedValues, calculateTotalPriceTab2 } = storeToRefs(calculatorStore);
-const { addConfiguration, deleteConfiguration, deleteAllConfigurations, tab2Configurations, incrementNodes, decrementNodes } = calculatorStore;
+const { configurations, tab1Configurations, tab2Configurations, calculateTotalPriceTab2 } = storeToRefs(calculatorStore);
+const { addConfiguration, deleteConfiguration, deleteAllConfigurations, incrementNodes, decrementNodes } = calculatorStore;
 
 const selectedType = ref(0);
 const nodeValue = ref(1);
 const ssdNodeValue = ref(16);
 
+const selectedIndex = ref(0);
+
 const selectType = (type) => {
 	selectedType.value = type;
 };
 
-const ssdNodeValueFormatted = computed(() => {
-	return `${ssdNodeValue.value} GB`;
-});
-
-const nodeValueFormatted = computed(() => {
-	return `${nodeValue.value} Узел`;
-});
+const activeTab = (index) => {
+	selectedIndex.value = index;
+	console.log('sasas');
+};
 </script>

@@ -32,13 +32,15 @@
 							Opencloud - ведущий поставщик облачных решений в Узбекистане. Мы предлагаем широкий спектр услуг, включая инфраструктуру как услугу (IaaS), резервное копирование как услугу (BaaS),
 							аварийное восстановление как услугу (DRaaS) и Kubernetes
 						</p>
-						<Button class="!bg-transparent border-grey border text-primary">
-							Лицензия
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-								<path d="M5.83325 14.1667L9.16659 9.99999L5.83325 5.83332" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M10.8333 14.1667L14.1666 9.99999L10.8333 5.83332" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</Button>
+						<NuxtLink to="/about-us">
+							<Button class="!bg-transparent border-grey border text-primary">
+								Лицензия
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<path d="M5.83325 14.1667L9.16659 9.99999L5.83325 5.83332" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path d="M10.8333 14.1667L14.1666 9.99999L10.8333 5.83332" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</Button>
+						</NuxtLink>
 					</div>
 				</div>
 			</div>

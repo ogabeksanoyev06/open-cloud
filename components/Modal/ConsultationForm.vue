@@ -1,9 +1,12 @@
 <script setup>
 import { useApplication } from '~/stores/application';
+import { useCustomToast } from '~/composables/useCustomToast.js';
 
 const applicationStore = useApplication();
 const { consultationForm } = applicationStore;
 const { loading } = storeToRefs(applicationStore);
+
+const { showToast } = useCustomToast();
 
 const isOpen = ref(false);
 
@@ -28,6 +31,7 @@ const sendConsultationForm = async () => {
 			email: form.email
 		});
 		isOpen.value = false;
+		showToast('Tez orada siz bilan boglanamiz!', 'success');
 	} catch (error) {
 		console.log(error);
 	}
@@ -36,15 +40,9 @@ const sendConsultationForm = async () => {
 
 <template>
 	<div>
-		<Dialog>
+		<Dialog v-model:open="isOpen">
 			<DialogTrigger as-child>
-				<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">
-					Получить консультацию
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<path d="M5.83325 14.1665L9.16659 9.99984L5.83325 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M10.8333 14.1665L14.1666 9.99984L10.8333 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-					</svg>
-				</Button>
+				<slot></slot>
 			</DialogTrigger>
 			<DialogContent class="sm:max-w-[580px] p-4 sm:p-8">
 				<DialogHeader>
@@ -75,14 +73,31 @@ const sendConsultationForm = async () => {
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="company" rules="required" v-model="form.email">
+								<VField name="company" rules="required" v-model="form.company">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
-									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
+									<span class="text-sm text-destructive font-medium">{{ errors.company }}</span>
 								</VField>
 							</div>
 
-							<Button class="ml-auto">
+							<Button :disabled="loading" class="ml-auto">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink"
+									aria-hidden="true"
+									role="img"
+									font-size="48"
+									class="animate-spin iconify iconify--ph w-5 h-5"
+									width="1em"
+									height="1em"
+									viewBox="0 0 256 256"
+									v-if="loading"
+								>
+									<path
+										fill="#000"
+										d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m39.11 25.19C170.24 83.71 155 99.44 135 113.61c-2.25-24.48-8.44-49.8-38.37-67.82a87.89 87.89 0 0 1 70.5 3.4ZM40.18 133.54c28.34-20 49.57-14.68 71.87-4.39c-20.05 14.19-38.86 32.21-39.53 67.11a87.92 87.92 0 0 1-32.34-62.72m136.5 67.73c-31.45-14.55-37.47-35.58-39.71-60c12.72 5.86 26.31 10.75 41.3 10.75c11.33 0 23.46-2.8 36.63-10.08a88.2 88.2 0 0 1-38.22 59.33"
+									></path>
+								</svg>
 								Отправить
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<path d="M5.83337 14.1666L9.16671 9.99996L5.83337 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
