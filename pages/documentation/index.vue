@@ -3,7 +3,7 @@
 		<div class="container pt-4">
 			<section class="flex flex-col items-center gap-10">
 				<div></div>
-				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">Документация</h1>
+				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{translations['header.link4']}}</h1>
 				<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 			</section>
 
@@ -53,6 +53,9 @@
 
 <script setup>
 import { useDocumentsStore } from '~/stores/documents.js';
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
 
 const route = useRoute();
 

@@ -3,8 +3,8 @@
 		<section class="container flex flex-col items-center gap-10">
 			<div></div>
 			<div class="flex flex-col gap-6">
-				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">Калькулятор ресурсов</h1>
-				<p>Соберите свою конфигурацию ресурсов, узнайте ее стоимость и подключите. Калькулятор предложит бесплатные конфигурации для экономии на старте</p>
+				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{translations['calculctor.title']}}</h1>
+				<p>{{translations['calculctor.desc']}}</p>
 			</div>
 			<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 		</section>
@@ -199,6 +199,9 @@
 
 <script setup>
 import { useCalculatorStore } from '~/stores/calculator.js';
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
 
 const calculatorStore = useCalculatorStore();
 

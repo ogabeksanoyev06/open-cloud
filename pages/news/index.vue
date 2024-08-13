@@ -2,14 +2,14 @@
 	<div class="grid gap-10 pt-4">
 		<div class="container flex flex-col items-center gap-10">
 			<div></div>
-			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">Новости/Блог</h1>
+			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{translations['home.news-title']}}</h1>
 		</div>
 		<div class="container max-w-[1760px]">
 			<div class="bg-background rounded-[40px] py-20">
 				<div class="container grid gap-6">
 					<div class="flex gap-1 w-fit rounded-[12px] bg-grey-0 p-2 relative">
-						<button @click="selectNewsType(0)" class="text-grey rounded-[8px] px-10 py-3 transition-300 hover:bg-primary hover:text-black" :class="{ 'bg-primary': newsType === 0 }">Новости</button>
-						<button @click="selectNewsType(1)" class="text-grey rounded-[8px] px-10 py-3 transition-300 hover:bg-primary hover:text-black" :class="{ 'bg-primary': newsType === 1 }">Блог</button>
+						<button @click="selectNewsType(0)" class="text-grey rounded-[8px] px-10 py-3 transition-300 hover:bg-primary hover:text-black" :class="{ 'bg-primary': newsType === 0 }">{{translations['news.news']}}</button>
+						<button @click="selectNewsType(1)" class="text-grey rounded-[8px] px-10 py-3 transition-300 hover:bg-primary hover:text-black" :class="{ 'bg-primary': newsType === 1 }">{{translations['news.blog']}}</button>
 					</div>
 					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 						<NuxtLink
@@ -55,6 +55,10 @@
 
 <script setup>
 import { useNewsStore } from '~/stores/news';
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+
+const { translations } = storeToRefs(translationsStore)
 
 const newsType = ref(0);
 

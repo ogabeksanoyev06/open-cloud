@@ -2,7 +2,7 @@
 	<div class="relative flex items-stretch">
 		<div class="container shrink-0 relative z-0">
 			<div class="relative">
-				<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium mb-10">Компании, которые решили свою задачу с нами</h3>
+				<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium mb-10">{{translations['home.clients-title']}}</h3>
 				<div class="overflow-hidden relative z-0">
 					<Swiper
 						class="!overflow-visible"
@@ -35,7 +35,7 @@
 									</h4>
 									<a :href="client.url" target="_blank">
 										<Button variant="secondary" class="bg-grey-0">
-											Подробнее
+											{{translations['home.more-btn']}}
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
 												<path d="M5.8335 14.6665L9.16683 10.4998L5.8335 6.33317" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 												<path d="M10.8335 14.6665L14.1668 10.4998L10.8335 6.33317" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -55,6 +55,10 @@
 </template>
 
 <script setup>
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
+
 defineProps({
 	data: {
 		type: Array,

@@ -41,9 +41,11 @@
 				<div v-html="product.text"></div>
 			</section>
 			<section class="mt-10 sm:mt-20">
-				<h2 class="text-xl md:text-3xl lg:text-4xl font-medium text-center mb-6 sm:mb-8">Преимущества</h2>
+				<h2 class="text-xl md:text-3xl lg:text-4xl font-medium text-center mb-6 sm:mb-8">
+					{{ translations['product.advantages'] }}
+				</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
-					<div class="flex flex-col gap-6 bg-grey-0 border border-grey-1 sm:p-6 p-8 hover:bg-white transition-300" v-for="item in product?.advantages" :key="item.id">
+					<div class="flex flex-col gap-6 bg-grey-0 border border-grey-1 sm:p-6 p-8 hover:bg-white transition-300" v-for="(item, i) in product?.advantages" :key="i">
 						<div class="w-14 h-14 sm:w-16 sm:h-16">
 							<img :src="item.image" alt="" class="rounded-2xl w-full" />
 						</div>
@@ -59,21 +61,21 @@
 			</section>
 			<section class="mt-10 sm:mt-20">
 				<div class="flex flex-col gap-4 sm:gap-6 sm:flex-row sm:justify-between sm:items-center mb-6">
-					<h3 class="text-xl md:text-3xl font-medium">Тарифы</h3>
+					<h3 class="text-xl md:text-3xl font-medium">{{ translations['product.tarrifs'] }}</h3>
 					<div class="flex items-center rounded-[8px] p-1 sm:p-2 bg-white">
 						<button
 							@click="selectTypeTarif(0)"
 							:class="{ 'bg-primary': tarifsType === 0 }"
 							class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto"
 						>
-							В день
+							{{ translations['product.day'] }}
 						</button>
 						<button
 							@click="selectTypeTarif(1)"
 							:class="{ 'bg-primary': tarifsType === 1 }"
 							class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto"
 						>
-							В месяц
+							{{ translations['product.month'] }}
 						</button>
 					</div>
 				</div>
@@ -83,16 +85,18 @@
 							<p class="text-base font-medium mb-2">
 								{{ item?.subtitle }}
 							</p>
-							<h4 class="text-xl sm:text-2xl font-medium space-x-2 mb-4">{{ item?.price }} <span class="text-grey text-sm font-normal">в месяц с НДС</span></h4>
+							<h4 class="text-xl sm:text-2xl font-medium space-x-2 mb-4">
+								{{ item?.price }} <span class="text-grey text-sm font-normal">{{ translations['product.in-month'] }}</span>
+							</h4>
 							<div v-html="item.desc"></div>
 						</div>
 						<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 						<div class="flex flex-col gap-2">
-							<p class="text-grey text-base">Количество vCPU, шт</p>
-							<p class="text-base font-medium">4 vCPU</p>
+							<p class="text-grey text-base">{{ translations['product.cpu-quantity'] }}</p>
+							<p class="text-base font-medium">{{ translations['product.cpu'] }}</p>
 						</div>
 						<Button class="sm:text-base">
-							Заказать
+							{{ translations['product.order'] }}
 							<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
 								<path d="M6.33301 14.1667L9.66634 9.99999L6.33301 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								<path d="M11.333 14.1667L14.6663 9.99999L11.333 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -126,16 +130,18 @@
 									<p class="text-base font-medium mb-2">
 										{{ item?.subtitle }}
 									</p>
-									<h4 class="text-xl sm:text-2xl font-medium space-x-2 mb-4">{{ item?.price }} <span class="text-grey text-sm font-normal">в месяц с НДС</span></h4>
+									<h4 class="text-xl sm:text-2xl font-medium space-x-2 mb-4">
+										{{ item?.price }} <span class="text-grey text-sm font-normal">{{ translations['product.in-month'] }}</span>
+									</h4>
 									<div v-html="item.desc"></div>
 								</div>
 								<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 								<div class="flex flex-col gap-2">
-									<p class="text-grey text-base">Количество vCPU, шт</p>
-									<p class="text-base font-medium">4 vCPU</p>
+									<p class="text-grey text-base">{{ translations['product.cpu-quantity'] }}</p>
+									<p class="text-base font-medium">{{ translations['product.cpu'] }}</p>
 								</div>
 								<Button class="sm:text-base">
-									Заказать
+									{{ translations['product.order'] }}
 									<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
 										<path d="M6.33301 14.1667L9.66634 9.99999L6.33301 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 										<path d="M11.333 14.1667L14.6663 9.99999L11.333 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -162,12 +168,12 @@
 						</svg>
 					</div>
 					<div class="flex flex-col gap-2">
-						<h4 class="text-xl sm:text-2xl font-medium text-white">Скачать каталог тарифов</h4>
-						<p class="text-grey-2 text-base">File Size: 26 GB</p>
+						<h4 class="text-xl sm:text-2xl font-medium text-white">{{ translations['product.download'] }}</h4>
+						<p class="text-grey-2 text-base">{{ translations['product.file-size'] }} 26 GB</p>
 					</div>
 				</div>
 				<Button class="max-sm:w-full">
-					Скачать файл
+					{{ translations['product.download-file'] }}
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 						<path d="M7.5 10L10 12.5M10 12.5L12.5 10M10 12.5L10 2.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						<path
@@ -196,7 +202,9 @@
 			<div class="sm:container sm:max-w-[1760px] mt-10 sm:mt-20">
 				<div class="bg-white sm:rounded-[40px] py-10 sm:py-16">
 					<div class="container">
-						<h3 class="text-xl sm:text-2xl md:text-3xl font-medium mb-6 sm:mb-10 text-center">Часто задаваемые вопросы</h3>
+						<h3 class="text-xl sm:text-2xl md:text-3xl font-medium mb-6 sm:mb-10 text-center">
+							{{ translations['product.faq'] }}
+						</h3>
 						<Accordion type="single" class="grid items-start grid-cols-1 md:grid-cols-2 gap-6" collapsible>
 							<AccordionItem class="bg-grey-0 rounded-[12px] p-3 sm:py-4 sm:px-6" v-for="item in accordionItems" :key="item.value" :value="item.value">
 								<AccordionTrigger class="text-base sm:text-xl font-medium hover:no-underline p-0">{{ item.title }}</AccordionTrigger>
@@ -216,6 +224,10 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useProductsStore } from '~/stores/products.js';
+import { useTranslationsStore } from '~/stores/translations.js';
+const translationsStore = useTranslationsStore();
+
+const { translations } = storeToRefs(translationsStore);
 
 const accordionItems = [
 	{ value: 'item-1', title: 'Is it accessible?', content: 'Yes. It adheres to the WAI-ARIA design pattern.' },
@@ -248,6 +260,7 @@ const { data: tarifs } = await useAsyncData(
 .text h1 {
 	@apply text-xl sm:text-3xl lg:text-4xl font-medium mb-4;
 }
+
 .text p {
 	@apply text-sm sm:text-base text-grey;
 }

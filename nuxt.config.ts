@@ -15,7 +15,15 @@ export default defineNuxtConfig({
 		pageTransition: { name: 'page', mode: 'out-in' }
 	},
 	css: ['@/assets/styles/main.css'],
-	modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n', '@pinia/nuxt', 'nuxt-swiper', '@pinia-plugin-persistedstate/nuxt'],
+	modules: [
+        '@nuxtjs/tailwindcss',
+        'shadcn-nuxt',
+        '@nuxtjs/i18n',
+        '@pinia/nuxt',
+        'nuxt-swiper',
+        '@pinia-plugin-persistedstate/nuxt',
+        "nuxt-easy-lightbox"
+    ],
 	i18n: {
 		strategy: 'prefix_except_default',
 		locales: ['en', 'uz', 'ru'],

@@ -3,49 +3,64 @@
 		<section class="bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-no-repeat bg-top bg-cover relative">
 			<div class="container relative">
 				<div class="py-10 sm:py-[120px] flex flex-col gap-6">
-					<h1 class="font-medium text-xl sm:text-4xl text-white max-w-[1200px]">Облачные решения и IT‑инфраструктура для бизнеса</h1>
-					<p class="text-grey-2 max-w-[900px]">Строим и поддерживаем IT-инфраструктуру компаний, которые создают и развивают цифровые продукты.</p>
-					<Button class="mr-auto">
-						Получить демо
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-							<path d="M5.83337 14.1666L9.16671 9.99996L5.83337 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M10.8334 14.1666L14.1667 9.99996L10.8334 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
-					</Button>
+					<h1 class="font-medium text-xl sm:text-4xl text-white max-w-[1200px]">{{ translations['about.hero-title'] }}</h1>
+					<p class="text-grey-2 max-w-[900px]">{{ translations['about.hero-desc'] }}</p>
+					<ModalConsultationForm>
+						<Button class="mr-auto">
+							{{ translations['about.hero-btn'] }}
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+								<path d="M5.83337 14.1666L9.16671 9.99996L5.83337 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M10.8334 14.1666L14.1667 9.99996L10.8334 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</Button>
+					</ModalConsultationForm>
 				</div>
 			</div>
 		</section>
 		<section class="container max-w-[1200px] mt-20 flex flex-col gap-10">
-			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium">Disaster Recovery as a Service — удобно, надежно и выгодно</h2>
+			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium">{{ translations['about.title'] }}</h2>
 			<img src="/assets/images/about.png" alt="" class="rounded-2xl w-full h-full" />
 			<p class="text-grey text-sm sm:text-lg">
-				Opencloud - ведущий поставщик облачных решений в Узбекистане. Мы предлагаем широкий спектр услуг, включая инфраструктуру как услугу (IaaS), резервное копирование как услугу (BaaS), аварийное
-				восстановление как услугу (DRaaS) и Kubernetes. Наши решения разработаны для того, чтобы помочь предприятиям любого размера повысить гибкость своих ИТ-систем, снизить затраты и защитить свои
-				данные. Мы являемся партнером Zadara, мирового лидера в области корпоративных облачных сервисов, и резидентом IT Park Uzbekistan, поддерживаемой правительством инициативы по содействию
-				развитию IT-индустрии в стране.
+				{{ translations['about.desc'] }}
 			</p>
 		</section>
 		<section class="mt-20 bg-green bg-[url('~/assets/images/custom_green_bg.png')] bg-no-repeat bg-cover bg-top py-6">
-			<div class="container max-w-[1200px] flex items-center justify-between flex-wrap gap-10">
-				<div>
-					<h5 class="text-xl sm:text-2xl font-medium">Наши лицензии и сертификаты</h5>
-					<p class="mt-2">Opencloud - ведущий поставщик облачных решений в Узбекистане.</p>
+			<div class="container max-w-[1200px] flex items-center justify-between sm:flex-row flex-col gap-10">
+				<div class="sm:flex-1">
+					<h5 class="text-xl sm:text-2xl font-medium">{{ translations['about.license-title'] }}</h5>
+					<p class="mt-2">{{ translations['about.license-desc'] }}</p>
 					<Button variant="link" class="p-0 mt-6 text-black">
-						Подробное
+						{{ translations['about.license-more'] }}
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M5.83337 14.1667L9.16671 10L5.83337 5.83335" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M10.8334 14.1667L14.1667 10L10.8334 5.83335" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</Button>
 				</div>
-				<div class="h-[125px] mlПолучите консультацию менеджера-auto">
-					<img class="object-cover h-full w-full" src="~/assets/images/certificate.png" alt="certificate img" />
-				</div>
+				<Swiper
+					class="w-full max-w-[230px] h-[128px]"
+					:modules="[SwiperAutoplay]"
+					:space-between="6"
+					:slides-per-view="1"
+					:loop="true"
+					:speed="2000"
+					:autoplay="{
+						delay: 2000,
+						disableOnInteraction: false
+					}"
+				>
+					<SwiperSlide v-for="(src, index) in imgs" :key="index" @click="() => showImg(index)">
+						<div class="w-full h-full flex-shrink-0 overflow-hidden">
+							<img :src="src" class="object-cover h-full w-full" />
+						</div>
+					</SwiperSlide>
+					<VueEasyLightbox :visible="visibleRef" :imgs="imgs" :index="indexRef" @hide="onHide" />
+				</Swiper>
 			</div>
 		</section>
 
 		<section class="bg-background p-10">
-			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-6">Миссия компании</h2>
+			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-6">{{ translations['about.mission-title'] }}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 				<div class="flex flex-col gap-4 p-4 sm:p-6 bg-grey-0 rounded-2xl">
 					<div class="flex items-center justify-center h-14 w-14 bg-black rounded">
@@ -56,13 +71,13 @@
 							/>
 						</svg>
 					</div>
-					<h3 class="text-lg sm:text-xl">Контролируйте процессы в единой консоли</h3>
-					<p class="text-grey">Удобное управление и моментальное масштабирование инфраструктуры в облаке</p>
+					<h3 class="text-lg sm:text-xl">{{ translations['about.mission-card-title'] }}</h3>
+					<p class="text-grey">{{ translations['about.mission-card-desc'] }}</p>
 				</div>
 			</div>
 		</section>
 		<section class="container mt-10 sm:mt-20">
-			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">Как мы работаем</h2>
+			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.how-we-work'] }}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
 				<div class="flex flex-col gap-4 border p-4 sm:px-10 sm:py-8 border-grey-1" v-for="item in 5" :key="item">
 					<h4 class="font-medium text-xl sm:text-2xl">Оптимизируйте расходы на IT-инфраструктуру</h4>
@@ -72,7 +87,7 @@
 		</section>
 		<section class="container mt-10 sm:mt-20">
 			<div class="bg-white py-10">
-				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">Наша команда</h2>
+				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.team'] }}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					<div class="flex flex-col items-center gap-6 p-10 hover:bg-grey-0 transition-300" v-for="item in 5" :key="item">
 						<div class="w-52 h-52 rounded-full overflow-hidden">
@@ -88,10 +103,10 @@
 		</section>
 		<section class="container mt-10 sm:mt-20">
 			<div class="flex items-center justify-between mb-4">
-				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">Вакансии</h2>
+				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">{{ translations['about.vacansy'] }}</h2>
 				<NuxtLink to="/vacancy">
 					<Button variant="link" class="p-0 text-black font-normal">
-						Вакансии
+						{{ translations['about.vacansy'] }}
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M5.83325 14.1667L9.16659 10.0001L5.83325 5.83342" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M10.8333 14.1667L14.1666 10.0001L10.8333 5.83342" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -118,7 +133,7 @@
 		</section>
 		<section class="container mt-10 sm:mt-20">
 			<div class="flex items-center justify-between mb-10">
-				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">Медиа</h2>
+				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">{{ translations['about.media'] }}</h2>
 			</div>
 			<div class="overflow-hidden relative z-0">
 				<Swiper
@@ -164,6 +179,26 @@ import { useContactStore } from '~/stores/contact';
 import { usePartnersStore } from '~/stores/partners';
 import { useMediaStore } from '~/stores/media';
 import { useVacancyStore } from '~/stores/vacancies.js';
+import { useTranslationsStore } from '~/stores/translations.js';
+
+const visibleRef = ref(false);
+const indexRef = ref(0);
+
+const imgs = [
+	'https://via.placeholder.com/450.png/',
+	'https://via.placeholder.com/300.png/',
+	'https://via.placeholder.com/150.png/',
+	{ src: 'https://via.placeholder.com/450.png/', title: 'this is title' }
+];
+
+const showImg = (index) => {
+	indexRef.value = index;
+	visibleRef.value = true;
+};
+const onHide = () => (visibleRef.value = false);
+
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore);
 
 const { data } = await useAsyncData('about-us', async () => {
 	const [partners, media, contacts, vacancies] = await Promise.all([usePartnersStore().getPartners(), useMediaStore().getMedia(), useContactStore().getContact(), useVacancyStore().getVacancies()]);

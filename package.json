@@ -19,6 +19,7 @@
 		"clsx": "^2.1.1",
 		"maska": "^3.0.0",
 		"nuxt": "^3.12.4",
+		"nuxt-easy-lightbox": "^1.0.2",
 		"nuxt-swiper": "^1.2.2",
 		"pinia": "^2.2.1",
 		"radix-vue": "^1.9.3",

@@ -1,6 +1,10 @@
 <script setup>
 import { useApplication } from '~/stores/application';
-import { useCustomToast } from '~/composables/useCustomToast.js';
+import { useTranslationsStore } from '~/stores/translations.js';
+
+const translationsStore = useTranslationsStore();
+
+const { translations } = storeToRefs(translationsStore);
 
 const applicationStore = useApplication();
 const { consultationForm } = applicationStore;
@@ -46,41 +50,41 @@ const sendConsultationForm = async () => {
 			</DialogTrigger>
 			<DialogContent class="sm:max-w-[580px] p-4 sm:p-8">
 				<DialogHeader>
-					<DialogTitle class="text-2xl">Получите консультацию менеджера</DialogTitle>
+					<DialogTitle class="text-2xl">{{ translations['home.consultation-title'] }}</DialogTitle>
 				</DialogHeader>
 				<div class="w-full grid gap-6">
 					<VForm @submit="sendConsultationForm" v-slot="{ errors }">
 						<div class="grid gap-6">
 							<div class="grid gap-2">
 								<VField name="name" rules="required" v-model="form.name">
-									<Label for="name"> Фамилия имя очества </Label>
-									<Input v-model="form.name" id="login" type="text" placeholder="имя" />
+									<Label for="name"> {{ translations['home.name-input'] }} </Label>
+									<Input v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
 									<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
 								<VField name="phone" rules="required" v-model="form.phone">
-									<Label for="phone"> Номер телефона </Label>
-									<Input placeholder="имя" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
+									<Label for="phone"> {{ translations['home.phone-input'] }} </Label>
+									<Input :placeholder="translations['home.phone-label']" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
 									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
 								<VField name="email" rules="required|email" v-model="form.email">
-									<Label for="email"> Электрон почта </Label>
-									<Input v-model="form.email" id="email" type="text" placeholder="Э-почта" />
+									<Label for="email"> {{ translations['home.email-input'] }} </Label>
+									<Input v-model="form.email" id="email" type="text" :placeholder="translations['home.email-label']" />
 									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="company" rules="required" v-model="form.company">
+								<VField name="company" rules="required" v-model="form.email">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
-									<span class="text-sm text-destructive font-medium">{{ errors.company }}</span>
+									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 
-							<Button :disabled="loading" class="ml-auto">
+							<Button class="ml-auto" :disabled="loading">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									xmlns:xlink="http://www.w3.org/1999/xlink"

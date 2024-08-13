@@ -3,8 +3,8 @@
 		<div class="container mt-[150px] lg:mt-0 lg:pl-[300px]">
 			<div class="flex items-center justify-between flex-col gap-6 md:flex-row">
 				<div class="flex flex-col gap-2 max-w-[600px]">
-					<h4 class="text-lg sm:text-2xl">Получите консультацию менеджера</h4>
-					<p class="text-base">Нужно уточнить детали? Обсудить требования? У вас сложный проект? Мы поможет подобрать правильное решение</p>
+					<h4 class="text-lg sm:text-2xl">{{translations['home.consultation-title']}}</h4>
+					<p class="text-base">{{translations['home.consultation-banner']}}</p>
 				</div>
 				<ModalConsultationForm>
 					<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">
@@ -21,4 +21,8 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useTranslationsStore } from "~/stores/translations.js"
+const translationsStore = useTranslationsStore();
+const { translations } = storeToRefs(translationsStore)
+</script>
