@@ -3,8 +3,8 @@
 		<section class="container flex flex-col items-center gap-10">
 			<div></div>
 			<div class="flex flex-col gap-6">
-				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{translations['calculctor.title']}}</h1>
-				<p>{{translations['calculctor.desc']}}</p>
+				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['calculctor.title'] }}</h1>
+				<p>{{ translations['calculctor.desc'] }}</p>
 			</div>
 			<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 		</section>
@@ -199,15 +199,18 @@
 
 <script setup>
 import { useCalculatorStore } from '~/stores/calculator.js';
-import { useTranslationsStore } from "~/stores/translations.js"
+import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
-const { translations } = storeToRefs(translationsStore)
+const { translations } = storeToRefs(translationsStore);
 
 const calculatorStore = useCalculatorStore();
+const { getTarifCategories, getSpecificationPrice } = calculatorStore;
 
-const { data } = await useAsyncData('calculator', async () => {
-	const [tariff, prices] = await Promise.all([calculatorStore.getTarifCategories(), calculatorStore.getSpecificationPrice()]);
-
-	return { tariff, prices };
+const { tarifData } = storeToRefs(calculatorStore);
+const { data: tariff } = await useAsyncData('tariff', async () => {
+	return await getTarifCategories();
+});
+const { data: prices } = await useAsyncData('prices', async () => {
+	return await getSpecificationPrice();
 });
 </script>

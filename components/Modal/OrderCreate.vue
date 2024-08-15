@@ -15,7 +15,7 @@ const { showToast } = useCustomToast();
 
 const { orderCreate } = applicationStore;
 
-const { tab2Configurations } = storeToRefs(calculatorStore);
+const { tab2Configurations,calculateTotalPriceTab2 } = storeToRefs(calculatorStore);
 const { loading } = storeToRefs(applicationStore);
 
 const isOpen = ref(false);
@@ -99,7 +99,7 @@ const sendOrderCreate = async () => {
 								<VField name="company" rules="required" v-model="form.company">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
-									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
+									<span class="text-sm text-destructive font-medium">{{ errors.company }}</span>
 								</VField>
 							</div>
 

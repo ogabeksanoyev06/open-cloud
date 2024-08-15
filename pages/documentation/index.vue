@@ -3,7 +3,7 @@
 		<div class="container pt-4">
 			<section class="flex flex-col items-center gap-10">
 				<div></div>
-				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{translations['header.link4']}}</h1>
+				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['header.link4'] }}</h1>
 				<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 			</section>
 
@@ -13,6 +13,7 @@
 						<h3 class="text-xl sm:text-2xl font-medium">
 							{{ item.title }}
 						</h3>
+
 						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 							<NuxtLink
 								class="flex flex-col gap-4 p-4 sm:p-6 bg-grey-0 rounded-2xl border border-transparent hover:bg-white hover:border-primary cursor-pointer transition-300"
@@ -53,9 +54,9 @@
 
 <script setup>
 import { useDocumentsStore } from '~/stores/documents.js';
-import { useTranslationsStore } from "~/stores/translations.js"
+import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
-const { translations } = storeToRefs(translationsStore)
+const { translations } = storeToRefs(translationsStore);
 
 const route = useRoute();
 
@@ -63,8 +64,3 @@ const { data: documents } = await useAsyncData('documents', async () => {
 	return await useDocumentsStore().getDocuments();
 });
 </script>
-
-
-
-
-

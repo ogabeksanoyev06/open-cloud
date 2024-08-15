@@ -8,7 +8,8 @@
 						<Accordion v-model="activeItem" type="single" class="w-full flex flex-col gap-6 p-6 border-l-[1px]" collapsible>
 							<AccordionItem class="border-b-0" v-for="(item, i) in data?.documents?.subcategories" :key="item.value" :value="item.slug">
 								<AccordionTrigger
-									class="text-base font-medium p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
+									class="text-base text-left font-medium p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
+									:class="{ 'before:w-1': item.slug === activeItem }"
 								>
 									{{ item.title }}
 								</AccordionTrigger>
@@ -81,7 +82,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.router-active-link {
-	color: var(--primary);
+.router-link-active {
+	color: hsl(var(--primary));
 }
 </style>

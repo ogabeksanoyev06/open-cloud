@@ -43,7 +43,7 @@
 						<p class="text-base sm:text-xl text-white">
 							{{ translations['home.about-banner-desc'] }}
 						</p>
-						<Button class="!bg-transparent border-grey border text-primary">
+						<Button class="!bg-transparent border-grey border text-primary w-full sm:w-auto">
 							Лицензия
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 								<path d="M5.83325 14.1667L9.16659 9.99999L5.83325 5.83332" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="max-sm:container max-sm:py-4">
-			<div class="bg-[url('~/assets/images/custom_black_bg.png')] bg-no-repeat bg-top bg-cover max-sm:rounded-2xl relative">
-				<div class="container flex flex-col sm:flex-row items-center justify-between py-6 max-sm:pb-0 sm:py-20 relative overflow-hidden">
-					<div class="flex flex-col float-start gap-10 max-w-[720px] w-full max-sm:pb-[200px] relative z-10">
+			<div class="bg-[url('~/assets/images/custom_black_bg.png')] bg-black bg-no-repeat bg-top bg-cover max-sm:rounded-2xl relative">
+				<div class="container flex flex-col sm:flex-row items-center justify-between py-6 max-sm:pb-0 sm:py-20 gap-10 relative overflow-hidden">
+					<div class="flex flex-col float-start max-w-[720px] w-full gap-10 relative z-10">
 						<div class="flex flex-col gap-5">
 							<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-white">{{ product.title }}</h1>
 							<p class="text-white sm:text-grey-2">
@@ -31,11 +31,10 @@
 							</ModalConsultationForm>
 						</div>
 					</div>
-					<img :src="product.image" alt="" class="absolute sm:top-1/2 sm:-translate-y-1/2 sm:right-8 max-sm:bottom-0 max-sm:translate-y-[80px] h-[240px] w-[240px] object-contain" />
+					<img :src="product.image" alt="" class="max-w-[200px] max-h-[200px] object-contain" />
 				</div>
 			</div>
 		</div>
-
 		<div class="container">
 			<section class="mt-10 sm:mt-20 text">
 				<div v-html="product.text"></div>
@@ -59,10 +58,11 @@
 				</div>
 				<HomeConsultationBanner class="rounded-2xl" />
 			</section>
+
 			<section class="mt-10 sm:mt-20">
 				<div class="flex flex-col gap-4 sm:gap-6 sm:flex-row sm:justify-between sm:items-center mb-6">
 					<h3 class="text-xl md:text-3xl font-medium">{{ translations['product.tarrifs'] }}</h3>
-					<div class="flex items-center rounded-[8px] p-1 sm:p-2 bg-white">
+					<div class="flex items-center rounded-[12px] p-1 sm:p-2 bg-white">
 						<button
 							@click="selectTypeTarif(0)"
 							:class="{ 'bg-primary': tarifsType === 0 }"
@@ -79,29 +79,31 @@
 						</button>
 					</div>
 				</div>
-				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					<div class="flex flex-col gap-6 border border-grey-1 bg-white p-4 sm:p-6 odd:bg-grey-0" v-for="item in tarifs?.results" :key="item.id">
+				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+					<div class="flex flex-col gap-6 border border-grey-1 bg-grey-0 p-4 sm:p-6 hover:bg-white transition-300" v-for="(item, a) in tarifs?.results" :key="a">
 						<div class="flex flex-col">
-							<p class="text-base font-medium mb-2">
-								{{ item?.subtitle }}
-							</p>
+							<h4 class="text-base font-medium mb-2">
+								{{ item?.title }}
+							</h4>
 							<h4 class="text-xl sm:text-2xl font-medium space-x-2 mb-4">
 								{{ item?.price }} <span class="text-grey text-sm font-normal">{{ translations['product.in-month'] }}</span>
 							</h4>
+							<p class="text-base text-black-1">
+								{{ item?.subtitle }}
+							</p>
+							<div class="shrink-0 bg-grey-1 relative h-px w-full my-6"></div>
 							<div v-html="item.desc"></div>
 						</div>
 						<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
-						<div class="flex flex-col gap-2">
-							<p class="text-grey text-base">{{ translations['product.cpu-quantity'] }}</p>
-							<p class="text-base font-medium">{{ translations['product.cpu'] }}</p>
-						</div>
-						<Button class="sm:text-base">
-							{{ translations['product.order'] }}
-							<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-								<path d="M6.33301 14.1667L9.66634 9.99999L6.33301 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M11.333 14.1667L14.6663 9.99999L11.333 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</Button>
+						<ModalConsultationForm>
+							<Button class="sm:text-base w-full">
+								{{ translations['product.order'] }}
+								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+									<path d="M6.33301 14.1667L9.66634 9.99999L6.33301 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path d="M11.333 14.1667L14.6663 9.99999L11.333 5.83332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</Button>
+						</ModalConsultationForm>
 					</div>
 				</div>
 				<div class="block sm:hidden">
@@ -124,7 +126,7 @@
 							}
 						}"
 					>
-						<SwiperSlide v-for="item in tarifs?.results" :key="item.id">
+						<SwiperSlide v-for="(item, b) in tarifs?.results" :key="b">
 							<div class="flex flex-col gap-6 border border-grey-1 p-4 rounded-2xl">
 								<div class="flex flex-col">
 									<p class="text-base font-medium mb-2">
@@ -154,8 +156,8 @@
 			</section>
 		</div>
 
-		<section class="bg-black p-6 sm:p-10 max-sm:mt-6 max-sm:mx-4 max-sm:rounded-2xl">
-			<div class="container p-0 flex flex-col sm:flex-row items-center gap-6 sm:justify-between">
+		<section class="container">
+			<div class="bg-black p-6 sm:p-10 max-sm:mt-6 max-sm:rounded-2xl flex flex-col sm:flex-row items-center gap-6 sm:justify-between">
 				<div class="flex items-center gap-4">
 					<div class="sm:px-2">
 						<svg xmlns="http://www.w3.org/2000/svg" width="36" height="41" viewBox="0 0 36 41" fill="none">
@@ -172,7 +174,24 @@
 						<p class="text-grey-2 text-base">{{ translations['product.file-size'] }} 26 GB</p>
 					</div>
 				</div>
-				<Button class="max-sm:w-full">
+				<Button :disabled="isLoading" class="max-sm:w-full" @click="downloadFile()">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						aria-hidden="true"
+						role="img"
+						font-size="48"
+						class="animate-spin iconify iconify--ph w-5 h-5"
+						width="1em"
+						height="1em"
+						viewBox="0 0 256 256"
+						v-if="isLoading"
+					>
+						<path
+							fill="#000"
+							d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m39.11 25.19C170.24 83.71 155 99.44 135 113.61c-2.25-24.48-8.44-49.8-38.37-67.82a87.89 87.89 0 0 1 70.5 3.4ZM40.18 133.54c28.34-20 49.57-14.68 71.87-4.39c-20.05 14.19-38.86 32.21-39.53 67.11a87.92 87.92 0 0 1-32.34-62.72m136.5 67.73c-31.45-14.55-37.47-35.58-39.71-60c12.72 5.86 26.31 10.75 41.3 10.75c11.33 0 23.46-2.8 36.63-10.08a88.2 88.2 0 0 1-38.22 59.33"
+						></path>
+					</svg>
 					{{ translations['product.download-file'] }}
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 						<path d="M7.5 10L10 12.5M10 12.5L12.5 10M10 12.5L10 2.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -198,6 +217,44 @@
 			</div>
 		</section>
 
+		<section class="container mt-10">
+			<Swiper
+				class=""
+				:modules="[SwiperAutoplay]"
+				:space-between="24"
+				:slides-per-view="1"
+				:loop="true"
+				:speed="2000"
+				:autoplay="{
+					delay: 2000,
+					disableOnInteraction: false
+				}"
+				:breakpoints="{
+					0: {
+						slidesPerView: 3.4
+					},
+					380: {
+						slidesPerView: 4
+					},
+					640: {
+						slidesPerView: 5
+					},
+					960: {
+						slidesPerView: 6
+					},
+					1280: {
+						slidesPerView: 8
+					}
+				}"
+			>
+				<SwiperSlide v-for="(img, i) in product?.images" :key="i">
+					<div class="sm:px-10 px-6 sm:h-20 w-[160px]">
+						<img :src="img.image" alt="" class="w-full h-full object-contain" />
+					</div>
+				</SwiperSlide>
+			</Swiper>
+		</section>
+
 		<section>
 			<div class="sm:container sm:max-w-[1760px] mt-10 sm:mt-20">
 				<div class="bg-white sm:rounded-[40px] py-10 sm:py-16">
@@ -206,10 +263,10 @@
 							{{ translations['product.faq'] }}
 						</h3>
 						<Accordion type="single" class="grid items-start grid-cols-1 md:grid-cols-2 gap-6" collapsible>
-							<AccordionItem class="bg-grey-0 rounded-[12px] p-3 sm:py-4 sm:px-6" v-for="item in accordionItems" :key="item.value" :value="item.value">
-								<AccordionTrigger class="text-base sm:text-xl font-medium hover:no-underline p-0">{{ item.title }}</AccordionTrigger>
+							<AccordionItem class="bg-grey-0 rounded-[12px] p-3 sm:py-4 sm:px-6" v-for="item in product?.faqs" :key="item.id" :value="item.id">
+								<AccordionTrigger class="text-base sm:text-xl font-medium hover:no-underline p-0 !text-left">{{ item.question }}</AccordionTrigger>
 								<AccordionContent class="text-grey text-sm sm:text-base pb-0 mt-4 sm:mt-6">
-									{{ item.content }}
+									<div v-html="item.answer"></div>
 								</AccordionContent>
 							</AccordionItem>
 						</Accordion>
@@ -217,6 +274,7 @@
 				</div>
 			</div>
 		</section>
+
 		<HomeConsultationBanner class="mt-10 sm:mt-20" />
 	</div>
 </template>
@@ -229,18 +287,25 @@ const translationsStore = useTranslationsStore();
 
 const { translations } = storeToRefs(translationsStore);
 
-const accordionItems = [
-	{ value: 'item-1', title: 'Is it accessible?', content: 'Yes. It adheres to the WAI-ARIA design pattern.' },
-	{ value: 'item-2', title: 'Is it unstyled?', content: "Yes. It's unstyled by default, giving you freedom over the look and feel." },
-	{ value: 'item-3', title: 'Can it be animated?', content: 'Yes! You can use the transition prop to configure the animation.' }
-];
-
 const route = useRoute();
 
 const tarifsType = ref(0);
+const isLoading = ref(false);
 
 const selectTypeTarif = (type) => {
 	tarifsType.value = type;
+};
+const downloadFile = () => {
+	if (process.client) {
+		isLoading.value = true;
+		const link = document.createElement('a');
+		link.href = product.value?.tarif_catalog;
+		link.download = product.value?.title || 'file';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		isLoading.value = false;
+	}
 };
 
 const { data: product } = await useAsyncData('product', async () => {
@@ -264,4 +329,6 @@ const { data: tarifs } = await useAsyncData(
 .text p {
 	@apply text-sm sm:text-base text-grey;
 }
+
+
 </style>

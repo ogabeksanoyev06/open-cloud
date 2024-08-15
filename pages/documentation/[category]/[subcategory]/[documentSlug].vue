@@ -12,8 +12,8 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-
 import { useDocumentsStore } from '~/stores/documents.js';
+
 definePageMeta({
 	layout: 'documents'
 });

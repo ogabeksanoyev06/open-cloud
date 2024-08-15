@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">
 		<div class="container">
-			<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium mb-10">{{translations['home.reviews-title']}}</h3>
+			<h3 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-semibold sm:text-center sm:font-medium mb-10">{{ translations['home.reviews-title'] }}</h3>
 			<Swiper
 				:modules="[SwiperAutoplay]"
 				:space-between="6"
@@ -28,9 +28,10 @@
 				}"
 			>
 				<SwiperSlide v-for="(item, i) in data" :key="i">
-					<div class="flex flex-col gap-6 p-6 sm:p-8 group border rounded-3xl sm:rounded-none hover:bg-background transition-300">
+					<div class="flex flex-col gap-6 p-6 sm:p-8 group border rounded-3xl sm:rounded-none group hover:!bg-background transition-300 min-h-[320px]">
 						<div class="text-sm sm:text-base text-grey" v-html="item.text"></div>
-						<div class="flex items-center justify-between">
+						
+						<div class="flex items-center justify-between mt-auto">
 							<div class="flex items-center gap-3 flex-1">
 								<div class="w-14 h-14 rounded-full relative overflow-hidden shrink-0">
 									<img :src="item.image" class="object-cover w-full h-full" />
@@ -59,7 +60,7 @@ defineProps({
 	}
 });
 
-import { useTranslationsStore } from "~/stores/translations.js"
+import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
-const { translations } = storeToRefs(translationsStore)
+const { translations } = storeToRefs(translationsStore);
 </script>

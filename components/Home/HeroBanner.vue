@@ -12,7 +12,7 @@
 				</div>
 				<div class="flex flex-col sm:flex-row gap-4 md:gap-6">
 					<ModalConsultationForm>
-						<Button>
+						<Button class="w-full sm:w-auto">
 							Подробнее
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 								<path d="M5.8335 14.1666L9.16683 9.99996L5.8335 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -22,7 +22,7 @@
 					</ModalConsultationForm>
 
 					<ModalConsultationForm>
-						<Button class="text-primary !bg-transparent !border-grey">
+						<Button class="text-primary !bg-transparent !border-grey w-full sm:w-auto">
 							Получить консультацию
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 								<path d="M5.8335 14.1666L9.16683 9.99996L5.8335 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

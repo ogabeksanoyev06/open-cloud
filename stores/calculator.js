@@ -7,48 +7,51 @@ export const useCalculatorStore = defineStore(
 	'calculator',
 	() => {
 		const { showToast } = useCustomToast();
+		const tarifData = ref([]);
 
 		const tab1Configurations = ref([
 			{
 				id: 1,
-				tarifData: []
+				vcpu: 1,
+				ram: 16,
+				ssdNodes: 16,
+				hddNodes: 16,
+				publicIP: false,
+				tarifData: tarifData.value,
+				price: {
+					vcpu_price: 1,
+					ram_price: 1,
+					ssd_price: 1,
+					hdd_price: 1,
+					public_ip_price: 1
+				}
 			}
 		]);
 
-		const tab2Configurations = ref([]);
+		const tab2Configurations = ref([
+			{
+				id: 1,
+				vcpu: 1,
+				ram: 16,
+				ssdNodes: 16,
+				hddNodes: 16,
+				publicIP: false,
+				price: {
+					vcpu_price: 1,
+					ram_price: 1,
+					ssd_price: 1,
+					hdd_price: 1,
+					public_ip_price: 1
+				}
+			}
+		]);
 
 		const specification_prices = ref({});
 
 		const getTarifCategories = async () => {
 			try {
 				let res = await useAxios().getRequest('/calculator/configuration_tarif_categories');
-				const tarifData = res.data.results.map((tarif) => ({
-					id: tarif.id,
-					title: tarif.title,
-					ssdNodes: 16,
-					hddNodes: 16,
-					publicIP: false,
-					tarifs: tarif.tarifs.map((item) => ({
-						id: item.id,
-						ram: item.ram,
-						vcpu: item.vcpu,
-						price: item.price,
-						category: item.category
-					})),
-					price: {
-						vcpu_price: specification_prices.value.vcpu_price || 0,
-						ram_price: specification_prices.value.ram_price || 0,
-						ssd_price: specification_prices.value.ssd_price || 0,
-						hdd_price: specification_prices.value.hdd_price || 0,
-						public_ip_price: specification_prices.value.public_ip_price || 0
-					}
-				}));
-				tab1Configurations.value = [
-					{
-						tarifData: tarifData
-					}
-				];
-				console.log(tarifData);
+				tarifData.value = res.data;
 				return res.data;
 			} catch (error) {
 				console.log(error);
@@ -69,6 +72,7 @@ export const useCalculatorStore = defineStore(
 
 		const updateConfigurationPrices = (configurations) => {
 			const prices = specification_prices.value;
+			const tariff = tarifData.value.results;
 			configurations.forEach((config) => {
 				config.price = {
 					vcpu_price: prices.vcpu_price || 0,
@@ -77,35 +81,42 @@ export const useCalculatorStore = defineStore(
 					hdd_price: prices.hdd_price || 0,
 					public_ip_price: prices.public_ip_price || 0
 				};
+				config.tarifData = tariff;
 			});
 		};
 
-		const addConfiguration = (tab) => {
+		const addConfiguration = async (tab) => {
 			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
 			const lastConfig = configurations[configurations.length - 1];
 			const newId = lastConfig ? lastConfig.id + 1 : 1;
 			const price = specification_prices.value;
-			console.log(configurations);
+			const tariff = tarifData.value.results;
+
+			const updatedTariff = tariff.map((tarif) => ({
+				...tarif,
+				tarifs: tarif.tarifs.map((tarifDetail) => ({
+					...tarifDetail,
+					active: false
+				}))
+			}));
 
 			if (tab === 1) {
-				const baseConfig = {
-					title: '',
-					tarifs: [],
+				configurations.push({
+					id: newId,
+					vcpu: 1,
+					ram: 1,
 					ssdNodes: 16,
 					hddNodes: 16,
 					publicIP: false,
+					tarifData: updatedTariff, // Yangilangan tariflar
 					price: {
-						vcpu_price: specification_prices.value.vcpu_price || 0,
-						ram_price: specification_prices.value.ram_price || 0,
-						ssd_price: specification_prices.value.ssd_price || 0,
-						hdd_price: specification_prices.value.hdd_price || 0,
-						public_ip_price: specification_prices.value.public_ip_price || 0
-					}
-				};
-
-				configurations.push({
-					id: newId,
-					tarifData: baseConfig
+						vcpu_price: price.vcpu_price || 0,
+						ram_price: price.ram_price || 0,
+						ssd_price: price.ssd_price || 0,
+						hdd_price: price.hdd_price || 0,
+						public_ip_price: price.public_ip_price || 0
+					},
+					active: false // Yangi konfiguratsiya uchun active ni false qilib belgilash
 				});
 			} else {
 				configurations.push({
@@ -115,15 +126,18 @@ export const useCalculatorStore = defineStore(
 					ssdNodes: 16,
 					hddNodes: 16,
 					publicIP: false,
+					tarifData: updatedTariff, // Yangilangan tariflar
 					price: {
 						vcpu_price: price.vcpu_price || 0,
 						ram_price: price.ram_price || 0,
 						ssd_price: price.ssd_price || 0,
 						hdd_price: price.hdd_price || 0,
 						public_ip_price: price.public_ip_price || 0
-					}
+					},
+					active: false // Yangi konfiguratsiya uchun active ni false qilib belgilash
 				});
 			}
+
 			showToast("Konfiguratsiya qo'shildi", 'success');
 		};
 
@@ -166,14 +180,24 @@ export const useCalculatorStore = defineStore(
 			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
 			const index = configurations.findIndex((conf) => conf.id === id);
 			if (index !== -1) {
+				// Konfiguratsiyani o'chirib tashlash
 				configurations.splice(index, 1);
 				showToast("Konfiguratsiya o'chirildi", 'error');
+
+				// TarifData ma'lumotlarini tozalash
+				if (tarifData.value.results) {
+					tarifData.value.results.forEach((tarif) => {
+						tarif.tarifs.forEach((tarifItem) => {
+							tarifItem.active = false; // Active ni false ga o'zgartirish
+						});
+					});
+				}
 			}
 		};
 
 		const deleteAllConfigurations = (tab) => {
 			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
-			configurations.length = 0; // Barcha konfiguratsiyalarni o'chirish
+			configurations.length = 0;
 		};
 
 		const togglePublicIP = (tab, id) => {
@@ -184,23 +208,39 @@ export const useCalculatorStore = defineStore(
 			}
 		};
 
-		// Formatlangan qiymatlar uchun computed properties har bir konfiguratsiya uchun
-		const tab1FormattedValues = computed(() => {
-			return tab1Configurations.value.map((config) => ({
-				ssd: `${config.ssdNodes} GB`,
-				hdd: `${config.hddNodes} GB`,
-				ram: `${config.ram} GB`,
-				vcpu: `${config.vcpu} Nodes`
-			}));
-		});
+		const changeTarif = (tab, itemId, selectedIndex, tarifId) => {
+			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
+			const config = configurations.find((conf) => conf.id === itemId);
 
-		const tab2FormattedValues = computed(() => {
-			return {
-				ssd: tab2Configurations.value.map((config) => `${config.ssdNodes} GB`),
-				hdd: tab2Configurations.value.map((config) => `${config.hddNodes} GB`),
-				ram: tab2Configurations.value.map((config) => `${config.ram} GB`),
-				vcpu: tab2Configurations.value.map((config) => `${config.vcpu} Nodes`)
-			};
+			if (config && config.tarifData && config.tarifData[selectedIndex]) {
+				const tarifDataItem = config.tarifData[selectedIndex];
+
+				tarifDataItem.tarifs.forEach((tarif) => {
+					tarif.active = tarif.id === tarifId; // Tanlangan tarif uchun active ni true ga, boshqalar uchun false ga o'rnating
+				});
+			}
+		};
+
+		const calculateTotalPriceTab1 = computed(() => {
+			const prices = specification_prices.value;
+
+			return tab1Configurations.value.reduce((total, config) => {
+				const basePrice =
+					config.vcpu * (prices.vcpu_price || 0) +
+					config.ram * (prices.ram_price || 0) +
+					config.ssdNodes * (prices.ssd_price || 0) +
+					config.hddNodes * (prices.hdd_price || 0) +
+					(config.publicIP ? prices.public_ip_price || 0 : 0);
+
+				const tariffPrice = config.tarifData.reduce((tariffTotal, tarif) => {
+					const activeTarifPrice = tarif.tarifs.reduce((tariffSum, tarifDetail) => {
+						return tarifDetail.active ? tariffSum + tarifDetail.price : tariffSum;
+					}, 0);
+					return tariffTotal + activeTarifPrice;
+				}, 0);
+
+				return total + basePrice + tariffPrice;
+			}, 0);
 		});
 
 		const calculateTotalPriceTab2 = computed(() => {
@@ -217,6 +257,7 @@ export const useCalculatorStore = defineStore(
 		});
 
 		return {
+			tarifData,
 			getTarifCategories,
 			getSpecificationPrice,
 			tab1Configurations,
@@ -227,10 +268,10 @@ export const useCalculatorStore = defineStore(
 			deleteConfiguration,
 			togglePublicIP,
 			specification_prices,
-			tab1FormattedValues,
-			tab2FormattedValues,
+			changeTarif,
 			deleteAllConfigurations,
-			calculateTotalPriceTab2
+			calculateTotalPriceTab2,
+			calculateTotalPriceTab1
 		};
 	},
 	{

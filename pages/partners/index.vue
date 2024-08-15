@@ -2,7 +2,7 @@
 	<div>
 		<div class="container flex flex-col items-center gap-10">
 			<div></div>
-			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{translations['partners.title']}}</h1>
+			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{ translations['partners.title'] }}</h1>
 		</div>
 		<div class="container max-w-[1760px] mt-10">
 			<div class="bg-white rounded-2xl py-10 sm:py-20">
@@ -10,10 +10,10 @@
 					<img src="/assets/images/news.png" class="w-full" alt="" />
 					<div class="flex flex-col gap-6">
 						<h3 class="text-xl font-medium">
-							{{translations['partners.desc1']}}
+							{{ translations['partners.desc1'] }}
 						</h3>
 						<p>
-							{{translations['partners.desc2']}}
+							{{ translations['partners.desc2'] }}
 						</p>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 // 	return await usePartnersStore().getPartners();
 // });
 
-import { useTranslationsStore } from "~/stores/translations.js"
+import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
-const { translations } = storeToRefs(translationsStore)
+const { translations } = storeToRefs(translationsStore);
 </script>
