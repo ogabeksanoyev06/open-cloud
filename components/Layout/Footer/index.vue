@@ -1,8 +1,8 @@
 <template>
 	<footer class="bg-black bg-[url(~/assets/images/custom_footer_bg.png)] bg-no-repeat bg-cover bg-top text-white">
 		<div class="container">
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 py-10 sm:py-20">
-				<NuxtLink to="/" class="max-w-[180px]">
+			<div class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 py-10 sm:py-20 gap-10">
+				<NuxtLink :to="localePath('/')" class="max-w-[180px]">
 					<img src="/assets/images/logo-2.png" alt="" class="w-full" />
 				</NuxtLink>
 				<div class="flex flex-col items-start gap-6 sm:gap-8">
@@ -158,6 +158,7 @@ const langs = [
 		avatar: '/assets/images/png/english.png'
 	}
 ];
+const localePath = useLocalePath();
 const { setLocale, locale } = useI18n();
 
 const selectedLang = ref(langs.find((lang) => lang.id === locale.value));

@@ -1,7 +1,20 @@
 <template>
 	<div class="grid gap-10 pt-4">
 		<div class="container flex flex-col items-center gap-10 pb-10">
-			<div></div>
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink as-child>
+							<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>Контакты
+						</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{ translations['contacts.title'] }}</h1>
 		</div>
 		<div class="sm:container sm:max-w-[1760px]">
@@ -118,7 +131,7 @@
 						<div v-html="contacts.map" class="min-h-[360px] lg:min-h-[500px] h-full rounded-3xl overflow-hidden"></div>
 					</div>
 					<section class="sm:mt-10">
-						<HomeClientBanner/>
+						<HomeClientBanner />
 					</section>
 				</div>
 			</div>

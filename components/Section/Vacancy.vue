@@ -1,7 +1,7 @@
 <template>
 	<div class="flex items-center justify-between mb-4">
 		<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">{{ translations['about.vacansy'] }}</h2>
-		<NuxtLink to="/vacancy">
+		<NuxtLink :to="localePath('/vacancy')">
 			<Button variant="link" class="p-0 text-black font-normal">
 				{{ translations['about.vacansy'] }}
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -12,23 +12,23 @@
 		</NuxtLink>
 	</div>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
-		<div class="flex flex-col gap-6 border p-4 sm:p-8 border-grey-1 hover:bg-white transition-300" v-for="item in data?.slice(0, 4)" :key="item.id">
-			<ModalVacancy>
+		<ModalVacancy v-for="item in data?.slice(0, 4)" :key="item.id" class="w-full">
+			<div class="flex flex-col items-start gap-6 border p-4 sm:p-8 border-grey-1 hover:bg-white transition-300">
 				<h4 class="font-medium text-lg sm:text-xl">
 					{{ item.title }}
 				</h4>
-			</ModalVacancy>
 
-			<p class="text-grey flex items-center gap-2">
-				<span>{{ item.exp }}</span>
-				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" width="6" height="7" viewBox="0 0 6 7" fill="none">
-						<circle cx="3" cy="3.5" r="3" fill="#9A999B" />
-					</svg>
-				</span>
-				<span> {{ item.type }}</span>
-			</p>
-		</div>
+				<p class="text-grey flex items-center gap-2">
+					<span>{{ item.exp }}</span>
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="6" height="7" viewBox="0 0 6 7" fill="none">
+							<circle cx="3" cy="3.5" r="3" fill="#9A999B" />
+						</svg>
+					</span>
+					<span> {{ item.type }}</span>
+				</p>
+			</div>
+		</ModalVacancy>
 	</div>
 </template>
 
@@ -41,7 +41,7 @@ defineProps({
 		required: true
 	}
 });
-
+const localePath = useLocalePath();
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 </script>

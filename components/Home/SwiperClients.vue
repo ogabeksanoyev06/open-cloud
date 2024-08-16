@@ -29,14 +29,14 @@
 					>
 						<SwiperSlide v-for="(client, i) in data" :key="i">
 							<div class="inline-flex items-center flex-col sm:flex-row gap-4 sm:gap-6 border rounded-2xl border-grey-1 group p-2 sm:p-[8px_24px_8px_8px]">
-								<div class="max-w-56 max-h-56 flex-shrink-0 overflow-hidden rounded-lg">
-									<img :src="client.image" alt="" class="w-full h-full object-cover sm:rounded-[18px_8px_8px_18px]" />
+								<div class="w-56 h-56 flex items-center justify-center  flex-shrink-0 overflow-hidden rounded-lg">
+									<img :src="client.image" alt="" class="w-full  object-contain sm:object-contain sm:rounded-[18px_8px_8px_18px]" />
 								</div>
-								<div class="flex flex-col items-start gap-10 max-w-[290px]">
+								<div class="flex flex-col items-start gap-10">
 									<h4 class="text-base sm:text-xl">
 										{{ client.title }}
 									</h4>
-									<NuxtLink to="/cases">
+									<NuxtLink :to="localePath('/cases')">
 										<Button variant="secondary" class="bg-grey-0">
 											{{ translations['home.more-btn'] }}
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -68,6 +68,7 @@ defineProps({
 		required: true
 	}
 });
+const localePath = useLocalePath();
 </script>
 
 <style>

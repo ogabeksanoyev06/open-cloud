@@ -1,7 +1,19 @@
 <template>
 	<div>
 		<section class="container flex flex-col items-center gap-10">
-			<div></div>
+			<Breadcrumb class="pt-4">
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink as-child>
+							<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>Цены </BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<div class="flex flex-col gap-6">
 				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['calculctor.title'] }}</h1>
 				<p>{{ translations['calculctor.desc'] }}</p>

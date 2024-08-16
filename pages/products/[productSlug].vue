@@ -2,33 +2,35 @@
 	<div>
 		<div class="max-sm:container max-sm:py-4">
 			<div class="bg-[url('~/assets/images/custom_black_bg.png')] bg-black bg-no-repeat bg-top bg-cover max-sm:rounded-2xl relative">
-				<div class="container flex flex-col sm:flex-row items-center justify-between py-6 max-sm:pb-0 sm:py-20 gap-10 relative overflow-hidden">
-					<div class="flex flex-col float-start max-w-[720px] w-full gap-10 relative z-10">
-						<div class="flex flex-col gap-5">
-							<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-white">{{ product.title }}</h1>
-							<p class="text-white sm:text-grey-2">
-								{{ product.subtitle }}
-							</p>
-						</div>
-						<div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-							<ModalConsultationForm>
-								<Button>
-									Заказать
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-										<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-									</svg>
-								</Button>
-							</ModalConsultationForm>
-							<ModalConsultationForm>
-								<Button variant="outline" class="border-grey !bg-transparent !text-primary">
-									Получить демо
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-										<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-									</svg>
-								</Button>
-							</ModalConsultationForm>
+				<div class="container flex flex-col sm:flex-row items-center justify-between gap-10 relative overflow-hidden">
+					<div class="flex flex-col max-w-[720px] w-full gap-10 relative z-10">
+						<div class="flex flex-col gap-10 py-6 max-sm:pb-0 sm:py-20">
+							<div class="flex flex-col gap-5">
+								<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-white">{{ product.title }}</h1>
+								<p class="text-white sm:text-grey-2">
+									{{ product.subtitle }}
+								</p>
+							</div>
+							<div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+								<ModalConsultationForm>
+									<Button>
+										Заказать
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</Button>
+								</ModalConsultationForm>
+								<ModalConsultationForm>
+									<Button variant="outline" class="border-grey !bg-transparent !text-primary">
+										Получить демо
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</Button>
+								</ModalConsultationForm>
+							</div>
 						</div>
 					</div>
 					<img :src="product.image" alt="" class="max-w-[200px] max-h-[200px] object-contain" />
@@ -43,7 +45,7 @@
 				<h2 class="text-xl md:text-3xl lg:text-4xl font-medium text-center mb-6 sm:mb-8">
 					{{ translations['product.advantages'] }}
 				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					<div class="flex flex-col gap-6 bg-grey-0 border border-grey-1 sm:p-6 p-8 hover:bg-white transition-300" v-for="(item, i) in product?.advantages" :key="i">
 						<div class="w-14 h-14 sm:w-16 sm:h-16">
 							<img :src="item.image" alt="" class="rounded-2xl w-full" />
@@ -79,7 +81,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
 					<div class="flex flex-col gap-6 border border-grey-1 bg-grey-0 p-4 sm:p-6 hover:bg-white transition-300" v-for="(item, a) in tarifs?.results" :key="a">
 						<div class="flex flex-col">
 							<h4 class="text-base font-medium mb-2">
@@ -171,7 +173,7 @@
 					</div>
 					<div class="flex flex-col gap-2">
 						<h4 class="text-xl sm:text-2xl font-medium text-white">{{ translations['product.download'] }}</h4>
-						<p class="text-grey-2 text-base">{{ translations['product.file-size'] }} 26 GB</p>
+						<p class="text-grey-2 text-base">{{ translations['product.file-size'] }} 5 MB</p>
 					</div>
 				</div>
 				<Button :disabled="isLoading" class="max-sm:w-full" @click="downloadFile()">
@@ -298,8 +300,9 @@ const selectTypeTarif = (type) => {
 const downloadFile = () => {
 	if (process.client) {
 		isLoading.value = true;
+		const url = `/download?url=${encodeURIComponent(product.value?.tarif_catalog)}`;
 		const link = document.createElement('a');
-		link.href = product.value?.tarif_catalog;
+		link.href = url;
 		link.download = product.value?.title || 'file';
 		document.body.appendChild(link);
 		link.click();
@@ -329,6 +332,4 @@ const { data: tarifs } = await useAsyncData(
 .text p {
 	@apply text-sm sm:text-base text-grey;
 }
-
-
 </style>

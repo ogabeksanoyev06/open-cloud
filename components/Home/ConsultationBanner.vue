@@ -1,7 +1,7 @@
 <template>
-	<div class="mt-10 overflow-hidden py-6 bg-[url(~/assets/images/custom_green_bg.png)] bg-no-repeat bg-cover bg-top relative">
+	<div class="mt-10 overflow-hidden bg-[url(~/assets/images/custom_green_bg.png)] bg-no-repeat bg-cover bg-top relative">
 		<div class="container mt-[150px] lg:mt-0 lg:pl-[300px] relative z-10">
-			<div class="flex items-center justify-between flex-col gap-6 md:flex-row">
+			<div class="flex py-6 items-center justify-between flex-col gap-6 md:flex-row">
 				<div class="flex flex-col gap-2 max-w-[600px]">
 					<h4 class="text-lg sm:text-2xl">{{ translations['home.consultation-title'] }}</h4>
 					<p class="text-base">{{ translations['home.consultation-banner'] }}</p>
@@ -16,8 +16,8 @@
 					</Button>
 				</ModalConsultationForm>
 			</div>
+			<img src="/assets/svg/as.svg" alt="" class="absolute -top-[150px] lg:top-0 sm:left-[0px]" />
 		</div>
-		<img src="/assets/images/shield.png" alt="" class="sm:w-[150px] sm:h-[150px] lg:w-[200px] lg:h-[200px] absolute top-0  sm:left-[100px]" />
 	</div>
 </template>
 

@@ -1,7 +1,19 @@
 <template>
 	<div>
 		<div class="container flex flex-col items-center gap-10">
-			<div></div>
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink as-child>
+							<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>Партнерство </BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{ translations['partners.title'] }}</h1>
 		</div>
 		<div class="container max-w-[1760px] mt-10">

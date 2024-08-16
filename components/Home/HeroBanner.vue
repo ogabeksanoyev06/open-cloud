@@ -1,5 +1,7 @@
 <template>
-	<section class="min-h-[calc(100vh-400px)] sm:min-h-[600px] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4">
+	<section
+		class="min-h-[calc(100vh-100px)] sm:min-h-[600px] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4"
+	>
 		<div class="container relative">
 			<div class="flex flex-col gap-6 md:gap-20 relative z-10 max-w-[700px] mb-6">
 				<div>

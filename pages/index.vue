@@ -193,7 +193,16 @@ const { getPartners } = partnerStore;
 // const localePath = useLocalePath();
 
 const { data } = await useAsyncData('home', async () => {
-	const [news, clients, reviews, banners, products, partners] = await Promise.all([getNews(0), getClients(), getReviews(), getBanners(0), getTopProducts(), getPartners()]);
+	const [news, clients, reviews, banners, products, partners] = await Promise.all([
+		getNews({
+			type: 0,
+		}),
+		getClients(),
+		getReviews(),
+		getBanners(0),
+		getTopProducts(),
+		getPartners()
+	]);
 
 	return { news, clients, reviews, banners, products, partners };
 });

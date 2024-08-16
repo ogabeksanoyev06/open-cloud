@@ -2,6 +2,19 @@
 	<div>
 		<section class="bg-black bg-[url('@/assets/images/custom_black_bg.png')] bg-no-repeat bg-top bg-cover relative">
 			<div class="container relative">
+				<Breadcrumb class="pt-4">
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<BreadcrumbLink as-child>
+								<NuxtLink class="!text-white" :to="localePath('/')"> Главный </NuxtLink>
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage class="!text-white">Цены </BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
 				<div class="py-10 sm:py-[120px] flex flex-col gap-6">
 					<h1 class="font-medium text-xl sm:text-4xl text-white max-w-[1200px]">{{ translations['about.hero-title'] }}</h1>
 					<p class="text-grey-2 max-w-[900px]">{{ translations['about.hero-desc'] }}</p>
@@ -37,41 +50,43 @@
 						</svg>
 					</Button>
 				</div>
-				<Swiper
-					@swiper="onSwiper"
-					class="max-w-[380px] w-full z-[10]"
-					:modules="[SwiperAutoplay]"
-					:space-between="6"
-					:slides-per-view="1"
-					:loop="true"
-					:speed="2000"
-					:autoplay="{
-						delay: 2000,
-						disableOnInteraction: false
-					}"
-				>
-					<button
-						@click="categorySwiper?.slideNext()"
-						class="absolute top-1/2 -translate-y-1/2 left-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
+				<div id="certificate">
+					<Swiper
+						@swiper="onSwiper"
+						class="max-w-[380px] w-full z-[10]"
+						:modules="[SwiperAutoplay]"
+						:space-between="6"
+						:slides-per-view="1"
+						:loop="true"
+						:speed="2000"
+						:autoplay="{
+							delay: 2000,
+							disableOnInteraction: false
+						}"
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-							<path d="M14 7.5L10 12.5L14 17.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
-					</button>
-					<button
-						@click="categorySwiper?.slidePrev()"
-						class="absolute top-1/2 -translate-y-1/2 right-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
-					>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-							<path d="M10 17.5L14 12.5L10 7.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
-					</button>
-					<SwiperSlide v-for="(src, index) in data.certificates?.results" :key="index" @click="() => showImg(index)">
-						<div class="flex-shrink-0 max-w-[360px] sm:h-[125px] sm:max-w-[230px] mx-auto">
-							<img :src="src.image" class="object-cover h-full w-full" />
-						</div>
-					</SwiperSlide>
-				</Swiper>
+						<button
+							@click="categorySwiper?.slideNext()"
+							class="absolute top-1/2 -translate-y-1/2 left-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+								<path d="M14 7.5L10 12.5L14 17.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</button>
+						<button
+							@click="categorySwiper?.slidePrev()"
+							class="absolute top-1/2 -translate-y-1/2 right-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+								<path d="M10 17.5L14 12.5L10 7.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</button>
+						<SwiperSlide v-for="(src, index) in data.certificates?.results" :key="index" @click="() => showImg(index)">
+							<div class="flex-shrink-0 max-w-[360px] sm:h-[125px] sm:max-w-[230px] mx-auto">
+								<img :src="src.image" class="object-cover h-full w-full" />
+							</div>
+						</SwiperSlide>
+					</Swiper>
+				</div>
 			</div>
 			<VueEasyLightbox class="!z-40" :visible="visibleRef" :imgs="data.certificates?.results.map((item) => item.image)" :index="indexRef" @hide="onHide" />
 		</section>

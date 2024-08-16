@@ -2,7 +2,7 @@
 	<div>
 		<div class="container">
 			<div class="flex flex-col gap-6 py-10 border-b">
-				<NuxtLink to="/news">
+				<NuxtLink :to=" localePath('/news')">
 					<Button variant="ghost" class="py-1 px-2 mr-auto hover:bg-background">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M8.33333 13.334L5 10.0007M5 10.0007L8.33333 6.66732M5 10.0007L15 10.0007" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -38,6 +38,7 @@ import { useRoute } from 'vue-router';
 import { useNewsStore } from '~/stores/news';
 import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
+const localePath = useLocalePath();
 
 const { translations } = storeToRefs(translationsStore);
 

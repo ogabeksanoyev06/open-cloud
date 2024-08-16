@@ -17,7 +17,7 @@
 									<nav class="flex flex-col gap-4">
 										<NuxtLink
 											v-for="subcategory in item.documentations"
-											:to="`/documentation/${route.params.category}/${route.params.subcategory}/${subcategory?.slug}`"
+											:to="localePath(`/documentation/${route.params.category}/${route.params.subcategory}/${subcategory?.slug}`)"
 											class="text-grey text-base"
 											:key="subcategory.id"
 										>
@@ -51,6 +51,7 @@ const categoriesStore = useCategoriesStore();
 const translationsStore = useTranslationsStore();
 const documentsStore = useDocumentsStore();
 
+const localePath = useLocalePath();
 const { locale } = useI18n();
 const route = useRoute();
 const activeItem = ref(null);

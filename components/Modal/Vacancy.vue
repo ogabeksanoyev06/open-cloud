@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Dialog v-model:open="isOpen" :close-icon="true">
-			<DialogTrigger>
+			<DialogTrigger class="w-full">
 				<slot />
 			</DialogTrigger>
 			<DialogContent class="sm:max-w-[600px] p-4 sm:p-6 flex flex-col gap-6">

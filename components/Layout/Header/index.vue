@@ -6,7 +6,7 @@
 		<div class="container flex h-16 sm:h-[100px] items-center">
 			<div class="mr-4 lg:mr-1 flex items-center">
 				<NuxtLink :to="localePath('/')" class="mr-4 md:mr-2 xl:mr-6 flex items-center flex-shrink-0">
-					<img src="/assets/svg/logo-dark.svg" alt="" />
+					<img src="/assets/images/logo.png" alt="" class="max-w-[100px]" />
 				</NuxtLink>
 				<nav class="hidden lg:flex flex-wrap items-center max-lg:space-x-4 lg:space-x-8 xl:space-x-10 text-base font-normal">
 					<Button variant="ghost" class="p-0 gap-2 hover:bg-transparent text-base font-normal" @click="isMenuOpen = !isMenuOpen">
@@ -134,7 +134,7 @@
 		<Sheet v-model:open="isOpen">
 			<SheetContent side="left" class="w-full">
 				<div class="flex flex-col gap-10 h-full ">
-					<NuxtLink to="/">
+					<NuxtLink :to="localePath('/')">
 						<img src="/assets/images/logo.png" alt="" class="max-w-[120px]" />
 					</NuxtLink>
 					<nav class="flex flex-col gap-8 ">
