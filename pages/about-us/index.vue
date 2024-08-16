@@ -6,12 +6,12 @@
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>
-								<NuxtLink class="!text-white" :to="localePath('/')"> Главный </NuxtLink>
+								<NuxtLink class="!text-[#C2C2C3]" :to="localePath('/')"> Главный </NuxtLink>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />
 						<BreadcrumbItem>
-							<BreadcrumbPage class="!text-white">Цены </BreadcrumbPage>
+							<BreadcrumbPage class="!text-[#C2C2C3]">Облачные решения и IT‑инфраструктура для бизнеса </BreadcrumbPage>
 						</BreadcrumbItem>
 					</BreadcrumbList>
 				</Breadcrumb>
@@ -42,18 +42,18 @@
 				<div class="sm:flex-1">
 					<h5 class="text-xl sm:text-2xl font-medium">{{ translations['about.license-title'] }}</h5>
 					<p class="mt-2">{{ translations['about.license-desc'] }}</p>
-					<Button variant="link" class="p-0 mt-6 text-black">
+					<!-- <Button variant="link" class="p-0 mt-6 text-black">
 						{{ translations['about.license-more'] }}
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M5.83337 14.1667L9.16671 10L5.83337 5.83335" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M10.8334 14.1667L14.1667 10L10.8334 5.83335" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
-					</Button>
+					</Button> -->
 				</div>
 				<div id="certificate">
 					<Swiper
 						@swiper="onSwiper"
-						class="max-w-[380px] w-full z-[10]"
+						class=" max-w-[300px] sm:max-w-[380px] w-full z-[10]"
 						:modules="[SwiperAutoplay]"
 						:space-between="6"
 						:slides-per-view="1"
@@ -81,7 +81,7 @@
 							</svg>
 						</button>
 						<SwiperSlide v-for="(src, index) in data.certificates?.results" :key="index" @click="() => showImg(index)">
-							<div class="flex-shrink-0 max-w-[360px] sm:h-[125px] sm:max-w-[230px] mx-auto">
+							<div class="max-w-[360px] sm:h-[125px] sm:max-w-[230px] mx-auto">
 								<img :src="src.image" class="object-cover h-full w-full" />
 							</div>
 						</SwiperSlide>
@@ -90,7 +90,7 @@
 			</div>
 			<VueEasyLightbox class="!z-40" :visible="visibleRef" :imgs="data.certificates?.results.map((item) => item.image)" :index="indexRef" @hide="onHide" />
 		</section>
-		<section class="bg-background p-10">
+		<section class="bg-white p-4 sm:p-10">
 			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-6">{{ translations['about.mission-title'] }}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				<div class="flex flex-col gap-4 p-4 sm:p-6 bg-grey-0 rounded-2xl">
@@ -208,7 +208,6 @@
 				</Swiper>
 			</div>
 		</section>
-
 		<section>
 			<HomeConsultationBanner />
 		</section>

@@ -42,7 +42,7 @@
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" class="flex flex-col gap-1">
-						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
+						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in filteredLangs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
 							{{ lang.label }}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
@@ -132,75 +132,77 @@
 			</aside>
 		</transition>
 		<Sheet v-model:open="isOpen">
-			<SheetContent side="left" class="w-full">
-				<div class="flex flex-col gap-10 h-full ">
-					<NuxtLink :to="localePath('/')">
-						<img src="/assets/images/logo.png" alt="" class="max-w-[120px]" />
-					</NuxtLink>
-					<nav class="flex flex-col gap-8 ">
-						<button @click="activeSheet" class="flex items-center justify-between font-medium w-full">
-							{{ translations['header.link1'] }}
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-								<path d="M11.6667 7.16675L15 10.5001M15 10.5001L11.6667 13.8334M15 10.5001L5 10.5001" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</button>
-						<NuxtLink :to="localePath('/calculator')">{{ translations['header.link3'] }}</NuxtLink>
-						<NuxtLink :to="localePath('/about-us')">{{ translations['header.link2'] }}</NuxtLink>
-						<NuxtLink :to="localePath('/documentation')">{{ translations['header.link4'] }}</NuxtLink>
-						<NuxtLink :to="localePath('/partners')">{{ translations['header.link5'] }}</NuxtLink>
-						<NuxtLink :to="localePath('/contacts')">{{ translations['header.link6'] }}</NuxtLink>
-					</nav>
-					<div class="flex flex-col gap-6 mt-auto">
-						<Accordion type="single" class="w-full" collapsible>
-							<AccordionItem value="langs">
-								<AccordionTrigger class="px-2 text-base ">{{ selectedLang.label }}</AccordionTrigger>
-								<AccordionContent class="">
-									<div @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-2 hover:bg-secondary rounded">
-										<span> {{ lang.label }}</span>
-									</div>
-								</AccordionContent>
-							</AccordionItem>
-							<AccordionItem value="phone" class="border-none">
-								<AccordionTrigger class="px-2">
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-											<path
-												d="M15.5 14.8333V13.4617C15.5 12.7802 15.0851 12.1674 14.4523 11.9143L12.7572 11.2362C11.9524 10.9143 11.0352 11.263 10.6475 12.0383L10.5 12.3333C10.5 12.3333 8.41667 11.9167 6.75 10.25C5.08333 8.58333 4.66667 6.5 4.66667 6.5L4.96168 6.35249C5.73698 5.96484 6.08571 5.04761 5.76379 4.2428L5.08574 2.54768C4.83263 1.91492 4.21979 1.5 3.53828 1.5L2.16667 1.5C1.24619 1.5 0.5 2.24619 0.5 3.16667C0.5 10.5305 6.46954 16.5 13.8333 16.5C14.7538 16.5 15.5 15.7538 15.5 14.8333Z"
-												fill="#272727"
-											/>
-											<path
-												fill-rule="evenodd"
-												clip-rule="evenodd"
-												d="M8.20825 4.83333C8.20825 4.48816 8.48807 4.20833 8.83325 4.20833C9.35307 4.20833 9.86779 4.31072 10.348 4.50964C10.8283 4.70857 11.2647 5.00014 11.6322 5.3677C11.9998 5.73527 12.2914 6.17163 12.4903 6.65188C12.6892 7.13213 12.7916 7.64685 12.7916 8.16667C12.7916 8.51185 12.5118 8.79167 12.1666 8.79167C11.8214 8.79167 11.5416 8.51185 11.5416 8.16667C11.5416 7.811 11.4715 7.45882 11.3354 7.13023C11.1993 6.80164 10.9998 6.50308 10.7483 6.25159C10.4968 6.00009 10.1983 5.8006 9.86969 5.66449C9.5411 5.52839 9.18892 5.45833 8.83325 5.45833C8.48807 5.45833 8.20825 5.17851 8.20825 4.83333Z"
-												fill="#272727"
-											/>
-											<path
-												fill-rule="evenodd"
-												clip-rule="evenodd"
-												d="M8.20825 1.5C8.20825 1.15482 8.48807 0.875 8.83325 0.875C9.79081 0.875 10.739 1.0636 11.6237 1.43005C12.5083 1.79649 13.3121 2.33359 13.9892 3.01068C14.6663 3.68777 15.2034 4.4916 15.5699 5.37627C15.9363 6.26093 16.1249 7.20911 16.1249 8.16667C16.1249 8.51184 15.8451 8.79167 15.4999 8.79167C15.1547 8.79167 14.8749 8.51184 14.8749 8.16667C14.8749 7.37326 14.7186 6.58763 14.415 5.85462C14.1114 5.12161 13.6664 4.45558 13.1054 3.89456C12.5443 3.33354 11.8783 2.88852 11.1453 2.58489C10.4123 2.28127 9.62665 2.125 8.83325 2.125C8.48807 2.125 8.20825 1.84518 8.20825 1.5Z"
-												fill="#272727"
-											/>
-										</svg>
-									</span>
-								</AccordionTrigger>
-								<AccordionContent v-for="contact in formattedContacts" :key="contact">
-									<a :href="`tel:${contact}`" target="_blank">
-										{{ contact }}
-									</a>
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
-						<ModalConsultationForm>
-							<Button class="w-full">
-								{{ translations['header.login'] }}
+			<SheetContent side="left" class="w-full h-full p-0">
+				<ScrollArea class="h-screen">
+					<div class="flex flex-col justify-between gap-10 p-6 h-screen">
+						<NuxtLink :to="localePath('/')">
+							<img src="/assets/images/logo.png" alt="" class="max-w-[120px]" />
+						</NuxtLink>
+						<nav class="flex flex-col gap-8">
+							<button @click="activeSheet" class="flex items-center justify-between font-medium w-full">
+								{{ translations['header.link1'] }}
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-									<ellipse cx="9.99984" cy="15.0833" rx="5.83333" ry="2.91667" stroke="#272727" stroke-width="1.5" stroke-linejoin="round" />
-									<ellipse cx="9.99984" cy="6.33333" rx="3.33333" ry="3.33333" stroke="#272727" stroke-width="1.5" stroke-linejoin="round" />
+									<path d="M11.6667 7.16675L15 10.5001M15 10.5001L11.6667 13.8334M15 10.5001L5 10.5001" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
-							</Button>
-						</ModalConsultationForm>
+							</button>
+							<NuxtLink :to="localePath('/calculator')">{{ translations['header.link3'] }}</NuxtLink>
+							<NuxtLink :to="localePath('/about-us')">{{ translations['header.link2'] }}</NuxtLink>
+							<NuxtLink :to="localePath('/documentation')">{{ translations['header.link4'] }}</NuxtLink>
+							<NuxtLink :to="localePath('/partners')">{{ translations['header.link5'] }}</NuxtLink>
+							<NuxtLink :to="localePath('/contacts')">{{ translations['header.link6'] }}</NuxtLink>
+						</nav>
+						<div class="flex flex-col gap-6 mt-auto">
+							<Accordion type="single" class="w-full" collapsible>
+								<AccordionItem value="langs">
+									<AccordionTrigger class="px-2 text-base">{{ selectedLang.label }}</AccordionTrigger>
+									<AccordionContent class="">
+										<div @click="selectLang(lang)" v-for="(lang, i) in filteredLangs" :key="i" class="cursor-pointer p-2 hover:bg-secondary rounded">
+											<span> {{ lang.label }}</span>
+										</div>
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="phone" class="border-none">
+									<AccordionTrigger class="px-2">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+												<path
+													d="M15.5 14.8333V13.4617C15.5 12.7802 15.0851 12.1674 14.4523 11.9143L12.7572 11.2362C11.9524 10.9143 11.0352 11.263 10.6475 12.0383L10.5 12.3333C10.5 12.3333 8.41667 11.9167 6.75 10.25C5.08333 8.58333 4.66667 6.5 4.66667 6.5L4.96168 6.35249C5.73698 5.96484 6.08571 5.04761 5.76379 4.2428L5.08574 2.54768C4.83263 1.91492 4.21979 1.5 3.53828 1.5L2.16667 1.5C1.24619 1.5 0.5 2.24619 0.5 3.16667C0.5 10.5305 6.46954 16.5 13.8333 16.5C14.7538 16.5 15.5 15.7538 15.5 14.8333Z"
+													fill="#272727"
+												/>
+												<path
+													fill-rule="evenodd"
+													clip-rule="evenodd"
+													d="M8.20825 4.83333C8.20825 4.48816 8.48807 4.20833 8.83325 4.20833C9.35307 4.20833 9.86779 4.31072 10.348 4.50964C10.8283 4.70857 11.2647 5.00014 11.6322 5.3677C11.9998 5.73527 12.2914 6.17163 12.4903 6.65188C12.6892 7.13213 12.7916 7.64685 12.7916 8.16667C12.7916 8.51185 12.5118 8.79167 12.1666 8.79167C11.8214 8.79167 11.5416 8.51185 11.5416 8.16667C11.5416 7.811 11.4715 7.45882 11.3354 7.13023C11.1993 6.80164 10.9998 6.50308 10.7483 6.25159C10.4968 6.00009 10.1983 5.8006 9.86969 5.66449C9.5411 5.52839 9.18892 5.45833 8.83325 5.45833C8.48807 5.45833 8.20825 5.17851 8.20825 4.83333Z"
+													fill="#272727"
+												/>
+												<path
+													fill-rule="evenodd"
+													clip-rule="evenodd"
+													d="M8.20825 1.5C8.20825 1.15482 8.48807 0.875 8.83325 0.875C9.79081 0.875 10.739 1.0636 11.6237 1.43005C12.5083 1.79649 13.3121 2.33359 13.9892 3.01068C14.6663 3.68777 15.2034 4.4916 15.5699 5.37627C15.9363 6.26093 16.1249 7.20911 16.1249 8.16667C16.1249 8.51184 15.8451 8.79167 15.4999 8.79167C15.1547 8.79167 14.8749 8.51184 14.8749 8.16667C14.8749 7.37326 14.7186 6.58763 14.415 5.85462C14.1114 5.12161 13.6664 4.45558 13.1054 3.89456C12.5443 3.33354 11.8783 2.88852 11.1453 2.58489C10.4123 2.28127 9.62665 2.125 8.83325 2.125C8.48807 2.125 8.20825 1.84518 8.20825 1.5Z"
+													fill="#272727"
+												/>
+											</svg>
+										</span>
+									</AccordionTrigger>
+									<AccordionContent v-for="contact in formattedContacts" :key="contact">
+										<a :href="`tel:${contact}`" target="_blank">
+											{{ contact }}
+										</a>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+							<ModalConsultationForm>
+								<Button class="w-full">
+									{{ translations['header.login'] }}
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+										<ellipse cx="9.99984" cy="15.0833" rx="5.83333" ry="2.91667" stroke="#272727" stroke-width="1.5" stroke-linejoin="round" />
+										<ellipse cx="9.99984" cy="6.33333" rx="3.33333" ry="3.33333" stroke="#272727" stroke-width="1.5" stroke-linejoin="round" />
+									</svg>
+								</Button>
+							</ModalConsultationForm>
+						</div>
 					</div>
-				</div>
+				</ScrollArea>
 			</SheetContent>
 		</Sheet>
 		<Sheet v-model:open="isCatalogOpen">
@@ -296,6 +298,8 @@ const formattedContacts = computed(() => {
 	if (!contacts.value || !contacts.value.nbm) return [];
 	return contacts.value.nbm.split(',').map((contact) => contact.trim());
 });
+
+const filteredLangs = computed(() => langs.filter((lang) => lang.id !== selectedLang.value.id));
 
 const eventHeaderShadowHandler = () => {
 	const header = document.querySelector('#header');

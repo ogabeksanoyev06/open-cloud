@@ -126,7 +126,7 @@
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" class="flex flex-col gap-1">
-						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
+						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in filteredLangs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
 							{{ lang.label }}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
@@ -162,7 +162,7 @@ const localePath = useLocalePath();
 const { setLocale, locale } = useI18n();
 
 const selectedLang = ref(langs.find((lang) => lang.id === locale.value));
-
+const filteredLangs = computed(() => langs.filter((lang) => lang.id !== selectedLang.value.id));
 const selectLang = (lang) => {
 	selectedLang.value = lang;
 	setLocale(lang.id);

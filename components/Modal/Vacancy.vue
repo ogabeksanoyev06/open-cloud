@@ -1,12 +1,13 @@
 <template>
 	<div>
 		<Dialog v-model:open="isOpen" :close-icon="true">
-			<DialogTrigger class="w-full">
+			<DialogTrigger class="w-full" @click="vacancyId">
 				<slot />
 			</DialogTrigger>
-			<DialogContent class="sm:max-w-[600px] p-4 sm:p-6 flex flex-col gap-6">
+
+			<DialogContent class="sm:max-w-[600px] p-4 sm:p-10 flex flex-col gap-6 sm:!rounded-[40px]">
 				<div class="flex items-center justify-between">
-					<DialogTitle class="text-2xl">Frontend developer</DialogTitle>
+					<DialogTitle class="text-2xl">{{ data.title }}</DialogTitle>
 					<!-- <DialogClose>
 						<button class="flex items-center justify-center w-8 h-8 flex-shrink-0">
 							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -20,23 +21,12 @@
 						</button>
 					</DialogClose> -->
 				</div>
+
 				<div class="w-full overflow-y-auto h-[400px] sm:max-h-[600px] relative">
-					<div class="relative overflow-hidden h-full bg-grey-0 rounded-2xl sm:p-6 p-4" style="overflow: hidden scroll">
-						В IT академию требуется Web программист - преподаватель для онлайн -уроков (backend-fronted) Coddy Camp - это учебный центр в Ташкенте для детей школьного возраста (7-16 лет). Дети
-						обучаются программированию, графическому дизайну и робототехнике. Наша цель обучить детей современным навыкам, развить логическое мышление и креативность. На данный момент обучаются 700+
-						учеников в четырех филиалах. Мы предлагаем стать частью нашей дружной команды и работать с лучшими профессионалами своего дела. ♦️Основные требования: Опыт работы преподавателем не менее
-						года; Уметь объяснять сложные вещи простыми словами; Свободное владение русским и узбекским языками. ♦️Знание языков технологий такие как: HTML/CSS JavaScript React Node.js ♦️Чем вы будете
-						заниматься: Создавать с нами инновационные уроки; Проводить уроки с энергией и интересом; Находить индивидуальный подход к каждому ученику. ♦️Что мы предлагаем: Комфортный и современный
-						офис; Профессиональные тренинги; Teambuildings два раза в год; Оплачиваемый отпуск; В IT академию требуется Web программист - преподаватель для онлайн -уроков (backend-fronted) Coddy Camp
-						- это учебный центр в Ташкенте для детей школьного возраста (7-16 лет). Дети обучаются программированию, графическому дизайну и робототехнике. Наша цель обучить детей современным навыкам,
-						развить логическое мышление и креативность. На данный момент обучаются 700+ учеников в четырех филиалах. Мы предлагаем стать частью нашей дружной команды и работать с лучшими
-						профессионалами своего дела. ♦️Основные требования: Опыт работы преподавателем не менее года; Уметь объяснять сложные вещи простыми словами; Свободное владение русским и узбекским языками.
-						♦️Знание языков технологий такие как: HTML/CSS JavaScript React Node.js ♦️Чем вы будете заниматься: Создавать с нами инновационные уроки; Проводить уроки с энергией и интересом; Находить
-						индивидуальный подход к каждому ученику. ♦️Что мы предлагаем: Комфортный и современный офис; Профессиональные тренинги; Teambuildings два раза в год; Оплачиваемый отпуск;
-					</div>
+					<div class="relative overflow-hidden h-full bg-grey-0 rounded-2xl sm:p-6 p-4" style="overflow: hidden scroll" v-html="data.text"></div>
 					<div class="absolute inset-x-0 bottom-0 w-full sm:h-[90px]" style="background: linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, #f5f5f7 100%)"></div>
 				</div>
-				<div class="flex flex-wrap items-center justify-between gap-2 p-4 bg-[#1878F3] text-white rounded">
+				<div class="flex flex-wrap items-center justify-between gap-2 p-4 bg-[#1878F3] text-white rounded-[16px]">
 					<h4 class="text-base sm:text-xl font-medium">Отправить резюме по телеграм</h4>
 					<a href="#" target="_blank" class="flex items-center gap-2">
 						@opencloud_hr
@@ -52,5 +42,23 @@
 </template>
 
 <script setup>
+import { useVacancyStore } from '~/stores/vacancies.js';
 const isOpen = ref(false);
+
+const props = defineProps({
+	tariffId: Number
+});
+const store = useVacancyStore();
+const { getVacanciesId } = store;
+const { loading } = storeToRefs(store);
+const data = ref({});
+
+const vacancyId = async () => {
+	try {
+		const res = await getVacanciesId(props.tariffId);
+		data.value = res;
+	} catch (error) {
+		console.error('Error:', error);
+	}
+};
 </script>
