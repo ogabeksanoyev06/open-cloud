@@ -43,6 +43,10 @@
 	body {
 		@apply text-black bg-grey-0;
 	}
+	p span {
+		@apply !bg-transparent text-base text-grey;
+		font-family: 'GolosText', sans-serif;
+	}
 }
 
 @layer components {
