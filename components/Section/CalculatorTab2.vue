@@ -3,9 +3,9 @@
 		<div class="flex flex-col gap-6">
 			<slot />
 			<div>
-				<Accordion type="single" collapsible class="w-full">
+				<Accordion type="multiple" collapsible class="w-full">
 					<AccordionItem v-for="(item, i) in tab2Configurations" :key="i" :value="i">
-						<AccordionTrigger class="sm:text-xl">Конфигурация {{ i + 1 }}</AccordionTrigger>
+						<AccordionTrigger class="sm:text-xl">Конфигурация {{ item.id }}</AccordionTrigger>
 						<AccordionContent class="flex flex-col gap-6">
 							<div class="flex flex-col gap-6">
 								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -200,7 +200,7 @@
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab2) }} сум/месяц</h3>
 					</div>
 					<div class="flex flex-col gap-4">
-						<ModalOrderCreate />
+						<ModalOrderCreate :tab="2" />
 						<Button variant="outline"> Скачать расчет </Button>
 					</div>
 				</div>

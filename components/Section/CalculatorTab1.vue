@@ -3,29 +3,38 @@
 		<div class="flex flex-col gap-6">
 			<slot />
 			<div>
-				<Accordion type="single" class="w-full" collapsible>
+				<Accordion type="multiple" class="w-full" collapsible>
 					<AccordionItem v-for="(item, index) in tab1Configurations" :key="index" :value="index">
-						<AccordionTrigger class="sm:text-xl">Конфигурация {{ index + 1 }}</AccordionTrigger>
+						<AccordionTrigger class="sm:text-xl">Конфигурация {{ item.id }}</AccordionTrigger>
 						<AccordionContent class="flex flex-col gap-6">
 							<div class="">
-								<div class="relative overflow-hidden max-w-[600px] lg:max-w-none">
-									<ul class="flex items-center gap-4 h-full w-full" style="overflow: scroll">
-										<li class="flex items-center font-medium cursor-pointer" v-for="(tarif, tIndex) in item.tarifData" :key="tIndex" @click="activeTab(tIndex)">
+								<ScrollArea class="border rounded-md w-96 whitespace-nowrap">
+									<ul class="flex items-center gap-4 h-full w-full overflow-hidden" style="overflow: scroll">
+										<li
+											class="flex items-center font-medium cursor-pointer whitespace-nowrap"
+											v-for="(tarif, tIndex) in item.tarifData"
+											:key="tIndex"
+											@click="activeTab(tIndex)"
+											:class="{ 'text-primary': selectedIndex === tIndex }"
+										>
 											{{ tarif?.title }}
+											{{ selectedIndex }}
 										</li>
 									</ul>
-								</div>
+								</ScrollArea>
+								<div class="relative overflow-hidden max-w-[600px] lg:max-w-none"></div>
 								<div></div>
 							</div>
 							<p class="text-grey sm:text-sm">Конфигурации, сбалансированные по соотношению ядер и памяти</p>
 							<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 								<div
-									class="flex flex-col items-center gap-4 p-4 sm:p-6 rounded-2xl border-2 border-grey-1 cursor-pointer hover:shadow-lg transition-300"
+									class="flex flex-col items-start gap-4 p-4 sm:p-6 rounded-2xl border-2 border-grey-1 cursor-pointer hover:shadow-lg transition-300"
 									v-for="(tabContent, a) in item.tarifData[selectedIndex]?.tarifs"
 									:key="a"
-									@click="changeTarif(1, item.id, selectedIndex, tabContent.id)"
+									@click="changeTarif(item.id, tabContent.id)"
+									:class="{ 'border-primary shadow-lg': tabContent.active }"
 								>
-									<div class="flex items-center justify-center gap-2">
+									<div class="flex items-start justify-start gap-2">
 										<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">{{ tabContent.ram }} ГБ Ram</span>
 										<span class="bg-grey-0 rounded sm:px-4 px-3 py-2">{{ tabContent.vcpu }} vCPU</span>
 									</div>
@@ -134,7 +143,7 @@
 				</div>
 				<div class="flex flex-col gap-6 p-6" v-for="(item, i) in tab1Configurations" :key="item.id" :value="item.id">
 					<div class="flex items-center justify-between">
-						<h4 class="text-base sm:text-xl">Конфигурация {{ i + 1 }}</h4>
+						<h4 class="text-base sm:text-xl">Конфигурация {{ item.id }}</h4>
 						<Button @click="deleteConfiguration(1, item.id)" variant="ghost" class="p-0 h-auto">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<path
@@ -147,10 +156,10 @@
 						</Button>
 					</div>
 					<ul class="flex flex-col gap-4">
-						<li class="flex !flex-col !items-center gap-2 p-4 rounded-2xl border border-grey-1 transition-300" v-for="tarif in getActiveTarifs(item)" :key="tarif.id">
-							<div class="flex items-center justify-center gap-2">
-								<span class="bg-grey-1 rounded sm:px-4 px-3 py-2">{{ tarif.ram }} ГБ Ram</span>
-								<span class="bg-grey-1 rounded sm:px-4 px-3 py-2">{{ tarif.vcpu }} vCPU</span>
+						<li class="inline-flex !flex-col !items-start gap-2 p-4 rounded-2xl border border-grey-1 transition-300" v-for="tarif in getActiveTarifs(item)" :key="tarif.id">
+							<div class="flex items-start justify-center gap-2">
+								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.ram }} ГБ Ram</span>
+								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.vcpu }} vCPU</span>
 							</div>
 							<h4 class="text-base font-medium">{{ formatPrice(tarif.price) }} сум/месяц</h4>
 						</li>
@@ -175,13 +184,7 @@
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab1) }} сум/месяц</h3>
 					</div>
 					<div class="flex flex-col gap-4">
-						<Button>
-							Заказать
-							<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-								<path d="M6.33331 14.166L9.66665 9.99935L6.33331 5.83268" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M11.3333 14.166L14.6666 9.99935L11.3333 5.83268" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</Button>
+						<ModalOrderCreate :tab="1" />
 						<Button variant="outline"> Скачать расчет </Button>
 					</div>
 				</div>

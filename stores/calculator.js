@@ -62,27 +62,39 @@ export const useCalculatorStore = defineStore(
 			try {
 				let res = await useAxios().getRequest('/calculator/specification_prices');
 				specification_prices.value = res.data;
-				updateConfigurationPrices(tab1Configurations.value);
-				updateConfigurationPrices(tab2Configurations.value);
+				updateConfigurationPrices(1, tab1Configurations.value);
+				updateConfigurationPrices(2, tab2Configurations.value);
 				return res.data;
 			} catch (error) {
 				console.log(error);
 			}
 		};
 
-		const updateConfigurationPrices = (configurations) => {
+		const updateConfigurationPrices = (id, configurations) => {
 			const prices = specification_prices.value;
 			const tariff = tarifData.value.results;
-			configurations.forEach((config) => {
-				config.price = {
-					vcpu_price: prices.vcpu_price || 0,
-					ram_price: prices.ram_price || 0,
-					ssd_price: prices.ssd_price || 0,
-					hdd_price: prices.hdd_price || 0,
-					public_ip_price: prices.public_ip_price || 0
-				};
-				config.tarifData = tariff;
-			});
+			if (id === 1) {
+				configurations.forEach((config) => {
+					config.price = {
+						vcpu_price: prices.vcpu_price || 0,
+						ram_price: prices.ram_price || 0,
+						ssd_price: prices.ssd_price || 0,
+						hdd_price: prices.hdd_price || 0,
+						public_ip_price: prices.public_ip_price || 0
+					};
+					config.tarifData = tariff;
+				});
+			} else {
+				configurations.forEach((config) => {
+					config.price = {
+						vcpu_price: prices.vcpu_price || 0,
+						ram_price: prices.ram_price || 0,
+						ssd_price: prices.ssd_price || 0,
+						hdd_price: prices.hdd_price || 0,
+						public_ip_price: prices.public_ip_price || 0
+					};
+				});
+			}
 		};
 
 		const addConfiguration = async (tab) => {
@@ -108,15 +120,14 @@ export const useCalculatorStore = defineStore(
 					ssdNodes: 16,
 					hddNodes: 16,
 					publicIP: false,
-					tarifData: updatedTariff, // Yangilangan tariflar
+					tarifData: updatedTariff,
 					price: {
 						vcpu_price: price.vcpu_price || 0,
 						ram_price: price.ram_price || 0,
 						ssd_price: price.ssd_price || 0,
 						hdd_price: price.hdd_price || 0,
 						public_ip_price: price.public_ip_price || 0
-					},
-					active: false // Yangi konfiguratsiya uchun active ni false qilib belgilash
+					}
 				});
 			} else {
 				configurations.push({
@@ -126,15 +137,13 @@ export const useCalculatorStore = defineStore(
 					ssdNodes: 16,
 					hddNodes: 16,
 					publicIP: false,
-					tarifData: updatedTariff, // Yangilangan tariflar
 					price: {
 						vcpu_price: price.vcpu_price || 0,
 						ram_price: price.ram_price || 0,
 						ssd_price: price.ssd_price || 0,
 						hdd_price: price.hdd_price || 0,
 						public_ip_price: price.public_ip_price || 0
-					},
-					active: false // Yangi konfiguratsiya uchun active ni false qilib belgilash
+					}
 				});
 			}
 
@@ -208,17 +217,17 @@ export const useCalculatorStore = defineStore(
 			}
 		};
 
-		const changeTarif = (tab, itemId, selectedIndex, tarifId) => {
-			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
-			const config = configurations.find((conf) => conf.id === itemId);
-
-			if (config && config.tarifData && config.tarifData[selectedIndex]) {
-				const tarifDataItem = config.tarifData[selectedIndex];
-
-				tarifDataItem.tarifs.forEach((tarif) => {
-					tarif.active = tarif.id === tarifId; // Tanlangan tarif uchun active ni true ga, boshqalar uchun false ga o'rnating
-				});
-			}
+		const changeTarif = (selectedIndex, tarifId) => {
+			const configurations = tab1Configurations.value;
+			configurations.forEach((config) => {
+				if (config.id === selectedIndex) {
+					config.tarifData.forEach((tarifDataItem) => {
+						tarifDataItem.tarifs.forEach((tarif) => {
+							tarif.active = tarif.id === tarifId;
+						});
+					});
+				}
+			});
 		};
 
 		const calculateTotalPriceTab1 = computed(() => {

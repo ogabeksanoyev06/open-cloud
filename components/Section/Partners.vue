@@ -27,8 +27,8 @@
 			}"
 		>
 			<SwiperSlide v-for="(partner, i) in data" :key="i">
-				<div class="sm:border sm:border-grey-1 px-6 sm:px-5 inline-flex h-20 max-w-[200px] sm:max-w-[245px] sm:h-[136px] w-full">
-					<img :src="partner.image" alt="" class="w-full h-full object-contain" />
+				<div class="sm:border sm:border-grey-1 px-6 sm:px-5 flex items-center justify-center min-h-[130px]">
+					<img :src="partner.image" alt="" class="object-contain" />
 				</div>
 			</SwiperSlide>
 		</Swiper>

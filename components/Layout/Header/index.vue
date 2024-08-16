@@ -133,8 +133,11 @@
 		</transition>
 		<Sheet v-model:open="isOpen">
 			<SheetContent side="left" class="w-full">
-				<div class="flex flex-col h-full justify-between">
-					<nav class="flex flex-col gap-8 mt-6">
+				<div class="flex flex-col gap-10 h-full ">
+					<NuxtLink to="/">
+						<img src="/assets/images/logo.png" alt="" class="max-w-[120px]" />
+					</NuxtLink>
+					<nav class="flex flex-col gap-8 ">
 						<button @click="activeSheet" class="flex items-center justify-between font-medium w-full">
 							{{ translations['header.link1'] }}
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -145,29 +148,20 @@
 						<NuxtLink :to="localePath('/about-us')">{{ translations['header.link2'] }}</NuxtLink>
 						<NuxtLink :to="localePath('/documentation')">{{ translations['header.link4'] }}</NuxtLink>
 						<NuxtLink :to="localePath('/partners')">{{ translations['header.link5'] }}</NuxtLink>
+						<NuxtLink :to="localePath('/contacts')">{{ translations['header.link6'] }}</NuxtLink>
 					</nav>
-					<div class="flex flex-col gap-6">
-						<DropdownMenu>
-							<DropdownMenuTrigger as-child class="w-full justify-between">
-								<Button variant="secondary" class="!bg-transparent p-0 shadow-none">
-									Ру
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-											<path d="M5.83325 8.33325L9.99992 11.6666L14.1666 8.33325" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										</svg>
-									</span>
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end" class="flex flex-col gap-1">
-								<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
-									{{ lang.label }}
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
-						<div class="shrink-0 bg-[#E2E2EE] relative h-px w-full"></div>
-						<DropdownMenu>
-							<DropdownMenuTrigger as-child class="w-full justify-between">
-								<Button variant="secondary" class="!bg-transparent p-0 shadow-none">
+					<div class="flex flex-col gap-6 mt-auto">
+						<Accordion type="single" class="w-full" collapsible>
+							<AccordionItem value="langs">
+								<AccordionTrigger class="px-2 text-base ">{{ selectedLang.label }}</AccordionTrigger>
+								<AccordionContent class="">
+									<div @click="selectLang(lang)" v-for="(lang, i) in langs" :key="i" class="cursor-pointer p-2 hover:bg-secondary rounded">
+										<span> {{ lang.label }}</span>
+									</div>
+								</AccordionContent>
+							</AccordionItem>
+							<AccordionItem value="phone" class="border-none">
+								<AccordionTrigger class="px-2">
 									<span>
 										<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
 											<path
@@ -188,19 +182,14 @@
 											/>
 										</svg>
 									</span>
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-											<path d="M5.83325 8.33325L9.99992 11.6666L14.1666 8.33325" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										</svg>
-									</span>
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align="start" class="flex flex-col gap-2 p-3 w-full">
-								<a v-for="contact in formattedContacts" :key="contact" :href="`tel:${contact}`" target="_blank">
-									{{ contact }}
-								</a>
-							</DropdownMenuContent>
-						</DropdownMenu>
+								</AccordionTrigger>
+								<AccordionContent v-for="contact in formattedContacts" :key="contact">
+									<a :href="`tel:${contact}`" target="_blank">
+										{{ contact }}
+									</a>
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
 						<ModalConsultationForm>
 							<Button class="w-full">
 								{{ translations['header.login'] }}

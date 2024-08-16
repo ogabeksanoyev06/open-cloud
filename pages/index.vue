@@ -21,7 +21,7 @@
 		</section>
 		<section class="sm:mt-20 mt-10">
 			<div class="container">
-				<div class="bg-white p-10 flex flex-col gap-6 sm:gap-10">
+				<div class="bg-white px-4 py-10 sm:p-10 flex flex-col gap-6 sm:gap-10">
 					<h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
 						{{ translations['home.advantages-title'] }}
 					</h3>
@@ -36,7 +36,7 @@
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
 
-							<div class="flex flex-col gap-6 border border-b-0 border-grey-1 p-4 sm:p-6 rounded-t-2xl" style="background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%)">
+							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
 								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
@@ -53,7 +53,7 @@
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
 
-							<div class="flex flex-col gap-6 border border-b-0 border-grey-1 p-4 sm:p-6 rounded-t-2xl" style="background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%)">
+							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
 								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
@@ -70,7 +70,7 @@
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
 
-							<div class="flex flex-col gap-6 border border-b-0 border-grey-1 p-4 sm:p-6 rounded-t-2xl" style="background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%)">
+							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
 								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
@@ -198,3 +198,5 @@ const { data } = await useAsyncData('home', async () => {
 	return { news, clients, reviews, banners, products, partners };
 });
 </script>
+
+<style scoped></style>

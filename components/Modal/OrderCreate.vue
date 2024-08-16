@@ -3,6 +3,11 @@ import { useApplication } from '~/stores/application';
 import { useCalculatorStore } from '~/stores/calculator.js';
 import { useCustomToast } from '~/composables/useCustomToast.js';
 import { useTranslationsStore } from '~/stores/translations.js';
+
+const props = defineProps({
+	tab: Number
+});
+
 const translationsStore = useTranslationsStore();
 
 const { translations } = storeToRefs(translationsStore);
@@ -15,7 +20,7 @@ const { showToast } = useCustomToast();
 
 const { orderCreate } = applicationStore;
 
-const { tab2Configurations,calculateTotalPriceTab2 } = storeToRefs(calculatorStore);
+const { tab2Configurations, tab1Configurations, calculateTotalPriceTab2, calculateTotalPriceTab1 } = storeToRefs(calculatorStore);
 const { loading } = storeToRefs(applicationStore);
 
 const isOpen = ref(false);
@@ -30,16 +35,33 @@ const form = reactive({
 const formatPhoneNumber = (phone) => {
 	return phone.replace(/[^\d]/g, '');
 };
-
 const sendOrderCreate = async () => {
 	try {
-		const configurations = tab2Configurations.value.map((config) => ({
-			vcpu_count: config.vcpu,
-			ram_count: config.ram,
-			ssd_count: config.ssdNodes,
-			hdd_count: config.hddNodes,
-			public_ip: config.publicIP
-		}));
+		let configurations = [];
+		if (props.tab === 1) {
+			configurations = tab1Configurations.value.map((config) => {
+				const activeTarif = config.tarifData.flatMap((data) => data.tarifs).find((tarif) => tarif.active);
+				const result = {
+					ssd_count: config.ssdNodes,
+					hdd_count: config.hddNodes
+				};
+				if (config.publicIP === true) {
+					result.public_ip = config.publicIP;
+				}
+				if (activeTarif) {
+					result.tarif = activeTarif.id;
+				}
+				return result;
+			});
+		} else if (props.tab === 2) {
+			configurations = tab2Configurations.value.map((config) => ({
+				vcpu_count: config.vcpu,
+				ram_count: config.ram,
+				ssd_count: config.ssdNodes,
+				hdd_count: config.hddNodes,
+				public_ip: config.publicIP
+			}));
+		}
 		await orderCreate({
 			name: form.name,
 			phone: formatPhoneNumber(form.phone),
@@ -47,11 +69,8 @@ const sendOrderCreate = async () => {
 			company: form.company,
 			configs: configurations
 		});
-		showToast('Mahsulotlar muvaffaqiyatli yuborildi!', 'success');
 		isOpen.value = false;
-	} catch (error) {
-		console.log(error);
-	}
+	} catch (error) {}
 };
 </script>
 

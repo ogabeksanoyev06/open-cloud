@@ -1,7 +1,5 @@
 <template>
-	<section
-		class="sm:min-h-[calc(100vh-100px)] min-h-[calc(100vh-64px)] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4"
-	>
+	<section class="min-h-[calc(100vh-400px)] sm:min-h-[600px] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4">
 		<div class="container relative">
 			<div class="flex flex-col gap-6 md:gap-20 relative z-10 max-w-[700px] mb-6">
 				<div>
@@ -22,7 +20,7 @@
 					</ModalConsultationForm>
 
 					<ModalConsultationForm>
-						<Button class="text-primary !bg-transparent !border-grey w-full sm:w-auto">
+						<Button class="text-primary !bg-transparent border !border-grey w-full sm:w-auto">
 							Получить консультацию
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 								<path d="M5.8335 14.1666L9.16683 9.99996L5.8335 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

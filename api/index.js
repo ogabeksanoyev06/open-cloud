@@ -5,7 +5,9 @@ export function useAxios() {
 		try {
 			let res = await $axios.get(url, { params });
 			return res;
-		} catch (error) {}
+		} catch (error) {
+			console.log('error', error);
+		}
 	}
 
 	async function postRequest(url, body) {
