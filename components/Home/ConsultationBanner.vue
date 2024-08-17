@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-10 overflow-hidden bg-[url(~/assets/images/custom_green_bg.png)] bg-no-repeat bg-cover bg-top relative">
+	<div class=" overflow-hidden bg-[url(~/assets/images/custom_green_bg.png)] bg-no-repeat bg-cover bg-top relative">
 		<div class="container mt-[150px] lg:mt-0 lg:pl-[300px] relative z-10">
 			<div class="flex py-6 items-center justify-between flex-col gap-6 md:flex-row">
 				<div class="flex flex-col gap-2 max-w-[600px]">

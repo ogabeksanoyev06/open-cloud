@@ -13,7 +13,7 @@
 							</div>
 							<div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
 								<ModalConsultationForm>
-									<Button>
+									<Button class="sm:w-auto w-full">
 										Заказать
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -22,7 +22,7 @@
 									</Button>
 								</ModalConsultationForm>
 								<ModalConsultationForm>
-									<Button variant="outline" class="border-grey !bg-transparent !text-primary">
+									<Button variant="outline" class="sm:w-auto w-full border-grey !bg-transparent !text-primary">
 										Получить демо
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -58,7 +58,26 @@
 						</div>
 					</div>
 				</div>
-				<HomeConsultationBanner class="rounded-2xl" />
+				<div class="mt-10 overflow-hidden rounded-2xl bg-[url(~/assets/images/custom_green_bg.png)] bg-no-repeat bg-cover bg-top relative">
+					<div class="container mt-[150px] lg:mt-0 lg:pl-[300px] relative z-10">
+						<div class="flex py-6 items-center justify-between flex-col gap-6 md:flex-row">
+							<div class="flex flex-col gap-2 max-w-[600px]">
+								<h4 class="text-lg sm:text-2xl">{{ translations['home.consultation-title'] }}</h4>
+								<p class="text-base">{{ translations['home.consultation-banner'] }}</p>
+							</div>
+							<ModalConsultationForm>
+								<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">
+									Получить консультацию
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M5.83325 14.1665L9.16659 9.99984L5.83325 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M10.8333 14.1665L14.1666 9.99984L10.8333 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</Button>
+							</ModalConsultationForm>
+						</div>
+						<img src="/assets/svg/as.svg" alt="" class="absolute -top-[150px] lg:top-0 sm:left-[40px]" />
+					</div>
+				</div>
 			</section>
 
 			<section class="mt-10 sm:mt-20">
@@ -81,8 +100,8 @@
 						</button>
 					</div>
 				</div>
-				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-					<div class="flex flex-col gap-6 border border-grey-1 bg-grey-0 p-4 sm:p-6 hover:bg-white transition-300" v-for="(item, a) in tarifs?.results" :key="a">
+				<div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					<div class="child flex flex-col gap-6 border border-grey-1 bg-grey-0 p-4 sm:p-6 hover:bg-white transition-300" v-for="(item, a) in tarifs?.results" :key="a">
 						<div class="flex flex-col">
 							<h4 class="text-base font-medium mb-2">
 								{{ item?.title }}
@@ -97,7 +116,7 @@
 							<div v-html="item.desc"></div>
 						</div>
 						<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
-						<ModalConsultationForm>
+						<ModalConsultationForm :tariffId="item.id">
 							<Button class="sm:text-base w-full">
 								{{ translations['product.order'] }}
 								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
@@ -140,10 +159,10 @@
 									<div v-html="item.desc"></div>
 								</div>
 								<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
-								<div class="flex flex-col gap-2">
+								<!-- <div class="flex flex-col gap-2">
 									<p class="text-grey text-base">{{ translations['product.cpu-quantity'] }}</p>
 									<p class="text-base font-medium">{{ translations['product.cpu'] }}</p>
-								</div>
+								</div> -->
 								<Button class="sm:text-base">
 									{{ translations['product.order'] }}
 									<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">

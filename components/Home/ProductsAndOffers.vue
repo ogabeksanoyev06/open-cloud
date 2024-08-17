@@ -1,10 +1,10 @@
 <template>
 	<div class="container">
-		<div class="flex flex-col gap-8">
+		<div class="flex flex-col gap-8 sm:py-20 py-10 sm:border-x border-grey-1">
 			<h3 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">
 				{{ translations['home.products'] }}</h3>
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
-				<div class="p-8 flex flex-col items-start gap-6 transition-300 hover:bg-background group border border-grey-1"
+				<div class="p-8 flex flex-col items-start gap-6 transition-300 hover:bg-background group first:border-l-0 last:border-r-0 border border-grey-1"
 					v-for="item in data" :key="item.id">
 					<div class="flex items-center justify-center w-16 h-16 rounded-2xl">
 						<img :src="item.image" alt="" class="w-full h-full object-contain" />

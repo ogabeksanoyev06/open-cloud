@@ -24,7 +24,17 @@
 
 				<div class="w-full overflow-y-auto h-[400px] sm:max-h-[600px] relative">
 					<div class="relative overflow-hidden h-full bg-grey-0 rounded-2xl sm:p-6 p-4" style="overflow: hidden scroll" v-html="data.text"></div>
+
 					<div class="absolute inset-x-0 bottom-0 w-full sm:h-[90px]" style="background: linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, #f5f5f7 100%)"></div>
+
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia pariatur iusto inventore laudantium architecto iste modi, dignissimos, sit autem culpa commodi beatae repudiandae? Quasi
+					quae ipsa similique quia sunt omnis, maiores cumque facilis aperiam quaerat consequatur vero maxime quo minus possimus itaque libero quis veritatis recusandae ipsam ullam dignissimos a eos!
+					Quis id unde sapiente nostrum modi, sit quasi cumque hic beatae veritatis. Perferendis voluptatem ullam possimus iste impedit id illum corporis earum aut sed, placeat officiis dolor
+					molestiae temporibus, mollitia facere, corrupti cum esse? Doloremque excepturi ea facere vero eos exercitationem itaque velit dicta eligendi corrupti saepe ipsa qui vitae id, minima dolore
+					odit illum rerum assumenda culpa, iste tempore architecto deleniti magni. Error ratione, vero ea distinctio temporibus velit corrupti nulla beatae ipsa quidem veniam, unde ipsum debitis
+					aperiam dolorem minus sequi ipsam repellendus suscipit quisquam quibusdam odit officia! Ab, repellat cum! Dolores odio, suscipit velit a sequi quas inventore? Libero cupiditate non
+					consectetur excepturi, officiis labore nulla, odit autem nobis corrupti voluptas. Voluptatum quis perferendis sapiente molestiae vitae numquam neque cupiditate necessitatibus voluptatibus
+					dolore? Harum, dicta a tempore repudiandae dolor eaque aliquam esse ab ullam alias explicabo amet totam, magni odit officia, perferendis quos. Perferendis, distinctio obcaecati?
 				</div>
 				<div class="flex flex-wrap items-center justify-between gap-2 p-4 bg-[#1878F3] text-white rounded-[16px]">
 					<h4 class="text-base sm:text-xl font-medium">Отправить резюме по телеграм</h4>
@@ -62,3 +72,9 @@ const vacancyId = async () => {
 	}
 };
 </script>
+
+<style scoped>
+*::-webkit-scrollbar-thumb {
+	background-color: #c2c2c3;
+}
+</style>

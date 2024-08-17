@@ -2,6 +2,10 @@
 import { useApplication } from '~/stores/application';
 import { useTranslationsStore } from '~/stores/translations.js';
 
+const props = defineProps({
+	tariffId: Number
+});
+
 const translationsStore = useTranslationsStore();
 
 const { translations } = storeToRefs(translationsStore);
@@ -32,7 +36,8 @@ const sendConsultationForm = async () => {
 			name: form.name,
 			phone: formatPhoneNumber(form.phone),
 			company: form.company,
-			email: form.email
+			email: form.email,
+			tarif: props.tariffId
 		});
 		isOpen.value = false;
 		showToast('Tez orada siz bilan boglanamiz!', 'success');
