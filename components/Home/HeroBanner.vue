@@ -35,7 +35,7 @@
 		</div>
 		<Swiper
 			class="!right-0 !absolute w-[500px] sm:left-[calc(50%+100px)] sm:w-[800px] -bottom-[40px] !object-contain z-0"
-			:modules="[SwiperAutoplay]"
+			:modules="[SwiperAutoplay, SwiperPagination]"
 			:space-between="6"
 			:slides-per-view="1"
 			:loop="true"

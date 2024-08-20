@@ -6,7 +6,7 @@
 			</h3>
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				<div
-					class="p-8 grid-item flex flex-col items-start gap-6 transition-300 hover:bg-background group border-grey-1  lg:border-y lg:border-r lg:first:border-b-0 max-sm:border-x max-sm:border-b max-sm:first:border-t max-sm:first:rounded-tl-3xl max-sm:first:rounded-tr-3xl max-sm:last:rounded-bl-3xl max-sm:last:rounded-br-3xl xl:!border-y xl:border-r xl:last:border-r-0"
+					class="p-8 grid-item flex flex-col items-start gap-6 transition-300 hover:bg-background group border-grey-1 lg:border-y lg:border-r lg:first:border-b-0 max-sm:border-x max-sm:border-b max-sm:first:border-t max-sm:first:rounded-tl-3xl max-sm:first:rounded-tr-3xl max-sm:last:rounded-bl-3xl max-sm:last:rounded-br-3xl xl:!border-y xl:border-r xl:last:border-r-0"
 					v-for="item in data"
 					:key="item.id"
 				>

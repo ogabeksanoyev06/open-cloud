@@ -6,6 +6,7 @@
 		<div class="container max-w-[1760px]">
 			<div class="relative">
 				<Swiper
+					@swiper="setThumbsSwiper"
 					class="rounded-[40px] relative overflow-hidden z-1"
 					:modules="[SwiperAutoplay]"
 					:slides-per-view="1"
@@ -29,20 +30,20 @@
 							</div>
 						</div>
 					</SwiperSlide>
-					<div class="sm:flex z-10 hidden gap-3 absolute right-0 bottom-20 sm:right-20 sm:bottom-20">
-						<Button @click="swiper.slidePrev()" variant="ghost" class="p-0 h-10 w-10 rounded-full border border-white hover:bg-transparent">
-							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-								<path d="M23.3333 11.6666L16.6666 20L23.3333 28.3333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</Button>
-
-						<Button @click="swiper.slideNext()" variant="ghost" class="p-0 h-10 w-10 rounded-full border border-white hover:bg-transparent">
-							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-								<path d="M16.6667 11.6666L23.3334 20L16.6667 28.3333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</Button>
-					</div>
 				</Swiper>
+				<div class="sm:flex z-10 hidden gap-3 absolute right-0 bottom-20 sm:right-20 sm:bottom-20">
+					<Button @click="thumbsSwiper.slidePrev()" variant="ghost" class="p-0 h-10 w-10 rounded-full border border-white hover:bg-transparent">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+							<path d="M23.3333 11.6666L16.6666 20L23.3333 28.3333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</Button>
+
+					<Button @click="thumbsSwiper.slideNext()" variant="ghost" class="p-0 h-10 w-10 rounded-full border border-white hover:bg-transparent">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+							<path d="M16.6667 11.6666L23.3334 20L16.6667 28.3333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</Button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -59,4 +60,10 @@ defineProps({
 		required: true
 	}
 });
+
+const thumbsSwiper = ref(null);
+
+const setThumbsSwiper = (swiper) => {
+	thumbsSwiper.value = swiper;
+};
 </script>
