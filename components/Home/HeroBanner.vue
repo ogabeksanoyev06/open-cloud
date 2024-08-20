@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="min-h-[calc(100vh-100px)] sm:min-h-[600px] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4"
+		class="min-h-[calc(100vh-100px)] sm:min-h-[calc(100vh-100px)] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4"
 	>
 		<div class="container relative">
 			<div class="flex flex-col gap-6 md:gap-20 relative z-10 max-w-[700px] mb-6">
@@ -11,7 +11,7 @@
 					<p class="text-base sm:text-xl mt-5 text-white">{{ translations['home.hero-desc'] }}</p>
 				</div>
 				<div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-					<ModalConsultationForm>
+					<NuxtLink :to="localePath('/about-us')">
 						<Button class="w-full sm:w-auto">
 							Подробнее
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -19,7 +19,7 @@
 								<path d="M10.8335 14.1666L14.1668 9.99996L10.8335 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							</svg>
 						</Button>
-					</ModalConsultationForm>
+					</NuxtLink>
 
 					<ModalConsultationForm>
 						<Button class="text-primary !bg-transparent border !border-grey w-full sm:w-auto">
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<Swiper
-			class="!right-0 !absolute w-[378px] sm:left-[calc(50%+100px)] sm:w-[800px] -bottom-[40px] !object-contain z-0"
+			class="!right-0 !absolute w-[500px] sm:left-[calc(50%+100px)] sm:w-[800px] -bottom-[40px] !object-contain z-0"
 			:modules="[SwiperAutoplay]"
 			:space-between="6"
 			:slides-per-view="1"
@@ -46,7 +46,7 @@
 			}"
 		>
 			<SwiperSlide v-for="(item, i) in banners?.results" :key="i" class="rela">
-				<img class="w-full" :src="item.image" alt="server img" />
+				<img class="w-[90%] ml-auto" :src="item.image" alt="server img" />
 			</SwiperSlide>
 		</Swiper>
 	</section>
@@ -55,6 +55,8 @@
 <script setup>
 import { useTranslationsStore } from '~/stores/translations.js';
 import { useBannerStore } from '~/stores/banners.js';
+
+const localePath = useLocalePath();
 
 const { getBanners } = useBannerStore();
 const translationsStore = useTranslationsStore();

@@ -3,8 +3,8 @@
 		<div class="flex flex-col gap-6">
 			<slot />
 			<div>
-				<Accordion type="multiple" collapsible class="w-full">
-					<AccordionItem v-for="(item, i) in tab2Configurations" :key="i" :value="i">
+				<Accordion type="multiple" collapsible class="w-full" :defaultValue="tab2Configurations.map((_, i) => i.toString())">
+					<AccordionItem v-for="(item, i) in tab2Configurations" :key="i" :value="i.toString()">
 						<AccordionTrigger class="sm:text-xl">Конфигурация {{ item.id }}</AccordionTrigger>
 						<AccordionContent class="flex flex-col gap-6">
 							<div class="flex flex-col gap-6">

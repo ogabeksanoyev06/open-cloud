@@ -167,7 +167,7 @@
 			</div>
 		</section>
 
-		<section >
+		<section>
 			<HomeConsultationBanner />
 		</section>
 	</div>

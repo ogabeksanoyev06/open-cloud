@@ -1,35 +1,33 @@
 <template>
-	<div class="grid lg:grid-cols-[minmax(0,1fr)_400px] gap-6 items-start">
+	<div class="lg:grid lg:grid-cols-[minmax(0,1fr)_400px] gap-6 items-start">
 		<div class="flex flex-col gap-6">
 			<slot />
 			<div>
-				<Accordion type="multiple" class="w-full" collapsible>
-					<AccordionItem v-for="(item, index) in tab1Configurations" :key="index" :value="index">
+				<Accordion type="multiple" class="w-full" collapsible :defaultValue="tab1Configurations.map((_, index) => index.toString())">
+					<AccordionItem v-for="(item, index) in tab1Configurations" :key="index" :value="index.toString()">
 						<AccordionTrigger class="sm:text-xl">Конфигурация {{ item.id }}</AccordionTrigger>
-						<AccordionContent class="flex flex-col gap-6">
-							<div class="">
-								<ScrollArea class="border rounded-md w-96 whitespace-nowrap">
-									<ul class="flex items-center gap-4 h-full w-full overflow-hidden" style="overflow: scroll">
+						<AccordionContent class="flex flex-col gap-6 overflow-hidden`">
+							<div class="relative">
+								<ScrollArea class="relative overflow-hidden max-w-[600px] w-full lg:max-w-none">
+									<ul class="flex items-center border-b border-grey-1 gap-4">
 										<li
-											class="flex items-center font-medium cursor-pointer whitespace-nowrap"
+											class="flex items-center px-10 py-3 relative before:transition-300 transition-300 hover:before:w-full before:absolute before:h-[2px] before:w-0 before:bg-black-0 before:bottom-0 before:left-0 font-medium cursor-pointer whitespace-nowrap"
 											v-for="(tarif, tIndex) in item.tarifData"
 											:key="tIndex"
-											@click="activeTab(tIndex)"
-											:class="{ 'text-primary': selectedIndex === tIndex }"
+											@click="activeTab(item.id, tIndex)"
+											:class="{ 'text-[#272727] before:w-full': selectedIndexes[item.id] === tIndex }"
 										>
 											{{ tarif?.title }}
-											{{ selectedIndex }}
 										</li>
 									</ul>
+									<ScrollBar orientation="horizontal" />
 								</ScrollArea>
-								<div class="relative overflow-hidden max-w-[600px] lg:max-w-none"></div>
-								<div></div>
 							</div>
 							<p class="text-grey sm:text-sm">Конфигурации, сбалансированные по соотношению ядер и памяти</p>
 							<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 								<div
 									class="flex flex-col items-start gap-4 p-4 sm:p-6 rounded-2xl border-2 border-grey-1 cursor-pointer hover:shadow-lg transition-300"
-									v-for="(tabContent, a) in item.tarifData[selectedIndex]?.tarifs"
+									v-for="(tabContent, a) in item.tarifData[selectedIndexes[item.id]]?.tarifs"
 									:key="a"
 									@click="changeTarif(item.id, tabContent.id)"
 									:class="{ 'border-primary shadow-lg': tabContent.active }"
@@ -204,12 +202,23 @@ const calculatorStore = useCalculatorStore();
 const { tab1Configurations, calculateTotalPriceTab1 } = storeToRefs(calculatorStore);
 const { addConfiguration, deleteConfiguration, deleteAllConfigurations, incrementNodes, decrementNodes, changeTarif } = calculatorStore;
 
-const selectedIndex = ref(0);
+const selectedIndexes = reactive({});
 
-const activeTab = (index) => {
-	selectedIndex.value = index;
-	console.log(index);
+const activeTab = (configId, tabIndex) => {
+	selectedIndexes[configId] = tabIndex;
 };
+
+watch(
+	tab1Configurations,
+	(newConfigurations) => {
+		newConfigurations.forEach((config) => {
+			if (!(config.id in selectedIndexes)) {
+				selectedIndexes[config.id] = 0;
+			}
+		});
+	},
+	{ immediate: true }
+);
 
 const getActiveTarifs = (item) => {
 	return item.tarifData.flatMap((td) => td.tarifs).filter((tarif) => tarif.active);

@@ -11,9 +11,12 @@
 			</Button>
 		</NuxtLink>
 	</div>
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
-		<ModalVacancy v-for="item in data?.slice(0, 4)" :key="item.id" class="w-full" :tariffId="item.id">
-			<div class="flex flex-col items-start gap-6 border p-4 sm:p-8 border-grey-1 hover:bg-white transition-300">
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+		<ModalVacancy v-for="item in data?.slice(0, 4)" :key="item.id" class="w-full border-b first:border-t md:border-y md:border-r lg:border-y lg:border-r lg:first:border-b-0 xl:!border-y xl:!border-r xl:last:border-r-0" :tariffId="item.id">
+			<div class="flex flex-col items-start gap-6 p-4 sm:p-8 border-grey-1 hover:bg-white transition-300
+			
+			
+			">
 				<h4 class="font-medium text-lg sm:text-xl">
 					{{ item.title }}
 				</h4>
@@ -45,3 +48,6 @@ const localePath = useLocalePath();
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 </script>
+
+<style scoped>
+</style>
