@@ -96,8 +96,8 @@
 						{{ translations['home.help-title'] }}
 					</h3>
 
-					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1">
-						<div class="flex flex-col items-start gap-6 border border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
@@ -110,7 +110,7 @@
 								</svg>
 							</Button>
 						</div>
-						<div class="flex flex-col items-start gap-6 border border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
@@ -123,7 +123,7 @@
 								</svg>
 							</Button>
 						</div>
-						<div class="flex flex-col items-start gap-6 border border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
@@ -216,4 +216,49 @@ const { data } = await useAsyncData('home', async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 767px) {
+	.grid-item {
+		border-bottom: 1px solid #e2e2ee;
+		border-right: 1px solid #e2e2ee;
+
+		border-left: 1px solid #e2e2ee;
+	}
+
+	.grid-item:first-child {
+		border-top: 1px solid #e2e2ee;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(2n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 3) {
+		border-top: none;
+	}
+}
+
+@media (min-width: 1280px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(3n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 4) {
+		border-top: none;
+	}
+}
+</style>

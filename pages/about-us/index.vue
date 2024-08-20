@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="container">
-			<section class=" bg-green bg-[url('~/assets/images/custom_green_bg.png')] bg-no-repeat bg-cover bg-top py-6">
+			<section class="bg-green bg-[url('~/assets/images/custom_green_bg.png')] bg-no-repeat bg-cover bg-top py-6">
 				<div class="container max-w-[1200px] flex items-center justify-between sm:flex-row flex-col gap-10">
 					<div class="sm:flex-1">
 						<h5 class="text-xl sm:text-2xl font-medium">{{ translations['about.license-title'] }}</h5>
@@ -151,8 +151,8 @@
 		<section class="container">
 			<div class="border-x pb-10 sm:pb-20">
 				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.how-we-work'] }}</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-					<div class="flex flex-col gap-4 border p-4 sm:px-10 sm:py-8 border-grey-1" v-for="item in 5" :key="item">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					<div class="flex flex-col gap-4  p-4 sm:px-10 sm:py-8 grid-item border-grey-1" v-for="item in 5" :key="item">
 						<h4 class="font-medium text-xl sm:text-2xl">Оптимизируйте расходы на IT-инфраструктуру</h4>
 						<p class="text-grey">Различные модели оплаты — pay‑as‑you‑go или pay‑as‑you‑allocate. Платите только за те ресурсы, которыми пользуетесь</p>
 					</div>
@@ -273,3 +273,49 @@ const { data } = await useAsyncData('about-us', async () => {
 	return { partners, media, contacts, vacancies, certificates, workers };
 });
 </script>
+
+<style scoped>
+@media (max-width: 767px) {
+	.grid-item {
+		border-bottom: 1px solid #e2e2ee;
+	}
+
+	.grid-item:first-child {
+		border-top: 1px solid #e2e2ee;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(2n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 3) {
+		border-top: none;
+	}
+}
+
+
+
+@media (min-width: 1280px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(3n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 4) {
+		border-top: none;
+	}
+}
+</style>

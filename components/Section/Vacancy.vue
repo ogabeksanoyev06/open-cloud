@@ -15,10 +15,10 @@
 		<ModalVacancy
 			v-for="item in data?.slice(0, 4)"
 			:key="item.id"
-			class="w-full border-b first:border-t md:border-y md:border-r lg:border-y lg:border-r lg:first:border-b-0 xl:!border-y xl:!border-r xl:last:border-r-0"
+			class="w-full grid-item"
 			:tariffId="item.id"
 		>
-			<div class="flex flex-col items-start gap-6 p-4 sm:p-8 border-grey-1 hover:bg-white transition-300">
+			<div class="flex flex-col items-start gap-6 p-4 sm:p-8  hover:bg-white transition-300">
 				<h4 class="font-medium text-lg sm:text-xl">
 					{{ item.title }}
 				</h4>
@@ -51,4 +51,61 @@ const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 639px) {
+	.grid-item {
+		border-bottom: 1px solid #e2e2ee;
+	}
+
+	.grid-item:first-child {
+		border-top: 1px solid #e2e2ee;
+	}
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(2n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 3) {
+		border-top: none;
+	}
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(3n) {
+		border-right: none;
+	}
+
+	.grid-item:nth-child(n + 4) {
+		border-top: none;
+	}
+}
+
+@media (min-width: 1280px) {
+	.grid-item {
+		border-right: 1px solid #e2e2ee;
+		border-top: 1px solid #e2e2ee;
+		border-bottom: 1px solid #e2e2ee;
+	}
+
+	.grid-item:nth-child(n + 5) {
+		border-top: 0;
+	}
+	.grid-item:nth-child(4n) {
+		border-right: none !important;
+	}
+}
+</style>
