@@ -9,7 +9,7 @@
 					<img src="/assets/images/logo.png" alt="" class="max-w-[100px]" />
 				</NuxtLink>
 				<nav class="hidden lg:flex flex-wrap items-center max-lg:space-x-4 lg:space-x-8 xl:space-x-10 text-base font-normal">
-					<Button variant="ghost" class="p-0 gap-2 hover:bg-transparent text-base font-normal" @click="isMenuOpen = !isMenuOpen">
+					<Button variant="ghost" class="!p-0 gap-2 hover:bg-transparent text-base font-normal" @click="isMenuOpen = !isMenuOpen">
 						{{ translations['header.link1'] }}
 						<span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

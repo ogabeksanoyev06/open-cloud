@@ -10,8 +10,7 @@
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbPage>Контакты
-						</BreadcrumbPage>
+						<BreadcrumbPage>Контакты </BreadcrumbPage>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
@@ -26,12 +25,12 @@
 							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6">
 								<p class="text-grey">{{ translations['contacts.phone'] }}</p>
 								<div class="flex flex-wrap gap-4">
-									<a v-for="(number, idx) in contacts.nbm.split(',')" target="_blank" :key="idx" class="font-medium text-xl" :href="`tel:${number}`">{{ number }}</a>
+									<a v-for="(number, idx) in contacts.nbm.split(',')" target="_blank" :key="idx" class=" transition-300 font-medium text-xl hover:text-primary" :href="`tel:${number}`">{{ number }}</a>
 								</div>
 							</div>
-							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6">
+							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6 group">
 								<p class="text-grey">{{ translations['contacts.email'] }}</p>
-								<a :href="`mailto:${contacts.email}`" target="_blank" class="text-xl font-medium">{{ contacts.email }}</a>
+								<a :href="`mailto:${contacts.email}`" target="_blank" class=" transition-300 text-xl font-medium group-hover:text-primary">{{ contacts.email }}</a>
 							</div>
 							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6">
 								<p class="text-grey">{{ translations['contacts.social'] }}</p>
@@ -105,10 +104,9 @@
 										</VField>
 									</div>
 									<div class="grid gap-2 w-full">
-										<VField name="email" rules="required|email" v-model="form.email">
-											<Label for="email"> {{ translations['contacts.email-label'] }} </Label>
-											<Input v-model="form.email" id="email" type="text" :placeholder="translations['contacts.email-input']" />
-											<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
+										<VField name="email">
+											<Label for="email"> Номер телефона / Электрон почта </Label>
+											<Input v-model="form.email" id="email" type="text" placeholder="Номер телефона / Электрон почта" />
 										</VField>
 									</div>
 									<div class="grid gap-2 w-full">
