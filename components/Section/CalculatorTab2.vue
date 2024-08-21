@@ -150,16 +150,18 @@
 				</Button>
 			</div>
 		</div>
-		<div class="lg:sticky top-28 left-0 h-[calc(100vh-100px)] overflow-hidden rounded-2xl">
+		<div class="lg:sticky top-28 left-0 lg:h-[800px] overflow-hidden rounded-2xl">
 			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 overflow-auto h-full">
-				<div class="flex items-center justify-between p-6">
+				<div class="flex items-center justify-between p-4 sm:p-6 !pb-0">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
 					<Button variant="link" class="text-destructive hover:no-underline font-normal p-0" @click="deleteAllConfigurations(2)">Очистка</Button>
 				</div>
-				<div class="flex flex-col gap-6 p-6" v-for="(item, i) in tab2Configurations" :key="item.id" :value="item.id">
+				<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
+
+				<div class="flex flex-col gap-6 px-4 sm:px-6 " v-for="(item, i) in tab2Configurations" :key="item.id" :value="item.id">
 					<div class="flex items-center justify-between">
 						<h4 class="text-base sm:text-xl">Конфигурация {{ i + 1 }}</h4>
-						<Button @click="deleteConfiguration(2, item.id)" variant="ghost" class="p-0 h-auto">
+						<Button @click="deleteConfiguration(2, item.id)" variant="ghost" class="!p-0 h-auto">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<path
 									d="M19 9L18.2841 18.3068C18.1238 20.3908 16.386 22 14.2959 22H9.70412C7.61398 22 5.87621 20.3908 5.71591 18.3068L5 9M21 7C18.4021 5.73398 15.3137 5 12 5C8.68635 5 5.59792 5.73398 3 7M10 5V4C10 2.89543 10.8954 2 12 2C13.1046 2 14 2.89543 14 4V5M10 11L10 17M14 11V17"
@@ -194,7 +196,7 @@
 					</ul>
 					<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 				</div>
-				<div class="flex flex-col gap-6 mt-auto p-6 sticky bottom-0 bg-grey-0">
+				<div class="flex flex-col gap-6 mt-auto p-4 sm:p-6 sticky bottom-0 bg-grey-0">
 					<div class="flex flex-col gap-2">
 						<h4 class="text-sm sm:text-base text-grey">Цена за месяц</h4>
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab2) }} сум/месяц</h3>

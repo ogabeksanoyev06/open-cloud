@@ -149,6 +149,7 @@
 		</div>
 
 		<section class="container">
+			
 			<div class="border-x pb-10 sm:pb-20">
 				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.how-we-work'] }}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -32,7 +32,7 @@
 			<div class="hidden lg:flex flex-1 items-center space-x-2 justify-end">
 				<DropdownMenu>
 					<DropdownMenuTrigger as-child>
-						<Button variant="secondary" class="">
+						<Button variant="secondary" class="!px-4">
 							{{ selectedLang.label }}
 							<span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -49,7 +49,7 @@
 				</DropdownMenu>
 				<DropdownMenu>
 					<DropdownMenuTrigger as-child>
-						<Button variant="secondary" class="">
+						<Button variant="secondary" class="!px-4">
 							<span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
 									<path

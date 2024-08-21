@@ -1,7 +1,5 @@
 <template>
-	<section
-		class="min-h-[calc(100vh-100px)] sm:min-h-[calc(100vh-100px)] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4"
-	>
+	<section class="min-h-[613px] overflow-hidden bg-black bg-[url('~/assets/images/custom_black_bg.png')] bg-cover bg-no-repeat bg-center flex md:items-center relative py-4">
 		<div class="container relative">
 			<div class="flex flex-col gap-6 md:gap-20 relative z-10 max-w-[700px] mb-6">
 				<div>
@@ -32,23 +30,10 @@
 					</ModalConsultationForm>
 				</div>
 			</div>
+			<div class="!right-0 !absolute w-[500px] sm:left-[calc(50%+100px)] sm:w-[800px] sm:-bottom-[150px] !object-contain z-0">
+				<img class="w-[90%] ml-auto" :src="banners.results[0]?.image" alt="server img" />
+			</div>
 		</div>
-		<Swiper
-			class="!right-0 !absolute w-[500px] sm:left-[calc(50%+100px)] sm:w-[800px] -bottom-[40px] !object-contain z-0"
-			:modules="[SwiperAutoplay, SwiperPagination]"
-			:space-between="6"
-			:slides-per-view="1"
-			:loop="true"
-			:speed="2000"
-			:autoplay="{
-				delay: 2000,
-				disableOnInteraction: false
-			}"
-		>
-			<SwiperSlide v-for="(item, i) in banners?.results" :key="i" class="rela">
-				<img class="w-[90%] ml-auto" :src="item.image" alt="server img" />
-			</SwiperSlide>
-		</Swiper>
 	</section>
 </template>
 

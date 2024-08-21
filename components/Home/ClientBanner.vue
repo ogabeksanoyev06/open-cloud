@@ -1,10 +1,10 @@
 <template>
 	<div class="min-h-96 p-4 lg:px-20 rounded-3xl bg-[url('~/assets/images/custom_green_bg.png')] bg-top bg-cover bg-no-repeat flex lg:items-center relative">
 		<div class="max-w-[524px] flex flex-col sm:items-start gap-2 pb-[340px] lg:pb-0">
-			<h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
+			<h1 class="text-lg sm:text-xl md:text-2xl lg:text-4xl font-medium">
 				{{ translations['home.client-banner-title'] }}
 			</h1>
-			<p class="mb-6 lg:mb-10">{{ translations['home.client-banner-desc'] }}</p>
+			<p class="mb-6 lg:mb-10 text-base">{{ translations['home.client-banner-desc'] }}</p>
 			<ModalConsultationForm>
 				<Button class="text-primary !bg-black !border-grey w-full sm:w-auto">
 					Получить консультацию

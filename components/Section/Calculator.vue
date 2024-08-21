@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="bg-white p-4 sm:p-10">
+		<div class="bg-white p-4 sm:p-10 border">
 			<transition name="page">
 				<SectionCalculatorTab1 v-if="selectedType === 0">
 					<div class="flex sm:inline-flex flex-wrap sm:w-fit items-center rounded-[8px] p-1 sm:p-2 bg-grey-0">

@@ -16,7 +16,7 @@
 				</div>
 				<div class="overflow-hidden relative z-0">
 					<Swiper
-						class="!overflow-visible"
+						class=""
 						:modules="[SwiperAutoplay]"
 						:space-between="24"
 						:slides-per-view="1"
@@ -52,8 +52,6 @@
 							</NuxtLink>
 						</SwiperSlide>
 					</Swiper>
-					<div class="swiper-overlay hidden sm:block rotate-180 absolute -right-5 top-0 bottom-0 w-[228px] z-[1] pointer-events-none"></div>
-					<!-- <div class="swiper-overlay absolute left-0 top-0 bottom-0 w-[228px] z-[1] pointer-events-none"></div> -->
 				</div>
 			</div>
 		</div>

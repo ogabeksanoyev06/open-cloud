@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="container flex flex-col items-center gap-10">
+		<div class="container flex flex-col items-center gap-10 pt-4">
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>

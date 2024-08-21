@@ -114,7 +114,7 @@
 									<div class="grid gap-2 w-full">
 										<VField name="message" rules="required" v-model="form.message">
 											<Label for="message"> {{ translations['contacts.message-label'] }} </Label>
-											<Textarea v-model="form.message" id="message" type="text" :placeholder="translations['contacts.message-input']" />
+											<Textarea class="min-h-[125px]" v-model="form.message" id="message" type="text" :placeholder="translations['contacts.message-input']" />
 											<span class="text-sm text-destructive font-medium">{{ errors.message }}</span>
 										</VField>
 									</div>

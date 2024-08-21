@@ -97,42 +97,42 @@
 					</h3>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 							</div>
 
-							<Button class="!bg-transparent p-0 shadow-none">
+							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary ">
 								{{ translations['home.help-card-btn'] }}
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-									<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+								<svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" class="transition-300 group-hover:!stroke-primary" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
 							</Button>
 						</div>
-						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 							</div>
 
-							<Button class="!bg-transparent p-0 shadow-none">
+							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary ">
 								{{ translations['home.help-card-btn'] }}
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-									<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path class="transition-300 group-hover:!stroke-primary" d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
 							</Button>
 						</div>
-						<div class="flex flex-col items-start gap-6 grid-item border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
+						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
 								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 							</div>
 
-							<Button class="!bg-transparent p-0 shadow-none">
+							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">
 								{{ translations['home.help-card-btn'] }}
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-									<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path class="group-hover:!stroke-primary transition-300" d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
 							</Button>
 						</div>

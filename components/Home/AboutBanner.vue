@@ -6,7 +6,10 @@
 					<div class="max-w-[530px] w-full">
 						<img src="/assets/images/Group.png" alt="" class="w-full" />
 					</div>
-					<div class="grid grid-cols-2 bg-black rounded-t-2xl sm:grid-cols-3 gap-4 lg:-mt-[150px]">
+					<div
+						class="grid grid-cols-2 border-t border-x border-[#5D5D5F] rounded-t-3xl sm:grid-cols-3 gap-4 lg:-mt-[150px] backdrop-blur-[20px]"
+						style="background: linear-gradient(180deg, #353437 0%, rgba(39, 39, 39, 0.4) 100%)"
+					>
 						<div class="flex flex-col items-center gap-4 max-w-[180px] sm:p-6">
 							<h3 class="text-white text-2xl sm:text-3xl">{{ translations['home.about-banner-info-number1'] }}</h3>
 							<div class="shrink-0 relative h-px w-full" style="background: linear-gradient(90deg, rgba(181, 226, 117, 0) 0%, #b5e275 52%, rgba(181, 226, 117, 0) 100%)"></div>
@@ -30,10 +33,10 @@
 						<h1 class="text-white text-2xl md:text-3xl xl:text-4xl font-medium">
 							<span class="text-primary">{{ translations['home.about-banner-title1'] }}</span> - {{ translations['home.about-banner-title2'] }}
 						</h1>
-						<p class="text-base sm:text-xl text-white">
+						<p class="text-base sm:text-xl text-white font-normal">
 							{{ translations['home.about-banner-desc'] }}
 						</p>
-						<NuxtLink :to="localePath('/about-us#certificate')">
+						<NuxtLink :to="localePath('/about-us#certificate')" class="sm:mt-20">
 							<Button class="!bg-transparent border-grey border text-primary w-full sm:w-auto">
 								Лицензия
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

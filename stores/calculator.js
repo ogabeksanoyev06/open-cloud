@@ -13,9 +13,9 @@ export const useCalculatorStore = defineStore(
 			{
 				id: 1,
 				vcpu: 1,
-				ram: 16,
-				ssdNodes: 16,
-				hddNodes: 16,
+				ram: 1,
+				ssdNodes: 1,
+				hddNodes: 1,
 				publicIP: false,
 				tarifData: tarifData.value,
 				price: {
@@ -32,9 +32,9 @@ export const useCalculatorStore = defineStore(
 			{
 				id: 1,
 				vcpu: 1,
-				ram: 16,
-				ssdNodes: 16,
-				hddNodes: 16,
+				ram: 1,
+				ssdNodes: 1,
+				hddNodes: 1,
 				publicIP: false,
 				price: {
 					vcpu_price: 1,
@@ -117,8 +117,8 @@ export const useCalculatorStore = defineStore(
 					id: newId,
 					vcpu: 1,
 					ram: 1,
-					ssdNodes: 16,
-					hddNodes: 16,
+					ssdNodes: 1,
+					hddNodes: 1,
 					publicIP: false,
 					tarifData: updatedTariff,
 					price: {
@@ -133,9 +133,9 @@ export const useCalculatorStore = defineStore(
 				configurations.push({
 					id: newId,
 					vcpu: 1,
-					ram: 16,
-					ssdNodes: 16,
-					hddNodes: 16,
+					ram: 1,
+					ssdNodes: 1,
+					hddNodes: 1,
 					publicIP: false,
 					price: {
 						vcpu_price: price.vcpu_price || 0,
@@ -157,11 +157,11 @@ export const useCalculatorStore = defineStore(
 				if (type === 'vcpu') {
 					config.vcpu += 1;
 				} else if (type === 'ram') {
-					config.ram += 16; // RAMni 16GB oshirish
+					config.ram += 1; // RAMni 16GB oshirish
 				} else if (type === 'ssd') {
-					config.ssdNodes += 16; // SSDni 16GB oshirish
+					config.ssdNodes += 1; // SSDni 16GB oshirish
 				} else if (type === 'hdd') {
-					config.hddNodes += 16; // HDDni 16GB oshirish
+					config.hddNodes += 1; // HDDni 16GB oshirish
 				}
 			}
 		};
@@ -172,15 +172,15 @@ export const useCalculatorStore = defineStore(
 			if (config) {
 				if (type === 'vcpu' && config.vcpu > 1) {
 					config.vcpu -= 1;
-				} else if (type === 'ram' && config.ram > 16) {
+				} else if (type === 'ram' && config.ram > 1) {
 					// RAM 16GBdan kam bo'lmasligi kerak
-					config.ram -= 16;
-				} else if (type === 'ssd' && config.ssdNodes > 16) {
+					config.ram -= 1;
+				} else if (type === 'ssd' && config.ssdNodes > 1) {
 					// SSD 16GBdan kam bo'lmasligi kerak
-					config.ssdNodes -= 16;
-				} else if (type === 'hdd' && config.hddNodes > 16) {
+					config.ssdNodes -= 1;
+				} else if (type === 'hdd' && config.hddNodes > 1) {
 					// HDD 16GBdan kam bo'lmasligi kerak
-					config.hddNodes -= 16;
+					config.hddNodes -= 1;
 				}
 			}
 		};

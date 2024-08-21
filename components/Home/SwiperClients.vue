@@ -29,7 +29,7 @@
 					>
 						<SwiperSlide v-for="(client, i) in data" :key="i">
 							<div class="inline-flex items-center flex-col sm:flex-row gap-4 sm:gap-6 border rounded-2xl border-grey-1 group p-2 sm:p-[8px_24px_8px_8px]">
-								<div class="w-56 h-56 flex items-center justify-center  flex-shrink-0 overflow-hidden rounded-lg">
+								<div class="w-56 h-56 flex items-center justify-center  flex-shrink-0 overflow-hidden rounded-lg bg-[#F5F5F7] px-5 sm:px-[30px]">
 									<img :src="client.image" alt="" class="w-full  object-contain sm:object-contain sm:rounded-[18px_8px_8px_18px]" />
 								</div>
 								<div class="flex flex-col items-start gap-10">

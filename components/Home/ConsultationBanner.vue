@@ -3,8 +3,8 @@
 		<div class="container mt-[150px] lg:mt-0 lg:pl-[300px] relative z-10">
 			<div class="flex py-6 items-center justify-between flex-col gap-6 md:flex-row">
 				<div class="flex flex-col gap-2 max-w-[600px]">
-					<h4 class="text-lg sm:text-2xl">{{ translations['home.consultation-title'] }}</h4>
-					<p class="text-base">{{ translations['home.consultation-banner'] }}</p>
+					<h4 class="text-lg sm:text-2xl font-medium">{{ translations['home.consultation-title'] }}</h4>
+					<p class="text-sm sm:text-base">{{ translations['home.consultation-banner'] }}</p>
 				</div>
 				<ModalConsultationForm>
 					<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">

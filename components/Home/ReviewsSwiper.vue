@@ -30,13 +30,14 @@
 				>
 					<SwiperSlide v-for="(item, i) in data" :key="i" class="border-y border-r first:border-l">
 						<div class="flex flex-col gap-6 p-6 sm:p-8 group  rounded-3xl sm:rounded-none group hover:!bg-background transition-300 min-h-[350px]">
-							<div class="text-sm sm:text-base text-grey" v-html="item.text"></div>
+							<div class="text-sm sm:text-base text-grey line-clamp-[8]" v-html="item.text"></div>
 							<div class="flex items-center justify-between mt-auto">
 								<div class="flex items-center gap-3 flex-1">
 									<div class="w-14 h-14 rounded-full relative overflow-hidden shrink-0">
 										<img :src="item.image" class="object-cover w-full h-full" />
 									</div>
 									<div class="h-max flex flex-col justify-center">
+										
 										<p class="text-base sm:text-lg font-medium !break-all max-w-[400px] line-clamp-1">{{ item.title }}</p>
 										<div class="text-sm text-grey text-left" v-html="item.subtitle" />
 									</div>
@@ -65,3 +66,5 @@ import { useTranslationsStore } from '~/stores/translations.js';
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 </script>
+
+

@@ -62,30 +62,28 @@ const sendConsultationForm = async () => {
 						<div class="grid gap-6">
 							<div class="grid gap-2">
 								<VField name="name" rules="required" v-model="form.name">
-									<Label for="name"> {{ translations['home.name-input'] }} </Label>
+									<Label for="name"> <span class="text-destructive">*</span> {{ translations['home.name-input'] }} </Label>
 									<Input v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
 									<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
 								<VField name="phone" rules="required" v-model="form.phone">
-									<Label for="phone"> {{ translations['home.phone-input'] }} </Label>
+									<Label for="phone"><span class="text-destructive">*</span> {{ translations['home.phone-input'] }} </Label>
 									<Input :placeholder="translations['home.phone-label']" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
 									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="email" rules="required|email" v-model="form.email">
+								<VField name="email">
 									<Label for="email"> {{ translations['home.email-input'] }} </Label>
 									<Input v-model="form.email" id="email" type="text" :placeholder="translations['home.email-label']" />
-									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="company" rules="required" v-model="form.email">
+								<VField name="company">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
-									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 
