@@ -4,6 +4,7 @@
 		<div class="flex-1">
 			<slot />
 		</div>
+		<HomeConsultationBanner />
 		<LayoutFooter />
 	</div>
 </template>

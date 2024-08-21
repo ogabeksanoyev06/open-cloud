@@ -52,7 +52,6 @@
 			</div>
 		</div>
 		<section class="mt-10 sm:mt-20">
-			<HomeConsultationBanner />
 		</section>
 	</div>
 </template>

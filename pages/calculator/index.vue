@@ -28,7 +28,6 @@
 			<div class="container">
 				<div class="border-x py-10 "></div>
 			</div>
-			<HomeConsultationBanner />
 		</section>
 	</div>
 </template>

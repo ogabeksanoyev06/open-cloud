@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade">
-		<div v-if="isMenuOpen" @click="isMenuOpen = false" class="hidden lg:block w-screen h-screen fixed top-0 left-0 z-[8] bg-black/[0.4] backdrop-blur-sm"></div>
+		<div v-if="isMenuOpen" @click="isMenuOpen = false" class="hidden lg:block w-screen h-screen fixed top-0 left-0 z-[30] bg-black/[0.4] backdrop-blur-sm"></div>
 	</transition>
 	<header id="header" class="sticky z-40 top-0 bg-background backdrop-blur-lg">
 		<div class="container flex h-16 sm:h-[100px] items-center">
@@ -17,7 +17,73 @@
 							</svg>
 						</span>
 					</Button>
-					<NuxtLink :to="localePath('/about-us')" class="transition-300">{{ translations['header.link2'] }} </NuxtLink>
+					<DropdownMenu>
+						<DropdownMenuTrigger as-child>
+							<Button variant="ghost" class="!p-0 gap-2 hover:bg-transparent text-base font-normal">
+								{{ translations['header.link2'] }}
+								<span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M5.83325 8.33325L9.99992 11.6666L14.1666 8.33325" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</span>
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent class="flex flex-col gap-4 p-4 w-[220px] rounded-xl">
+							<NuxtLink :to="localePath('/about-us')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/about-us' }">
+								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
+									{{ translations['header.link2'] }}
+									<span v-if="route.path === '/about-us'">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+								</DropdownMenuItem>
+							</NuxtLink>
+							<NuxtLink :to="localePath('/calculator')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/calculator' }">
+								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
+									{{ translations['header.link3'] }}
+
+									<span v-if="route.path === '/calculator'">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+								</DropdownMenuItem>
+							</NuxtLink>
+							<NuxtLink :to="localePath('/documentation')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/documentation' }">
+								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
+									{{ translations['header.link4'] }}
+
+									<span v-if="route.path === '/documentation'">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+								</DropdownMenuItem>
+							</NuxtLink>
+							<NuxtLink :to="localePath('/partners')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/partners' }">
+								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
+									{{ translations['header.link5'] }}
+
+									<span v-if="route.path === '/partners'">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+								</DropdownMenuItem>
+							</NuxtLink>
+							<NuxtLink :to="localePath('/contacts')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/contacts' }">
+								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent"> 
+								{{ translations['header.link6'] }}
+								<span v-if="route.path === '/contacts'">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</span>
+								</DropdownMenuItem>
+							</NuxtLink>
+						</DropdownMenuContent>
+					</DropdownMenu>
 					<NuxtLink :to="localePath('/calculator')" class="transition-300">{{ translations['header.link3'] }} </NuxtLink>
 					<NuxtLink :to="localePath('/documentation')" class="transition-300">{{ translations['header.link4'] }} </NuxtLink>
 					<NuxtLink :to="localePath('/partners')" class="transition-300">{{ translations['header.link5'] }} </NuxtLink>
@@ -205,8 +271,8 @@
 				</ScrollArea>
 			</SheetContent>
 		</Sheet>
-		<Sheet v-model:open="isCatalogOpen">
-			<SheetContent side="left" class="p-6 w-full">
+		<Sheet v-model:open="isCatalogOpen" class="">
+			<SheetContent side="left" class="p-6 w-full z-[999]">
 				<div class="flex flex-col h-full gap-6">
 					<h3 class="font-medium text-lg flex gap-2 items-center" @click="closeProductModal">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">

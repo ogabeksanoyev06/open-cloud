@@ -229,7 +229,6 @@
 			</div>
 		</section>
 		<section>
-			<HomeConsultationBanner />
 		</section>
 	</div>
 </template>

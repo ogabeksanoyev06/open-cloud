@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 				<div class="flex flex-col items-center gap-6 justify-between order-2 lg:order-1 py-10">
-					<div class="max-w-[530px] w-full">
+					<div class="max-w-[530px] w-full" style="">
 						<img src="/assets/images/Group.png" alt="" class="w-full" />
 					</div>
 					<div

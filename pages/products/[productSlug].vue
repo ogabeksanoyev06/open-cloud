@@ -306,7 +306,6 @@
 			</div>
 		</section>
 
-		<HomeConsultationBanner class="" />
 	</div>
 </template>
 

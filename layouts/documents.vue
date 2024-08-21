@@ -33,7 +33,6 @@
 					</div>
 				</div>
 			</div>
-			<HomeConsultationBanner />
 		</div>
 		<LayoutFooter />
 	</div>

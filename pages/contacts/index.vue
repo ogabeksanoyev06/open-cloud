@@ -25,12 +25,12 @@
 							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6">
 								<p class="text-grey">{{ translations['contacts.phone'] }}</p>
 								<div class="flex flex-wrap gap-4">
-									<a v-for="(number, idx) in contacts.nbm.split(',')" target="_blank" :key="idx" class=" transition-300 font-medium text-xl hover:text-primary" :href="`tel:${number}`">{{ number }}</a>
+									<a v-for="(number, idx) in contacts.nbm.split(',')" target="_blank" :key="idx" class="transition-300 font-medium text-xl hover:text-primary" :href="`tel:${number}`">{{ number }}</a>
 								</div>
 							</div>
 							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6 group">
 								<p class="text-grey">{{ translations['contacts.email'] }}</p>
-								<a :href="`mailto:${contacts.email}`" target="_blank" class=" transition-300 text-xl font-medium group-hover:text-primary">{{ contacts.email }}</a>
+								<a :href="`mailto:${contacts.email}`" target="_blank" class="transition-300 text-xl font-medium group-hover:text-primary">{{ contacts.email }}</a>
 							</div>
 							<div class="flex flex-col gap-10 bg-grey-0 rounded-2xl p-6">
 								<p class="text-grey">{{ translations['contacts.social'] }}</p>
@@ -134,7 +134,6 @@
 				</div>
 			</div>
 		</div>
-		<HomeConsultationBanner />
 	</div>
 </template>
 
