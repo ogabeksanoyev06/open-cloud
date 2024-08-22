@@ -58,8 +58,9 @@
 				</div>
 			</section>
 		</div>
-		<section class="sm:mt-20 mt-10">
-		</section>
+		<div class="container">
+			<div class="border-x py-10"></div>
+		</div>
 	</div>
 </template>
 

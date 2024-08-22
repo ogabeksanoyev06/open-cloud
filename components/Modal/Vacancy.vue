@@ -5,7 +5,7 @@
 				<slot />
 			</DialogTrigger>
 
-			<DialogContent class="sm:max-w-[600px] p-4 sm:p-10 flex flex-col gap-6 sm:!rounded-[40px]">
+			<DialogContent class="sm:max-w-[800px] p-4 sm:p-10 flex flex-col gap-6 sm:!rounded-[40px]">
 				<div class="flex items-center justify-between">
 					<DialogTitle class="text-2xl">{{ data.title }}</DialogTitle>
 					<!-- <DialogClose>
@@ -24,7 +24,6 @@
 
 				<div class="w-full overflow-y-auto h-[400px] sm:max-h-[600px] relative">
 					<div class="relative overflow-hidden h-full bg-grey-0 rounded-2xl sm:p-6 p-4" style="overflow: hidden scroll" v-html="data.text"></div>
-
 					<div class="absolute inset-x-0 bottom-0 w-full sm:h-[90px]" style="background: linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, #f5f5f7 100%)"></div>
 				</div>
 				<div class="flex flex-wrap items-center justify-between gap-2 p-4 bg-[#1878F3] text-white rounded-[16px]">

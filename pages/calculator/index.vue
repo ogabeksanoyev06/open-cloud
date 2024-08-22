@@ -2,7 +2,7 @@
 	<div>
 		<section class="container gap-10">
 			<div class="border-x w-full flex flex-col justify-center items-center pb-10">
-				<Breadcrumb class="pt-4">
+				<Breadcrumb class="pt-4 pb-10">
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>

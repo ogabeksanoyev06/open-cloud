@@ -1,20 +1,25 @@
 <template>
-	<div class="grid gap-10 pt-4">
-		<div class="container flex flex-col items-center gap-10 pb-10">
-			<Breadcrumb>
-				<BreadcrumbList>
-					<BreadcrumbItem>
-						<BreadcrumbLink as-child>
-							<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
-						</BreadcrumbLink>
-					</BreadcrumbItem>
-					<BreadcrumbSeparator />
-					<BreadcrumbItem>
-						<BreadcrumbPage>Контакты </BreadcrumbPage>
-					</BreadcrumbItem>
-				</BreadcrumbList>
-			</Breadcrumb>
-			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{ translations['contacts.title'] }}</h1>
+	<div class="grid ">
+		<div class="container">
+			<div class="border-x border-b flex flex-col items-center gap-10 pb-10 pt-4">
+				<Breadcrumb>
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<BreadcrumbLink as-child>
+								<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage>Контакты </BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
+				<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium">{{ translations['contacts.title'] }}</h1>
+			</div>
+		</div>
+		<div class="container">
+			<div class="border-x pb-10"></div>
 		</div>
 		<div class="sm:container sm:max-w-[1760px]">
 			<div class="bg-white py-6 sm:py-20 sm:rounded-[40px]">
@@ -133,6 +138,9 @@
 					</section>
 				</div>
 			</div>
+		</div>
+		<div class="container">
+			<div class="border-x py-10"></div>
 		</div>
 	</div>
 </template>

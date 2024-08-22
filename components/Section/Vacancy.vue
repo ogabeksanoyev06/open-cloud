@@ -25,12 +25,7 @@
 
 				<p class="text-grey flex items-center gap-2">
 					<span>{{ item.exp }}</span>
-					<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="6" height="7" viewBox="0 0 6 7" fill="none">
-							<circle cx="3" cy="3.5" r="3" fill="#9A999B" />
-						</svg>
-					</span>
-					<span> {{ item.type }}</span>
+		
 				</p>
 			</div>
 		</ModalVacancy>
