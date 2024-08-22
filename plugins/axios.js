@@ -1,12 +1,15 @@
 import axios from 'axios';
 
 export default defineNuxtPlugin((nuxtApp) => {
+	const config = useRuntimeConfig(); // Runtime config ni olish
+
 	const axiosInstance = axios.create({
-		baseURL: process.env.API_BASE_URL || 'https://opencloudapi.pythonanywhere.com/api'
+		baseURL: config.public.apiBaseUrl || 'https://opencloudapi.pythonanywhere.com/api' // baseURL ni configdan olish
 	});
 
 	axiosInstance.interceptors.request.use(
 		(config) => {
+			// Tilni sozlash
 			config.headers['Language'] = nuxtApp.$i18n.locale.value;
 			return config;
 		},
@@ -23,5 +26,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 			return Promise.reject(error);
 		}
 	);
+
+	// axiosInstance ni Nuxt ilovasi kontekstiga qo'shish
 	nuxtApp.provide('axios', axiosInstance);
 });

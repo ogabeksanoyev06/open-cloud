@@ -230,9 +230,9 @@
 			</div>
 		</section>
 
-		<section class=" ">
+		<!-- <section class=" ">
 			<SectionCalculator />
-		</section>
+		</section> -->
 
 		<section class="">
 			<div class="container">
