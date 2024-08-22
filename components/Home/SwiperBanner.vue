@@ -26,7 +26,7 @@
 							class="relative before:h-full before:w-full before:left-0 before:top-0 before:absolute before:z-1 before:bg-gradient-to-b before:from-[rgba(39,39,39,0)] before:to-[rgba(39,39,39,0.8)]"
 						>
 							<div class="w-full h-[300px] md:h-[650px]">
-								<img :src="item.image" alt="" class="w-full h-full object-cover" />
+								<nuxt-img :src="item.image" alt="" class="w-full h-full object-cover" />
 							</div>
 						</div>
 					</SwiperSlide>

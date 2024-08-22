@@ -24,7 +24,7 @@
 		<div class="container max-w-[1760px]">
 			<div class="bg-white rounded-2xl py-10 sm:py-20">
 				<div class="container max-w-[1200px] w-full flex flex-col gap-10">
-					<img src="/assets/images/news.png" class="w-full" alt="" />
+					<nuxt-img src="/images/news.png" class="w-full" alt="" />
 					<div class="flex flex-col gap-6">
 						<h3 class="text-xl font-medium">
 							{{ translations['partners.desc1'] }}

@@ -34,7 +34,7 @@
 			<div class="border-x py-20">
 				<section class="mx-auto max-w-[1200px] flex flex-col gap-10">
 					<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl sm:text-center font-medium">{{ translations['about.title'] }}</h2>
-					<img src="/assets/images/about.png" alt="" class="rounded-2xl w-full h-full" />
+					<nuxt-img src="/images/about.png" alt="" class="rounded-2xl w-full h-full" />
 					<p class="text-grey text-sm sm:text-lg">
 						{{ translations['about.desc'] }}
 					</p>

@@ -34,7 +34,7 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
@@ -51,7 +51,8 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
@@ -68,7 +69,8 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<img src="/assets/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>

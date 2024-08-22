@@ -41,7 +41,7 @@
 						<SwiperSlide v-for="news in data" :key="news.id">
 							<NuxtLink :to="`/news/${news?.slug}`" class="space-y-4 group">
 								<div class="h-52 rounded-lg overflow-hidden">
-									<img :src="news.image" class="h-full w-full object-cover group-hover:scale-105 duration-200" />
+									<nuxt-img :src="news.image" class="h-full w-full object-cover group-hover:scale-105 duration-200" />
 								</div>
 								<div class="space-y-1">
 									<p class="text-grey">{{ news.created_at }}</p>

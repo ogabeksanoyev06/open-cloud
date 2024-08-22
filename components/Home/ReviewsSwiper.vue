@@ -3,6 +3,7 @@
 		<div class="container">
 			<div class="sm:py-20 py-10 sm:border-x border-grey-1">
 				<h3 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-semibold sm:text-center sm:font-medium mb-10">{{ translations['home.reviews-title'] }}</h3>
+				
 				<Swiper
 					:modules="[SwiperAutoplay]"
 					:space-between="0"
@@ -34,7 +35,7 @@
 							<div class="flex items-center justify-between mt-auto">
 								<div class="flex items-center gap-3 flex-1">
 									<div class="w-14 h-14 rounded-full relative overflow-hidden shrink-0">
-										<img :src="item.image" class="object-cover w-full h-full" />
+										<nuxt-img :src="item.image" class="object-cover w-full h-full" />
 									</div>
 									<div class="h-max flex flex-col justify-center">
 										

@@ -7,7 +7,7 @@
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				<NuxtLink class="p-8 grid-item flex flex-col items-start gap-6 transition-300 hover:bg-background group border-grey-1" v-for="item in data" :key="item.id" :to="`/products/${item.slug}`">
 					<div class="flex items-center justify-center w-16 h-16 rounded-2xl">
-						<img :src="item.image" alt="" class="w-full h-full object-contain" />
+						<nuxt-img :src="item.image" alt="" class="w-full h-full object-contain" />
 					</div>
 					<div class="flex flex-col gap-4">
 						<h4 class="text-lg font-medium">{{ item.title }}</h4>
