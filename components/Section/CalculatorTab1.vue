@@ -136,8 +136,8 @@
 				</Button>
 			</div>
 		</div>
-		<div class="lg:sticky top-28 left-0 lg:h-[600px] overflow-hidden rounded-2xl">
-			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 overflow-auto h-full">
+		<div class="lg:sticky top-28 left-0 lg:min-h-[600px] rounded-2xl">
+			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6  h-full">
 				<div class="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
 					<Button variant="link" class="text-destructive hover:no-underline font-normal !p-0" @click="deleteAllConfigurations(1)">Очистка</Button>
@@ -180,7 +180,7 @@
 					</ul>
 					<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 				</div>
-				<div class="flex flex-col gap-6 mt-auto px-4 sm:p-6 sticky bottom-0 bg-grey-0">
+				<div class="flex flex-col gap-6 mt-auto px-4 sm:p-6  bg-grey-0">
 					<div class="flex flex-col gap-2">
 						<h4 class="text-sm sm:text-base text-grey">Цена за месяц</h4>
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab1) }} сум/месяц</h3>

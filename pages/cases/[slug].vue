@@ -28,9 +28,9 @@
 		<div class="">
 			<div class="container">
 				<div class="border-x">
-					<div class="max-w-[1160px] sm:h-[640px] w-full mx-auto mb-10">
+					<!-- <div class="max-w-[1160px] sm:h-[640px] w-full mx-auto mb-10">
 						<img :src="data?.image" alt="" class="w-full h-full rounded-3xl mx-auto object-cover" />
-					</div>
+					</div> -->
 					<div class="text-base flex flex-col gap-6 max-w-[1160px] mx-auto" v-html="data?.desc"></div>
 				</div>
 			</div>
