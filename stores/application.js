@@ -36,9 +36,28 @@ export const useApplication = defineStore('application', () => {
 		}
 	}
 
+	async function getInvoice(form) {
+		loading.value = true;
+		try {
+			let res = await useAxios().postRequest('/calculator/order/get_invoice', form);
+			// showToast('Mahsulotlar muvaffaqiyatli yuborildi!', 'success');
+			return res.data;
+		} catch (error) {
+			if (error.response && error.response.data && error.response.data.message) {
+				const errorMessage = Array.isArray(error.response.data.message) ? error.response.data.message.map((msg) => msg.message).join(', ') : error.response.data.message;
+				showToast(`Xatolik: ${errorMessage}`, 'error');
+			} else {
+				showToast('Mahsulotlar yuborishda xatolik yuz berdi!', 'error');
+			}
+		} finally {
+			loading.value = false;
+		}
+	}
+
 	return {
 		loading,
 		consultationForm,
-		orderCreate
+		orderCreate,
+		getInvoice
 	};
 });

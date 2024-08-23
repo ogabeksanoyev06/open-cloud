@@ -11,7 +11,17 @@ export const useClientsStore = defineStore('clients', () => {
 		}
 	};
 
+	const getClientsId = async (id) => {
+		try {
+			let res = await useAxios().getRequest(`/clients/${id}`);
+			return res.data;
+		} catch (error) {
+			console.log('error', error);
+		}
+	};
+
 	return {
-		getClients
+		getClients,
+		getClientsId
 	};
 });

@@ -40,7 +40,7 @@ export default defineNuxtConfig({
 	},
 	runtimeConfig: {
 		public: {
-			apiBaseUrl: process.env.API_BASE_URL || 'https://opencloudapi.pythonanywhere.com/api'
+			apiBaseUrl: process.env.API_BASE_URL || 'https://admin.opencloud.ndc-agency.uz/api'
 		}
 	},
 	build: {

@@ -38,7 +38,7 @@
 							<h4 class="text-base sm:text-xl">
 								{{ item.title }}
 							</h4>
-							<a :href="item.url" target="_blank">
+							<NuxtLink :to="localePath(`/cases/${item?.slug}`)">
 								<Button variant="secondary" class="bg-grey-0">
 									{{ translations['cases.more'] }}
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -46,7 +46,7 @@
 										<path d="M10.8335 14.6665L14.1668 10.4998L10.8335 6.33317" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 									</svg>
 								</Button>
-							</a>
+							</NuxtLink>
 						</div>
 					</div>
 					<div class="flex sm:hidden border flex-col gap-4 p-6 rounded-[16px]" v-for="item in cases.results" :key="item.id">
