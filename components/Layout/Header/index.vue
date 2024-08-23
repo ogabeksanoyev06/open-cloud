@@ -28,58 +28,46 @@
 								</span>
 							</Button>
 						</DropdownMenuTrigger>
-						<DropdownMenuContent class="flex flex-col gap-4 p-4 w-[220px] rounded-xl">
-							<NuxtLink :to="localePath('/about-us')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/about-us' }">
+						<DropdownMenuContent align="start" class="flex flex-col gap-4 p-4 w-[220px] rounded-xl">
+							<NuxtLink :to="localePath('/about-us')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/about-us') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
 									{{ translations['header.link2'] }}
-									<span v-if="route.path === '/about-us'">
+									<span v-if="route.path === localePath('/about-us')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 										</svg>
 									</span>
 								</DropdownMenuItem>
 							</NuxtLink>
-							<NuxtLink :to="localePath('/calculator')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/calculator' }">
+							<NuxtLink :to="localePath('/vacancy')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/vacancy') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									{{ translations['header.link3'] }}
-
-									<span v-if="route.path === '/calculator'">
+									Вакансия
+									<span v-if="route.path === localePath('/vacancy')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 										</svg>
 									</span>
 								</DropdownMenuItem>
 							</NuxtLink>
-							<NuxtLink :to="localePath('/documentation')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/documentation' }">
+							<NuxtLink :to="localePath('/news')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/news') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									{{ translations['header.link4'] }}
-
-									<span v-if="route.path === '/documentation'">
+									Новости
+									<span v-if="route.path === localePath('/news')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 										</svg>
 									</span>
 								</DropdownMenuItem>
 							</NuxtLink>
-							<NuxtLink :to="localePath('/partners')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/partners' }">
+							<NuxtLink :to="localePath('/cases')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/cases') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									{{ translations['header.link5'] }}
+									Наши кейсы
 
-									<span v-if="route.path === '/partners'">
+									<span v-if="route.path === localePath('/cases')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 										</svg>
 									</span>
-								</DropdownMenuItem>
-							</NuxtLink>
-							<NuxtLink :to="localePath('/contacts')" class="transition-300 text-grey" :class="{ '!text-black': route.path === '/contacts' }">
-								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent"> 
-								{{ translations['header.link6'] }}
-								<span v-if="route.path === '/contacts'">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-										<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-									</svg>
-								</span>
 								</DropdownMenuItem>
 							</NuxtLink>
 						</DropdownMenuContent>
@@ -107,8 +95,8 @@
 							</span>
 						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end" class="flex flex-col gap-1">
-						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in filteredLangs" :key="i" class="cursor-pointer p-1 hover:bg-secondary rounded">
+					<DropdownMenuContent align="start" class="flex flex-col gap-1 w-[175px] p-3">
+						<DropdownMenuItem @click="selectLang(lang)" v-for="(lang, i) in filteredLangs" :key="i" class="p-0 focus:!bg-transparent cursor-pointer rounded">
 							{{ lang.label }}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
@@ -143,9 +131,11 @@
 							</span>
 						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end" class="flex flex-col gap-2 p-3">
+					<DropdownMenuContent align="start" class="flex flex-col gap-2 p-3 w-[175px]">
 						<a v-for="contact in formattedContacts" :key="contact" :href="`tel:${contact}`" target="_blank">
-							{{ contact }}
+							<DropdownMenuItem class="p-0 focus:!bg-transparent cursor-pointer">
+								{{ contact }}
+							</DropdownMenuItem>
 						</a>
 					</DropdownMenuContent>
 				</DropdownMenu>
@@ -285,7 +275,7 @@
 							<AccordionTrigger class="text-sm font-medium to-grey hover:no-underline"> {{ category.title }} </AccordionTrigger>
 							<AccordionContent>
 								<nav class="flex flex-col gap-4">
-									<NuxtLink v-for="item in categoriesInner.products" :to="localePath(`/products/${item.slug}`)" :key="item.id" class="flex flex-col gap-4">
+									<NuxtLink v-for="item in categoriesInner.products" :to="localePath(`/products/${item.slug}`)" :key="item.id" class="flex flex-col gap-4 overflow-hidden">
 										<div class="grid gap-2">
 											<h4 class="text-xs font-medium">
 												{{ item.title }}
@@ -318,7 +308,7 @@ const langs = [
 	},
 	{
 		id: 'uz',
-		label: "O'zbek",
+		label: "O'zbek tili",
 		avatar: '/assets/images/png/uzbek.png'
 	},
 	{
@@ -400,7 +390,11 @@ watch(route, () => {
 	isMenuOpen.value = false;
 	isOpen.value = false;
 });
-
+watch(locale, () => {
+	if (categories.value && categories.value?.results?.length > 0) {
+		linkTrigger(categories.value?.results[0]?.slug);
+	}
+});
 onMounted(() => {
 	if (categories.value && categories.value?.results?.length > 0) {
 		linkTrigger(categories.value?.results[0]?.slug);

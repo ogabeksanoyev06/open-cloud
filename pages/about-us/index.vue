@@ -149,11 +149,10 @@
 		</div>
 
 		<section class="container">
-			
 			<div class="border-x pb-10 sm:pb-20">
 				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.how-we-work'] }}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-					<div class="flex flex-col gap-4  p-4 sm:px-10 sm:py-8 grid-item border-grey-1" v-for="item in 5" :key="item">
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1" v-for="item in 5" :key="item">
 						<h4 class="font-medium text-xl sm:text-2xl">Оптимизируйте расходы на IT-инфраструктуру</h4>
 						<p class="text-grey">Различные модели оплаты — pay‑as‑you‑go или pay‑as‑you‑allocate. Платите только за те ресурсы, которыми пользуетесь</p>
 					</div>
@@ -189,11 +188,10 @@
 		<section class="">
 			<SectionPartners :data="data.partners?.results" />
 		</section>
-		<section class="bg-white py-10 sm:py-20 overflow-hidden">
-			<div class="container flex items-center justify-between mb-10">
-				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium">{{ translations['about.media'] }}</h2>
-			</div>
-			<div class="pr-[150px] -mr-[150px] relative z-0">
+		<section class="bg-white py-10 sm:py-20 ">
+			<div class="container">
+			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-10">{{ translations['about.media'] }}</h2>
+			<div class="pr-[150px] -mr-[150px] relative z-0 overflow-hidden">
 				<Swiper
 					class="!overflow-visible w-full rounded-[16px]"
 					:modules="[SwiperAutoplay]"
@@ -216,7 +214,7 @@
 							slidesPerView: 3
 						},
 						1440: {
-							slidesPerView: 4
+							slidesPerView: 3.4
 						}
 					}"
 				>
@@ -227,9 +225,9 @@
 					</SwiperSlide>
 				</Swiper>
 			</div>
+		</div>
 		</section>
-		<section>
-		</section>
+		<section></section>
 	</div>
 </template>
 
@@ -300,8 +298,6 @@ const { data } = await useAsyncData('about-us', async () => {
 		border-top: none;
 	}
 }
-
-
 
 @media (min-width: 1280px) {
 	.grid-item {

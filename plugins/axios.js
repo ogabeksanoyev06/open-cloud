@@ -9,7 +9,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 	axiosInstance.interceptors.request.use(
 		(config) => {
-			// Tilni sozlash
 			config.headers['Language'] = nuxtApp.$i18n.locale.value;
 			return config;
 		},
