@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<section class="bg-black bg-[url('@/assets/images/custom_black_bg.png')] bg-no-repeat bg-top bg-cover relative">
-			<div class="container relative">
+			<div class="container relative flex flex-col items-center">
 				<Breadcrumb class="pt-4">
 					<BreadcrumbList>
 						<BreadcrumbItem>
@@ -15,7 +15,7 @@
 						</BreadcrumbItem>
 					</BreadcrumbList>
 				</Breadcrumb>
-				<div class="py-10 sm:py-[120px] flex flex-col gap-6">
+				<div class="py-10 sm:py-[120px] flex flex-col items-center gap-6">
 					<h1 class="font-medium text-xl sm:text-4xl text-white max-w-[1200px]">{{ translations['about.hero-title'] }}</h1>
 					<p class="text-grey-2 max-w-[900px]">{{ translations['about.hero-desc'] }}</p>
 					<ModalConsultationForm>
@@ -188,44 +188,44 @@
 		<section class="">
 			<SectionPartners :data="data.partners?.results" />
 		</section>
-		<section class="bg-white py-10 sm:py-20 ">
+		<section class="bg-white py-10 sm:py-20 overflow-hidden">
 			<div class="container">
-			<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-10">{{ translations['about.media'] }}</h2>
-			<div class="pr-[150px] -mr-[150px] relative z-0 overflow-hidden">
-				<Swiper
-					class="!overflow-visible w-full rounded-[16px]"
-					:modules="[SwiperAutoplay]"
-					:space-between="16"
-					:slides-per-view="1"
-					:loop="true"
-					:speed="2000"
-					:autoplay="{
-						delay: 2000,
-						disableOnInteraction: false
-					}"
-					:breakpoints="{
-						0: {
-							slidesPerView: 1.2
-						},
-						640: {
-							slidesPerView: 2
-						},
-						1024: {
-							slidesPerView: 3
-						},
-						1440: {
-							slidesPerView: 3.4
-						}
-					}"
-				>
-					<SwiperSlide v-for="(item, i) in data?.media?.results" :key="i">
-						<div class="w-full h-[280px] flex-shrink-0 overflow-hidden">
-							<img :src="item.image" alt="" class="w-full h-full object-cover rounded-[16px]" />
-						</div>
-					</SwiperSlide>
-				</Swiper>
+				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-10">{{ translations['about.media'] }}</h2>
+				<div class="pr-[150px] -mr-[150px] relative z-0 overflow-hidden">
+					<Swiper
+						class="!overflow-visible w-full rounded-[16px]"
+						:modules="[SwiperAutoplay]"
+						:space-between="16"
+						:slides-per-view="1"
+						:loop="true"
+						:speed="2000"
+						:autoplay="{
+							delay: 2000,
+							disableOnInteraction: false
+						}"
+						:breakpoints="{
+							0: {
+								slidesPerView: 1.2
+							},
+							640: {
+								slidesPerView: 2
+							},
+							1024: {
+								slidesPerView: 3
+							},
+							1440: {
+								slidesPerView: 3.4
+							}
+						}"
+					>
+						<SwiperSlide v-for="(item, i) in data?.media?.results" :key="i">
+							<div class="w-full h-[280px] flex-shrink-0 overflow-hidden">
+								<img :src="item.image" alt="" class="w-full h-full object-cover rounded-[16px]" />
+							</div>
+						</SwiperSlide>
+					</Swiper>
+				</div>
 			</div>
-		</div>
 		</section>
 		<section></section>
 	</div>
