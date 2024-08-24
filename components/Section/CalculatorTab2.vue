@@ -22,7 +22,7 @@
 													/>
 												</svg>
 											</span>
-											<Input v-model="item.vcpu" type="text" class="px-10 text-center pointer-events-none" />
+											<Input v-model="item.vcpu" @input="validateNumber" type="text" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(2, item.id, 'vcpu')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -48,7 +48,7 @@
 													/>
 												</svg>
 											</span>
-											<Input v-model="item.ram" type="text" class="px-10 text-center pointer-events-none" />
+											<Input v-model="item.ram" @input="validateNumber" type="text" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(2, item.id, 'ram')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -74,7 +74,7 @@
 													/>
 												</svg>
 											</span>
-											<Input v-model="item.ssdNodes" type="text" class="px-10 text-center pointer-events-none" />
+											<Input v-model="item.ssdNodes" @input="validateNumber" type="text" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(2, item.id, 'ssd')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -100,7 +100,7 @@
 													/>
 												</svg>
 											</span>
-											<Input v-model="item.hddNodes" type="text" class="px-10 text-center pointer-events-none" />
+											<Input v-model="item.hddNodes" @input="validateNumber" type="text" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(2, item.id, 'hdd')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -150,7 +150,7 @@
 				</Button>
 			</div>
 		</div>
-		<div class="lg:sticky top-28 left-0 lg:min-h-[600px]  rounded-2xl">
+		<div class="lg:sticky top-28 left-0 lg:min-h-[600px] rounded-2xl">
 			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 h-full">
 				<div class="flex items-center justify-between p-4 sm:p-6 !pb-0">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
@@ -158,7 +158,7 @@
 				</div>
 				<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 
-				<div class="flex flex-col gap-6 px-4 sm:px-6 " v-for="(item, i) in tab2Configurations" :key="item.id" :value="item.id">
+				<div class="flex flex-col gap-6 px-4 sm:px-6" v-for="(item, i) in tab2Configurations" :key="item.id" :value="item.id">
 					<div class="flex items-center justify-between">
 						<h4 class="text-base sm:text-xl">Конфигурация {{ i + 1 }}</h4>
 						<Button @click="deleteConfiguration(2, item.id)" variant="ghost" class="!p-0 h-auto">
@@ -196,18 +196,80 @@
 					</ul>
 					<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 				</div>
-				<div class="flex flex-col gap-6 mt-auto p-4 sm:p-6  bg-grey-0">
+				<div class="flex flex-col gap-6 mt-auto p-4 sm:p-6 bg-grey-0">
 					<div class="flex flex-col gap-2">
 						<h4 class="text-sm sm:text-base text-grey">Цена за месяц</h4>
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab2) }} сум/месяц</h3>
 					</div>
 					<div class="flex flex-col gap-4">
 						<ModalOrderCreate :tab="2" />
-						<Button variant="outline"> Скачать расчет </Button>
+						<Button variant="outline" @click="generateReport"> Скачать расчет </Button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- {{ transformedConfigurations }} -->
+
+		<vue3-html2pdf
+			:show-layout="false"
+			:float-layout="true"
+			:enable-download="true"
+			:preview-modal="false"
+			:paginate-elements-by-height="1400"
+			filename="Конфигурация"
+			:pdf-quality="1"
+			:manual-pagination="true"
+			pdf-format="a4"
+			pdf-orientation="portrait"
+			pdf-content-width="800px"
+			@hasStartedGeneration="hasStartedGeneration()"
+			@hasGenerated="hasGenerated($event)"
+			ref="html2Pdf"
+		>
+			<template #pdf-content>
+				<section class="bg-[#F5F5F7] py-6">
+					<div class="max-w-[500px] w-full mx-auto flex flex-col gap-6">
+						<div class="mx-auto">
+							<img src="/assets/images/logo.png" alt="" class="w-[112px]" />
+						</div>
+
+						<div class="bg-white rounded-2xl flex flex-col gap-6 p-6 w-full">
+							<h3 class="text-lg font-medium text-center">Итоговый расчет</h3>
+							<div class="flex flex-col gap-2" v-for="(item, i) in transformedConfigurations" :key="i">
+								<h5 class="text-sm font-medium">Конфигурация {{ i + 1 }}</h5>
+								<ul class="flex flex-col gap-2">
+									<li class="flex">
+										<span class="text-xs font-normal">{{ item.vcpu_count }} vCPU</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.vcpu_price * item.vcpu_count) }} so’m</span>
+									</li>
+									<li class="flex">
+										<span class="text-xs font-normal">{{ item.ram_count }} GB RAM</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.ram_price * item.ram_count) }} so’m</span>
+									</li>
+									<li class="flex">
+										<span class="text-xs font-normal"> {{ item.hdd_count }} HDD</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.hdd_price * item.hdd_count) }} so’m</span>
+									</li>
+									<li class="flex">
+										<span class="text-xs font-normal"> {{ item.ssd_count }} SSD</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.ssd_price * item.ssd_count) }} so’m</span>
+									</li>
+								</ul>
+							</div>
+							<div class="flex flex-col gap-2">
+								<span class="text-xs font-medium">Всего</span>
+								<p class="text-base font-medium">{{ formatPrice(calculateTotalPriceTab2) }} сум/месяц</p>
+								<span class="text-[10px] text-grey">дата расчета: {{ $dayjs().format('DD.MM.YYYY HH:mm:ss') }}</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</template>
+		</vue3-html2pdf>
 	</div>
 </template>
 
@@ -222,7 +284,29 @@ const calculatorStore = useCalculatorStore();
 const { tab2Configurations, calculateTotalPriceTab2 } = storeToRefs(calculatorStore);
 const { addConfiguration, deleteConfiguration, deleteAllConfigurations, incrementNodes, decrementNodes } = calculatorStore;
 
-const selectedType = ref(0);
+function validateNumber(event) {
+	const value = event.target.value;
+	event.target.value = value.replace(/[^0-9]/g, '');
+}
 
-const selectedIndex = ref(0);
+const transformedConfigurations = computed(() => {
+	return tab2Configurations.value?.map((config, i) => ({
+		ssd_count: config.ssdNodes,
+		hdd_count: config.hddNodes,
+		ram_count: config.ram,
+		vcpu_count: config.vcpu,
+		ssd_price: config.price.ssd_price * config.ssdNodes,
+		hdd_price: config.price.hdd_price * config.hddNodes,
+		ram_price: config.price.ram_price * config.ram,
+		vcpu_price: config.price.vcpu_price * config.vcpu
+	}));
+});
+
+const html2Pdf = ref(null);
+
+const generateReport = () => {
+	if (html2Pdf.value) {
+		html2Pdf.value.generatePdf();
+	}
+};
 </script>

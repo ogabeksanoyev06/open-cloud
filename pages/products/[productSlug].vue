@@ -41,7 +41,7 @@
 			<section class="pt-10 sm:pt-20 text border-x">
 				<div v-html="product.text" class="max-w-[1166px] mx-auto"></div>
 			</section>
-			<section class="pt-10 sm:pt-20 border-x">
+			<section class="pt-10 sm:pt-20 border-x" v-if="product?.advantages?.length > 0">
 				<h2 class="text-xl md:text-3xl lg:text-4xl font-medium text-center mb-6 sm:mb-8">
 					{{ translations['product.advantages'] }}
 				</h2>
@@ -80,7 +80,7 @@
 				</div>
 			</section>
 
-			<section class="pt-10 sm:pt-20 border-x">
+			<section class="pt-10 sm:pt-20 border-x" v-if="tarifs?.results?.length > 0">
 				<div class="flex flex-col gap-4 sm:gap-6 sm:flex-row sm:justify-between sm:items-center mb-6 sm:px-6">
 					<h3 class="text-xl md:text-3xl font-medium">{{ translations['product.tarrifs'] }}</h3>
 					<div class="flex items-center rounded-[12px] p-1 sm:p-2 bg-white">
@@ -177,7 +177,7 @@
 			</section>
 		</div>
 
-		<section class="container">
+		<section class="container" v-if="product.tarif_catalog">
 			<div class="border-x pb-10 sm:pb-20">
 				<div class="bg-black p-6 sm:p-10 max-sm:mt-6 max-sm:rounded-2xl flex flex-col sm:flex-row items-center gap-6 sm:justify-between">
 					<div class="flex items-center gap-4">
@@ -230,10 +230,6 @@
 			</div>
 		</section>
 
-		<!-- <section class=" ">
-			<SectionCalculator />
-		</section> -->
-
 		<section class="">
 			<div class="container">
 				<div class="border-x text py-10 sm:py-20">
@@ -283,7 +279,7 @@
 			<div class="border-x py-10"></div>
 		</section>
 
-		<section>
+		<section v-if="product?.faqs?.length > 0">
 			<div class="sm:container sm:max-w-[1760px]">
 				<div class="bg-white sm:rounded-[40px] py-10 sm:py-16">
 					<div class="container">
@@ -305,7 +301,6 @@
 				<div class="border-x py-10"></div>
 			</div>
 		</section>
-
 	</div>
 </template>
 

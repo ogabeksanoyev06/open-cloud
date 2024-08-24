@@ -17,7 +17,7 @@
 											class="flex items-center px-10 py-3 relative before:transition-300 transition-300 hover:before:w-full before:absolute before:h-[2px] before:w-0 before:bg-black-0 before:bottom-0 before:left-0 font-medium cursor-pointer whitespace-nowrap"
 											v-for="(tarif, tIndex) in item.tarifData"
 											:key="tIndex"
-											@click="activeTab(item.id, tIndex)"
+											@click="activeTab(item.id, tIndex, tarif.title)"
 											:class="{ 'text-[#272727] before:w-full': selectedIndexes[item.id] === tIndex }"
 										>
 											{{ tarif?.title }}
@@ -60,7 +60,7 @@
 													/>
 												</svg>
 											</span>
-											<Input type="text" v-model="item.ssdNodes" class="px-10 text-center pointer-events-none" />
+											<Input type="text" @input="validateNumber" v-model="item.ssdNodes" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(1, item.id, 'ssd')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -86,7 +86,7 @@
 													/>
 												</svg>
 											</span>
-											<Input type="text" v-model="item.hddNodes" class="px-10 text-center pointer-events-none" />
+											<Input type="text" @input="validateNumber" v-model="item.hddNodes" class="px-10 text-center" />
 											<span class="absolute end-0 inset-y-0 flex items-center justify-center px-4 cursor-pointer" @click="incrementNodes(1, item.id, 'hdd')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 													<path
@@ -137,7 +137,7 @@
 			</div>
 		</div>
 		<div class="lg:sticky top-28 left-0 lg:min-h-[600px] rounded-2xl">
-			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6  h-full">
+			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 h-full">
 				<div class="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
 					<Button variant="link" class="text-destructive hover:no-underline font-normal !p-0" @click="deleteAllConfigurations(1)">Очистка</Button>
@@ -159,6 +159,7 @@
 					</div>
 					<ul class="flex flex-col gap-4">
 						<li class="inline-flex !flex-col !items-start gap-2 p-4 rounded-2xl border border-grey-1 transition-300" v-for="tarif in getActiveTarifs(item)" :key="tarif.id">
+							<h4 class="text-sm font-medium">{{tarif.title}}</h4>
 							<div class="flex items-start justify-center gap-2">
 								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.ram }} ГБ Ram</span>
 								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.vcpu }} vCPU</span>
@@ -180,18 +181,77 @@
 					</ul>
 					<div class="shrink-0 bg-grey-1 relative h-px w-full"></div>
 				</div>
-				<div class="flex flex-col gap-6 mt-auto px-4 sm:p-6  bg-grey-0">
+				<div class="flex flex-col gap-6 mt-auto px-4 sm:p-6 bg-grey-0">
 					<div class="flex flex-col gap-2">
 						<h4 class="text-sm sm:text-base text-grey">Цена за месяц</h4>
 						<h3 class="text-xl sm:text-2xl font-medium">{{ formatPrice(calculateTotalPriceTab1) }} сум/месяц</h3>
 					</div>
 					<div class="flex flex-col gap-4">
 						<ModalOrderCreate :tab="1" />
-						<Button variant="outline"> Скачать расчет </Button>
+						<Button variant="outline" @click="generateReport"> Скачать расчет </Button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<vue3-html2pdf
+			:show-layout="false"
+			:float-layout="true"
+			:enable-download="true"
+			:preview-modal="false"
+			:paginate-elements-by-height="1400"
+			filename="Конфигурация"
+			:pdf-quality="1"
+			:manual-pagination="true"
+			pdf-format="a4"
+			pdf-orientation="portrait"
+			pdf-content-width="800px"
+			@hasStartedGeneration="hasStartedGeneration()"
+			@hasGenerated="hasGenerated($event)"
+			ref="html2Pdf"
+		>
+			<template #pdf-content>
+				<section class="bg-[#F5F5F7] py-6">
+					<div class="max-w-[500px] w-full mx-auto flex flex-col gap-6">
+						<div class="mx-auto">
+							<img src="/assets/images/logo.png" alt="" class="w-[112px]" />
+						</div>
+
+						<div class="bg-white rounded-2xl flex flex-col gap-6 p-6 w-full">
+							<h3 class="text-lg font-medium text-center">Итоговый расчет</h3>
+							<div class="flex flex-col gap-2" v-for="(item, i) in tab1Configurations" :key="i">
+								<h5 class="text-sm font-medium">Конфигурация {{ i + 1 }}</h5>
+								<ul class="flex flex-col gap-2">
+									<li class="flex flex-col" v-for="tarif in getActiveTarifs(item)" :key="tarif.id">
+										<span class="text-xs font-medium">Тарифы: {{ tarif.title }}</span>
+										<div class="flex">
+											<span class="text-xs font-normal">{{ tarif.ram + ' ГБ Ram' + ', ' + tarif.vcpu + ' vCPU' }} </span>
+											<span class="border-b border-dashed flex-1 border-[#5D5D5F]"> </span>
+											<span class="text-xs font-normal">{{ formatPrice(tarif.price) }} so’m</span>
+										</div>
+									</li>
+
+									<li class="flex">
+										<span class="text-xs font-normal"> {{ item.hdd_count }} HDD</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.price?.hdd_price * item.hddNodes) }} so’m</span>
+									</li>
+									<li class="flex">
+										<span class="text-xs font-normal"> {{ item.ssd_count }} SSD</span>
+										<span class="border-b border-dashed flex-1 border-[#5D5D5F]"></span>
+										<span class="text-xs font-normal">{{ formatPrice(item.price?.ssd_price * item.ssdNodes) }} so’m</span>
+									</li>
+								</ul>
+							</div>
+							<div class="flex flex-col gap-2">
+								<span class="text-xs font-medium">Всего</span>
+								<p class="text-base font-medium">{{ formatPrice(calculateTotalPriceTab1) }} сум/месяц</p>
+								<span class="text-[10px] text-grey">дата расчета: {{ $dayjs().format('DD.MM.YYYY HH:mm:ss') }}</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</template>
+		</vue3-html2pdf>
 	</div>
 </template>
 
@@ -212,6 +272,19 @@ const activeTab = (configId, tabIndex) => {
 	selectedIndexes[configId] = tabIndex;
 };
 
+function validateNumber(event) {
+	const value = event.target.value;
+	event.target.value = value.replace(/[^0-9]/g, '');
+}
+
+const html2Pdf = ref(null);
+
+const generateReport = () => {
+	if (html2Pdf.value) {
+		html2Pdf.value.generatePdf();
+	}
+};
+
 watch(
 	tab1Configurations,
 	(newConfigurations) => {
@@ -225,6 +298,13 @@ watch(
 );
 
 const getActiveTarifs = (item) => {
-	return item.tarifData.flatMap((td) => td.tarifs).filter((tarif) => tarif.active);
+	return item.tarifData
+		.flatMap((td) =>
+			td.tarifs.map((tarif) => ({
+				...tarif,
+				title: td.title
+			}))
+		)
+		.filter((tarif) => tarif.active);
 };
 </script>
