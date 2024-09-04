@@ -46,6 +46,7 @@ export default defineNuxtConfig({
 		transpile: ['vue-toastification']
 	},
 	plugins: [{ src: '@/plugins/vue3-html2pdf', mode: 'client' }],
+	
 	vite: {
 		optimizeDeps: {
 			include: ['jspdf', 'html2pdf.js']

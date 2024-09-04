@@ -2,10 +2,11 @@
 	<div class="flex min-h-screen flex-col">
 		<LayoutHeader />
 		<div class="flex-1">
-			<div class="container">
-				<div class="grid lg:grid-cols-[340px_minmax(0,1fr)] gap-10 items-start mt-6">
+			<div class="container ">
+				<div class="border-x">
+				<div class="grid lg:grid-cols-[340px_minmax(0,1fr)]  items-start pt-6">
 					<ScrollArea class="sm:h-[calc(100vh-100px)]">
-						<Accordion v-model="activeItem" type="single" class="w-full flex flex-col gap-6 p-6 border-l-[1px]" collapsible>
+						<Accordion v-model="activeItem" type="single" class="w-full flex flex-col gap-6 p-6 border-r-[1px]" collapsible>
 							<AccordionItem class="border-b-0" v-for="(item, i) in data?.documents?.subcategories" :key="item.value" :value="item.slug">
 								<AccordionTrigger
 									class="text-base text-left font-medium p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
@@ -28,12 +29,14 @@
 							</AccordionItem>
 						</Accordion>
 					</ScrollArea>
-					<div>
+					<div class=" px-4 lg:px-10">
 						<slot />
 					</div>
 				</div>
 			</div>
+			</div>
 		</div>
+		<HomeConsultationBanner />
 		<LayoutFooter />
 	</div>
 </template>

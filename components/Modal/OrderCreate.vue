@@ -27,13 +27,23 @@ const isOpen = ref(false);
 
 const form = reactive({
 	name: '',
-	phone: '+998',
+	phone: '',
 	email: '',
 	company: ''
 });
 
 const formatPhoneNumber = (phone) => {
 	return phone.replace(/[^\d]/g, '');
+};
+
+const isNumber = (evt) => {
+	evt = evt || window.event;
+	let charCode = evt.which ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+		evt.preventDefault();
+	} else {
+		return true;
+	}
 };
 const sendOrderCreate = async () => {
 	try {
@@ -95,30 +105,31 @@ const sendOrderCreate = async () => {
 						<div class="grid gap-6">
 							<div class="grid gap-2">
 								<VField name="name" rules="required" v-model="form.name">
-									<Label for="name"> {{ translations['home.name-label'] }} </Label>
+									<Label for="name"> <span class="text-destructive">*</span> {{ translations['home.name-input'] }} </Label>
 									<Input v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
 									<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
 								<VField name="phone" rules="required" v-model="form.phone">
-									<Label for="phone"> {{ translations['home.phone-label'] }} </Label>
-									<Input :placeholder="translations['home.phone-input']" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
+									<Label for="phone"><span class="text-destructive">*</span> {{ translations['home.phone-input'] }} </Label>
+									<div class="relative">
+										<Input @keypress="isNumber($event)" :placeholder="translations['home.phone-label']" v-model="form.phone" class="pl-6" />
+										<span class="absolute start-0 inset-y-0 flex items-center justify-center px-4">+</span>
+									</div>
 									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="email" rules="required|email" v-model="form.email">
+								<VField name="email" v-model="form.email">
 									<Label for="email"> Электрон почта </Label>
 									<Input v-model="form.email" id="email" type="text" placeholder="Э-почта" />
-									<span class="text-sm text-destructive font-medium">{{ errors.email }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">
-								<VField name="company" rules="required" v-model="form.company">
+								<VField name="company" v-model="form.company">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
-									<span class="text-sm text-destructive font-medium">{{ errors.company }}</span>
 								</VField>
 							</div>
 

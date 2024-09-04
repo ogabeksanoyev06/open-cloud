@@ -20,7 +20,7 @@ const isOpen = ref(false);
 
 const form = reactive({
 	name: '',
-	phone: '+998',
+	phone: '',
 	company: '',
 	email: '',
 	message: ''
@@ -28,6 +28,16 @@ const form = reactive({
 
 const formatPhoneNumber = (phone) => {
 	return phone.replace(/[^\d]/g, '');
+};
+
+const isNumber = (evt) => {
+	evt = evt || window.event;
+	let charCode = evt.which ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+		evt.preventDefault();
+	} else {
+		return true;
+	}
 };
 
 const sendConsultationForm = async () => {
@@ -60,17 +70,20 @@ const sendConsultationForm = async () => {
 				<div class="w-full grid gap-6">
 					<VForm @submit="sendConsultationForm" v-slot="{ errors }">
 						<div class="grid gap-6">
-							<div class="grid gap-2">
+							<div class="grid gap-2 relative">
 								<VField name="name" rules="required" v-model="form.name">
 									<Label for="name"> <span class="text-destructive">*</span> {{ translations['home.name-input'] }} </Label>
 									<Input v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
 									<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
 								</VField>
 							</div>
-							<div class="grid gap-2">
+							<div class="grid gap-2 relative">
 								<VField name="phone" rules="required" v-model="form.phone">
 									<Label for="phone"><span class="text-destructive">*</span> {{ translations['home.phone-input'] }} </Label>
-									<Input :placeholder="translations['home.phone-label']" v-model="form.phone" v-maska data-maska="+998 (##) ###-##-##" />
+									<div class="relative">
+										<Input @keypress="isNumber($event)" :placeholder="translations['home.phone-label']" v-model="form.phone" class="pl-6" />
+										<span class="absolute start-0 inset-y-0 flex items-center justify-center px-4">+</span>
+									</div>
 									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
 								</VField>
 							</div>

@@ -267,6 +267,26 @@
 							</div>
 						</div>
 					</div>
+					<div class="bg-black mt-20 py-10">
+						<div class="container max-w-[500px] p-0 mb-6">
+							<div class="mx-auto">
+								<img src="/assets/images/logo-2.png" alt="" class="w-[112px]" />
+							</div>
+						</div>
+						<div class="container max-w-[500px] p-0 grid grid-cols-2 gap-4">
+							<div class="flex flex-col gap-2 text-white">
+								<p class="text-xs">Manzil:</p>
+								<p class="text-xs">100070, Toshkent shahar, Mirobod tumani, Amir Temur shoh ko‘chasi 17</p>
+							</div>
+							<div class="flex flex-col gap-2 text-white">
+								<p class="text-xs">Kontakt:</p>
+								<p class="text-xs">
+									+998 90 955 5995 <br />
+									+998 90 955 5995
+								</p>
+							</div>
+						</div>
+					</div>
 				</section>
 			</template>
 		</vue3-html2pdf>

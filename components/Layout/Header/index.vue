@@ -4,11 +4,11 @@
 	</transition>
 	<header id="header" class="sticky z-40 top-0 bg-background backdrop-blur-lg">
 		<div class="container flex h-16 sm:h-[100px] items-center">
-			<div class="mr-4 lg:mr-1 flex items-center">
+			<div class="mr-4 xl:mr-1 flex items-center">
 				<NuxtLink :to="localePath('/')" class="mr-4 md:mr-2 xl:mr-6 flex items-center flex-shrink-0">
 					<img src="/assets/images/logo.png" alt="" class="max-w-[100px]" />
 				</NuxtLink>
-				<nav class="hidden lg:flex flex-wrap items-center max-lg:space-x-4 lg:space-x-8 xl:space-x-10 text-base font-normal">
+				<nav class="hidden xl:flex flex-wrap items-center max-lg:space-x-3 lg:space-x-4 xl:space-x-6 text-base font-normal">
 					<Button variant="ghost" class="!p-0 gap-2 hover:bg-transparent text-base font-normal" @click="isMenuOpen = !isMenuOpen">
 						{{ translations['header.link1'] }}
 						<span>
@@ -78,12 +78,12 @@
 					<NuxtLink :to="localePath('/contacts')" class="transition-300">{{ translations['header.link6'] }} </NuxtLink>
 				</nav>
 			</div>
-			<button @click="isOpen = true" class="lg:hidden flex justify-end flex-1">
+			<button @click="isOpen = true" class="xl:hidden flex justify-end flex-1">
 				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
 					<path d="M11.6665 13.3333H28.3332M11.6665 19.9999H28.3332M11.6665 26.6666H28.3332" stroke="#272727" stroke-width="1.5" stroke-linecap="round" />
 				</svg>
 			</button>
-			<div class="hidden lg:flex flex-1 items-center space-x-2 justify-end">
+			<div class="hidden xl:flex flex-1 items-center space-x-2 justify-end">
 				<DropdownMenu>
 					<DropdownMenuTrigger as-child>
 						<Button variant="secondary" class="!px-4">
@@ -263,32 +263,34 @@
 		</Sheet>
 		<Sheet v-model:open="isCatalogOpen" class="">
 			<SheetContent side="left" class="p-6 w-full z-[999]">
-				<div class="flex flex-col h-full gap-6">
-					<h3 class="font-medium text-lg flex gap-2 items-center" @click="closeProductModal">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-							<path d="M11.6665 6.33325L8.33317 10.4999L11.6665 14.6666" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
-						{{ translations['header.link1'] }}
-					</h3>
-					<Accordion type="single" class="w-full" collapsible>
-						<AccordionItem class="border-none" v-for="category in categories.results" :key="category.id" :value="category.slug">
-							<AccordionTrigger class="text-sm font-medium to-grey hover:no-underline"> {{ category.title }} </AccordionTrigger>
-							<AccordionContent>
-								<nav class="flex flex-col gap-4">
-									<NuxtLink v-for="item in categoriesInner.products" :to="localePath(`/products/${item.slug}`)" :key="item.id" class="flex flex-col gap-4 overflow-hidden">
-										<div class="grid gap-2">
-											<h4 class="text-xs font-medium">
-												{{ item.title }}
-											</h4>
-											<p class="text-xs text-grey">{{ item.subtitle }}</p>
-										</div>
-										<div class="shrink-0 bg-[#E2E2EE] relative h-px w-full"></div>
-									</NuxtLink>
-								</nav>
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
-				</div>
+				<ScrollArea class="h-[600px]">
+					<div class="flex flex-col gap-6">
+						<h3 class="font-medium text-lg flex gap-2 items-center" @click="closeProductModal">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+								<path d="M11.6665 6.33325L8.33317 10.4999L11.6665 14.6666" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+							{{ translations['header.link1'] }}
+						</h3>
+						<Accordion type="single" class="w-full" collapsible>
+							<AccordionItem class="border-none" v-for="category in categories.results" :key="category.id" :value="category.slug">
+								<AccordionTrigger class="text-sm font-medium to-grey hover:no-underline"> {{ category.title }} </AccordionTrigger>
+								<AccordionContent>
+									<nav class="flex flex-col gap-4">
+										<NuxtLink v-for="item in categoriesInner.products" :to="localePath(`/products/${item.slug}`)" :key="item.id" class="flex flex-col gap-4 overflow-hidden">
+											<div class="grid gap-2">
+												<h4 class="text-xs font-medium">
+													{{ item.title }}
+												</h4>
+												<p class="text-xs text-grey">{{ item.subtitle }}</p>
+											</div>
+											<div class="shrink-0 bg-[#E2E2EE] relative h-px w-full"></div>
+										</NuxtLink>
+									</nav>
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
+					</div>
+				</ScrollArea>
 			</SheetContent>
 		</Sheet>
 	</header>

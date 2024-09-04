@@ -18,7 +18,7 @@
 				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['header.link4'] }}</h1>
 			</section>
 
-			<section class="border-x sm:pl-10 mt-10">
+			<section class="border-x sm:pl-10 pt-10">
 				<div class="relative lg:grid lg:grid-cols-[minmax(0,1fr)_240px] md:gap-6 xl:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
 					<div class="flex flex-col gap-6 sm:gap-10">
 						<div class="relative flex flex-col gap-6 bg-white p-6 sm:p-10 rounded-2xl sm:rounded-[40px]" v-for="item in documents.results" :key="item.id" :id="`documents-${item.slug}`">

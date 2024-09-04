@@ -159,7 +159,7 @@
 					</div>
 					<ul class="flex flex-col gap-4">
 						<li class="inline-flex !flex-col !items-start gap-2 p-4 rounded-2xl border border-grey-1 transition-300" v-for="tarif in getActiveTarifs(item)" :key="tarif.id">
-							<h4 class="text-sm font-medium">{{tarif.title}}</h4>
+							<h4 class="text-sm font-medium">{{ tarif.title }}</h4>
 							<div class="flex items-start justify-center gap-2">
 								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.ram }} ГБ Ram</span>
 								<span class="bg-grey-1 rounded-xl sm:px-4 px-3 py-2">{{ tarif.vcpu }} vCPU</span>
@@ -215,7 +215,6 @@
 						<div class="mx-auto">
 							<img src="/assets/images/logo.png" alt="" class="w-[112px]" />
 						</div>
-
 						<div class="bg-white rounded-2xl flex flex-col gap-6 p-6 w-full">
 							<h3 class="text-lg font-medium text-center">Итоговый расчет</h3>
 							<div class="flex flex-col gap-2" v-for="(item, i) in tab1Configurations" :key="i">
@@ -246,6 +245,26 @@
 								<span class="text-xs font-medium">Всего</span>
 								<p class="text-base font-medium">{{ formatPrice(calculateTotalPriceTab1) }} сум/месяц</p>
 								<span class="text-[10px] text-grey">дата расчета: {{ $dayjs().format('DD.MM.YYYY HH:mm:ss') }}</span>
+							</div>
+						</div>
+					</div>
+					<div class="bg-black mt-20 py-10">
+						<div class="container max-w-[500px] p-0 mb-6">
+							<div class="mx-auto">
+								<img src="/assets/images/logo-2.png" alt="" class="w-[112px]" />
+							</div>
+						</div>
+						<div class="container max-w-[500px] p-0 grid grid-cols-2 gap-4">
+							<div class="flex flex-col gap-2 text-white">
+								<p class="text-xs">Manzil:</p>
+								<p class="text-xs">100070, Toshkent shahar, Mirobod tumani, Amir Temur shoh ko‘chasi 17</p>
+							</div>
+							<div class="flex flex-col gap-2 text-white">
+								<p class="text-xs">Kontakt:</p>
+								<p class="text-xs">
+									+998 90 955 5995 <br />
+									+998 90 955 5995
+								</p>
 							</div>
 						</div>
 					</div>
