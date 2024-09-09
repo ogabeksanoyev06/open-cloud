@@ -5,7 +5,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 		} else if (to.hash) {
 			return {
 				el: to.hash,
-				top: 200, // Adjust this value to your preference
+				top: 100, // Adjust this value to your preference
 				behavior: 'smooth'
 			};
 		} else {

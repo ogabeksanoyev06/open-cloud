@@ -4,7 +4,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 	const config = useRuntimeConfig(); // Runtime config ni olish
 
 	const axiosInstance = axios.create({
-		baseURL: config.public.apiBaseUrl || 'https://admin.opencloud.ndc-agency.uz/api' // baseURL ni configdan olish
+		baseURL: config.public.apiBaseUrl || 'https://admin.opencloud.uz/api' // baseURL ni configdan olish
 	});
 
 	axiosInstance.interceptors.request.use(

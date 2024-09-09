@@ -22,7 +22,7 @@
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbPage> {{ data.title }}</BreadcrumbPage>
+						<BreadcrumbPage> {{ route.params.documentSlug  }}</BreadcrumbPage>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
@@ -47,7 +47,7 @@ const route = useRoute();
 const router = useRouter();
 
 const { data } = await useAsyncData('document', async () => {
-	return await useDocumentsStore().getDocumentationContent(route.params.documentSlug);
+	return await useDocumentsStore().getDocumentsInner(route.params.documentSlug);
 });
 </script>
 

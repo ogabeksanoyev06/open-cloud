@@ -148,48 +148,48 @@
 				</Button>
 			</div>
 		</div>
-		<transition name="modal">
-			<aside v-if="isMenuOpen" class="hidden lg:block absolute p-6 transition-300 w-full z-[9] left-0 top-16 sm:top-[100px] bg-grey-0">
-				<div class="container">
-					<div class="grid lg:grid-cols-[400px_minmax(0,1fr)] gap-6 items-start">
-						<ul class="flex flex-col gap-6">
-							<li
-								v-for="category in categories.results"
-								@click="linkTrigger(category.slug)"
-								:key="category.id"
-								:class="category.id === activeId ? 'before:w-1 text-black' : 'before:w-0 text-grey'"
-								class="cursor-pointer pl-6 flex items-center justify-between duration-200 gap-x-6 relative before:duration-200 before:absolute before:left-0 before:top-0 before:h-full before:bg-green before:rounded-e-full"
-							>
-								<span>{{ category.title }}</span>
-								<transition name="modal-icon">
-									<span v-if="category.id === activeId">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-										</svg>
-									</span>
-								</transition>
-							</li>
-						</ul>
-						<transition name="modal-icon">
-							<div class="flex flex-col gap-6 bg-white p-10 rounded-2xl">
-								<h3 class="text-2xl font-medium">{{ categoriesInner.title }}</h3>
-								<nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-									<NuxtLink :to="localePath(`/products/${item.slug}`)" class="flex flex-col gap-2" v-for="item in categoriesInner.products" :key="item.id">
-										<p class="font-medium text-base">{{ item.title }}</p>
-										<p class="to-grey">
-											{{ item.subtitle }}
-										</p>
-									</NuxtLink>
-								</nav>
-							</div>
-						</transition>
+		<aside class="menu-catalog" :class="{ ' !visible !opacity-100 !top-full': isMenuOpen }">
+			<div class="container menu-catalog__container">
+				<div class="grid lg:grid-cols-[400px_minmax(0,1fr)] gap-6 items-start">
+				<div class="overflow-y-auto h-full">
+					<ul class="flex flex-col gap-6 p-6 overflow-hidden">
+						<li
+							v-for="category in categories.results"
+							@click="linkTrigger(category.slug)"
+							:key="category.id"
+							:class="category.id === activeId ? 'before:w-1 text-black' : 'before:w-0 text-grey'"
+							class="cursor-pointer pl-6 flex items-center justify-between duration-200 gap-x-6 relative before:duration-200 before:absolute before:left-0 before:top-0 before:h-full before:bg-green before:rounded-e-full"
+						>
+							<span>{{ category.title }}</span>
+							<transition name="modal-icon">
+								<span v-if="category.id === activeId">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</span>
+							</transition>
+						</li>
+					</ul>
 					</div>
+					<div class=" overflow-y-auto h-full">
+						<div class="flex flex-col gap-6 bg-white p-10 rounded-2xl overflow-hidden">
+							<h3 class="text-2xl font-medium">{{ categoriesInner.title }}</h3>
+							<nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+								<NuxtLink :to="localePath(`/products/${item.slug}`)" class="flex flex-col gap-2" v-for="item in categoriesInner.products" :key="item.id">
+									<p class="font-medium text-base">{{ item.title }}</p>
+									<p class="to-grey">
+										{{ item.subtitle }}
+									</p>
+								</NuxtLink>
+							</nav>
+						</div>
 				</div>
-			</aside>
-		</transition>
+				</div>
+			</div>
+		</aside>
 		<Sheet v-model:open="isOpen">
 			<SheetContent side="left" class="w-full h-full p-0">
-				<ScrollArea class="h-screen">
+				<ScrollArea class="h-[calc[100vh-16px]">
 					<div class="flex flex-col justify-between gap-10 p-6 h-screen">
 						<NuxtLink :to="localePath('/')">
 							<img src="/assets/images/logo.png" alt="" class="max-w-[120px]" />
@@ -263,7 +263,7 @@
 		</Sheet>
 		<Sheet v-model:open="isCatalogOpen" class="">
 			<SheetContent side="left" class="p-6 w-full z-[999]">
-				<ScrollArea class="h-[600px]">
+				<ScrollArea class="h-[calc(100vh-64px)]">
 					<div class="flex flex-col gap-6">
 						<h3 class="font-medium text-lg flex gap-2 items-center" @click="closeProductModal">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -412,5 +412,30 @@ onUnmounted(() => {
 <style scoped>
 .router-link-active {
 	color: hsl(var(--primary));
+}
+
+.menu-catalog {
+	background: #fff;
+	box-shadow: 0 10px 16px #0000001a;
+	cursor: auto;
+	display: flex;
+	left: 0;
+	max-height: calc(100vh - 100px);
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 120%;
+	transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	visibility: hidden;
+	width: 100%;
+	z-index: 1000;
+}
+.menu-catalog__container {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 300px);
+    padding-bottom: 16px;
+    position: relative;
+    width: 100%;
 }
 </style>
