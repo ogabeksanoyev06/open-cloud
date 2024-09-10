@@ -210,8 +210,8 @@
 			ref="html2Pdf"
 		>
 			<template #pdf-content>
-				<section class="bg-[#F5F5F7] py-6">
-					<div class="max-w-[500px] w-full mx-auto flex flex-col gap-6">
+				<section class="bg-[#F5F5F7] py-6 relative flex flex-col min-h-[1100px]">
+					<div class="max-w-[500px] w-full mx-auto flex flex-col gap-6 flex-1">
 						<div class="mx-auto">
 							<img src="/assets/images/logo.png" alt="" class="w-[112px]" />
 						</div>
@@ -248,7 +248,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="bg-black mt-20 py-10">
+					<div class="bg-black mt-20 py-10 ">
 						<div class="container max-w-[500px] p-0 mb-6">
 							<div class="mx-auto">
 								<img src="/assets/images/logo-2.png" alt="" class="w-[112px]" />

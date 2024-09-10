@@ -6,20 +6,25 @@
 				<div class="border-x">
 					<div class="grid lg:grid-cols-[340px_minmax(0,1fr)] items-start pt-6">
 						<ScrollArea class="lg:h-[calc(100vh-100px)]">
+							<h3 class="pl-6 text-base font-bold">{{ data?.documents?.title }}</h3>
 							<Accordion v-model="activeItem" type="single" class="w-full flex flex-col gap-6 p-6 border-r-[1px]" collapsible>
 								<AccordionItem class="border-b-0" v-for="item in data?.documents?.subcategories" :key="item.id" :value="item.slug">
 									<AccordionTrigger
-										class="text-base text-left font-medium p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
+										class="text-base text-left font-medium p-0 before:-translate-y-1/2 before:top-1/2 items-start hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
 										:class="{ 'before:w-1': item.slug === activeItem }"
+										:hasSubcategories="item.subcategories?.length > 0 ? true : false"
 									>
-										{{ item.title }}
+										<NuxtLink :to="localePath(`/documentation/${route.params.category}/${item.slug}`)">
+											{{ item.title }}
+										</NuxtLink>
 									</AccordionTrigger>
-									<AccordionContent class="mt-4 p-0">
-										<Accordion v-model="activeItemSub" type="single" collapsible>
+									<AccordionContent class="mt-4 p-0" v-if="item?.subcategories?.length > 0">
+										<Accordion v-model="activeItemSubSub" type="single" collapsible>
 											<AccordionItem class="border-b-0" v-for="subcategory in item.subcategories" :key="subcategory.id" :value="subcategory.slug">
 												<AccordionTrigger
-													class="text-base text-left font-medium p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
-													:class="{ 'before:w-1': item.slug === activeItem }"
+													class="text-base !pl-2 text-left font-normal p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
+													:class="{ 'before:w-1': subcategory.slug === activeItemSubSub }"
+													:hasSubcategories="subcategory?.subcategories?.length > 0 ? true : false"
 												>
 													<NuxtLink :to="localePath(`/documentation/${route.params.category}/${route.params.subcategory}/${subcategory.slug}`)">
 														{{ subcategory.title }}
@@ -28,10 +33,10 @@
 												<AccordionContent class="mt-4 p-0">
 													<nav class="flex flex-col gap-4">
 														<NuxtLink
-															v-for="subSubcategory in subcategory.subcategories"
+															v-for="subSubcategory in subcategory?.subcategories"
 															:key="subSubcategory.id"
 															:to="localePath(`/documentation/${route.params.category}/${route.params.subcategory}/${subSubcategory.slug}`)"
-															class="text-grey text-base"
+															class="text-grey pl-2 text-base"
 														>
 															{{ subSubcategory.title }}
 														</NuxtLink>
@@ -71,12 +76,20 @@ const localePath = useLocalePath();
 const { locale } = useI18n();
 const route = useRoute();
 const activeItem = ref(null);
-const activeItemSub = ref(null);
+const activeItemSubSub = ref(null); 
+
 
 watch(
 	() => route.params.subcategory,
 	(newVal) => {
 		activeItem.value = newVal;
+	}
+);
+
+watch(
+	() => route.params.subcategory, 
+	(newVal) => {
+		activeItemSubSub.value = newVal;
 	}
 );
 
