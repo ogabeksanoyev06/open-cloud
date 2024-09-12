@@ -17,32 +17,59 @@
 				</Breadcrumb>
 				<h1 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-medium text-center">{{ translations['header.link4'] }}</h1>
 			</section>
-
 			<section class="border-x sm:pl-10 pt-10">
 				<div class="relative lg:grid lg:grid-cols-[minmax(0,1fr)_240px] md:gap-6 xl:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
-					<div class="flex flex-col gap-6 sm:gap-10">
-						<div class="relative flex flex-col gap-6 bg-white p-6 sm:p-10 rounded-2xl sm:rounded-[40px]" v-for="item in documents.results" :key="item.id" :id="`documents-${item.slug}`">
-							<h3 class="text-xl sm:text-2xl font-medium">
-								{{ item.title }}
-							</h3>
+					<div>
+						<div class="mb-6 hidden sm:block">
+							<div class="relative w-full">
+								<Input id="search" type="text" placeholder="Поиск продукты" class="pl-6 pr-12 py-4" v-model="search" @input="updateSearchQuery" />
+								<span class="absolute end-0 inset-y-0 flex items-center justify-center pr-6">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<g clip-path="url(#clip0_1692_7078)">
+											<path
+												d="M18.3334 18.3336L16.6668 16.667M1.66675 9.58366C1.66675 5.2114 5.21116 1.66699 9.58342 1.66699C13.9557 1.66699 17.5001 5.2114 17.5001 9.58366C17.5001 13.9559 13.9557 17.5003 9.58342 17.5003C5.21116 17.5003 1.66675 13.9559 1.66675 9.58366Z"
+												stroke="#272727"
+												stroke-width="1.5"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											/>
+										</g>
+										<defs>
+											<clipPath id="clip0_1692_7078">
+												<rect width="20" height="20" fill="white" />
+											</clipPath>
+										</defs>
+									</svg>
+								</span>
+							</div>
+						</div>
+						<div class="flex flex-col gap-6 sm:gap-10">
+							<div class="" v-for="item in documents.results" :key="item.id" :id="`documents-${item.slug}`">
+								<div class="relative flex flex-col gap-6 bg-white p-6 sm:p-10 rounded-2xl sm:rounded-[40px]" v-if="item.subcategories?.length > 0">
+									<h3 class="text-xl sm:text-2xl font-medium">
+										{{ item.title }}
+									</h3>
 
-							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-								<NuxtLink
-									class="flex flex-col gap-4 p-4 sm:p-6 bg-grey-0 rounded-2xl border border-transparent hover:bg-white hover:border-primary cursor-pointer transition-300"
-									v-for="subCategory in item.subcategories"
-									:to="localePath(`/documentation/${item.slug}/${subCategory.slug}`)"
-									:key="subCategory.id"
-								>
-									<h2 class="text-base sm:text-xl font-medium">
-										{{ subCategory.title }}
-									</h2>
-									<p class="text-base">
-										{{ subCategory.subtitle }}
-									</p>
-								</NuxtLink>
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+										<NuxtLink
+											class="flex flex-col gap-4 p-4 sm:p-6 bg-grey-0 rounded-2xl border border-transparent hover:bg-white hover:border-primary cursor-pointer transition-300"
+											v-for="subCategory in item.subcategories"
+											:to="localePath(`/documentation/${item.slug}/${subCategory.slug}`)"
+											:key="subCategory.id"
+										>
+											<h2 class="text-base sm:text-xl font-medium">
+												{{ subCategory.title }}
+											</h2>
+											<p class="text-base">
+												{{ subCategory.subtitle }}
+											</p>
+										</NuxtLink>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+
 					<div class="md:block hidden sticky top-28 left-0 h-fit">
 						<nav class="border-l border-grey-1 flex flex-col gap-1">
 							<NuxtLink
@@ -65,16 +92,46 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useDocumentsStore } from '~/stores/documents.js';
 import { useTranslationsStore } from '~/stores/translations.js';
+import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
+
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 
 const route = useRoute();
+const router = useRouter();
 const localePath = useLocalePath();
 
-const { data: documents } = await useAsyncData('documents', async () => {
-	return await useDocumentsStore().getDocuments();
-});
+const search = ref(route.query.search || ''); // Agar search query bo'lmasa, bo'sh string qabul qilinadi
+
+// Search queryni yangilash funksiyasi
+const updateSearchQuery = () => {
+	router.push({
+		query: { ...route.query, search: search.value }
+	});
+};
+
+// useAsyncData bilan search qiymatini o'qish
+const { data: documents } = await useAsyncData(
+	'documents',
+	async () => {
+		return await useDocumentsStore().getDocuments({
+			search: search.value
+		});
+	},
+	{
+		watch: [() => search.value] // search.value ni kuzatib boradi
+	}
+);
+
+// `search` query o'zgarganda yangilab turish
+watch(
+	() => route.query.search,
+	(newSearch) => {
+		search.value = newSearch || '';
+	}
+);
 </script>

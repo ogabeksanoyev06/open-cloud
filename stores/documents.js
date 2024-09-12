@@ -3,9 +3,9 @@ import { useAxios } from '@/api/index';
 
 export const useDocumentsStore = defineStore('documents', () => {
 	const documents = ref([]);
-	const getDocuments = async () => {
+	const getDocuments = async (params) => {
 		try {
-			let res = await useAxios().getRequest('/documentation_categories');
+			let res = await useAxios().getRequest('/documentation_categories', params);
 			documents.value = res.data;
 			return res.data;
 		} catch (error) {
