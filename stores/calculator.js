@@ -12,10 +12,10 @@ export const useCalculatorStore = defineStore(
 		const tab1Configurations = ref([
 			{
 				id: 1,
-				vcpu: 1,
-				ram: 1,
-				ssdNodes: 1,
-				hddNodes: 1,
+				vcpu: 0,
+				ram: 0,
+				ssdNodes: 0,
+				hddNodes: 0,
 				publicIP: false,
 				tarifData: tarifData.value,
 				price: {
@@ -31,10 +31,10 @@ export const useCalculatorStore = defineStore(
 		const tab2Configurations = ref([
 			{
 				id: 1,
-				vcpu: 1,
-				ram: 1,
-				ssdNodes: 1,
-				hddNodes: 1,
+				vcpu: 0,
+				ram: 0,
+				ssdNodes: 0,
+				hddNodes: 0,
 				publicIP: false,
 				price: {
 					vcpu_price: 1,
@@ -115,10 +115,10 @@ export const useCalculatorStore = defineStore(
 			if (tab === 1) {
 				configurations.push({
 					id: newId,
-					vcpu: 1,
-					ram: 1,
-					ssdNodes: 1,
-					hddNodes: 1,
+					vcpu: 0,
+					ram: 0,
+					ssdNodes: 0,
+					hddNodes: 0,
 					publicIP: false,
 					tarifData: updatedTariff,
 					price: {
@@ -132,10 +132,10 @@ export const useCalculatorStore = defineStore(
 			} else {
 				configurations.push({
 					id: newId,
-					vcpu: 1,
-					ram: 1,
-					ssdNodes: 1,
-					hddNodes: 1,
+					vcpu: 0,
+					ram: 0,
+					ssdNodes: 0,
+					hddNodes: 0,
 					publicIP: false,
 					price: {
 						vcpu_price: price.vcpu_price || 0,
@@ -155,13 +155,13 @@ export const useCalculatorStore = defineStore(
 			const config = configurations.find((conf) => conf.id === id);
 			if (config) {
 				if (type === 'vcpu') {
-					config.vcpu += 1;
+					config.vcpu += 10;
 				} else if (type === 'ram') {
-					config.ram += 1; // RAMni 16GB oshirish
+					config.ram += 10; // RAMni 16GB oshirish
 				} else if (type === 'ssd') {
-					config.ssdNodes += 1; // SSDni 16GB oshirish
+					config.ssdNodes += 10; // SSDni 16GB oshirish
 				} else if (type === 'hdd') {
-					config.hddNodes += 1; // HDDni 16GB oshirish
+					config.hddNodes += 10; // HDDni 16GB oshirish
 				}
 			}
 		};
@@ -170,17 +170,17 @@ export const useCalculatorStore = defineStore(
 			const configurations = tab === 1 ? tab1Configurations.value : tab2Configurations.value;
 			const config = configurations.find((conf) => conf.id === id);
 			if (config) {
-				if (type === 'vcpu' && config.vcpu > 1) {
-					config.vcpu -= 1;
-				} else if (type === 'ram' && config.ram > 1) {
+				if (type === 'vcpu' && config.vcpu >= 10) {
+					config.vcpu -= 10;
+				} else if (type === 'ram' && config.ram >= 10) {
 					// RAM 16GBdan kam bo'lmasligi kerak
-					config.ram -= 1;
-				} else if (type === 'ssd' && config.ssdNodes > 1) {
+					config.ram -= 10;
+				} else if (type === 'ssd' && config.ssdNodes >= 10) {
 					// SSD 16GBdan kam bo'lmasligi kerak
-					config.ssdNodes -= 1;
-				} else if (type === 'hdd' && config.hddNodes > 1) {
+					config.ssdNodes -= 10;
+				} else if (type === 'hdd' && config.hddNodes >= 10) {
 					// HDD 16GBdan kam bo'lmasligi kerak
-					config.hddNodes -= 1;
+					config.hddNodes -= 10;
 				}
 			}
 		};
@@ -234,12 +234,7 @@ export const useCalculatorStore = defineStore(
 			const prices = specification_prices.value;
 
 			return tab1Configurations.value.reduce((total, config) => {
-				const basePrice =
-					config.vcpu * (prices.vcpu_price || 0) +
-					config.ram * (prices.ram_price || 0) +
-					config.ssdNodes * (prices.ssd_price || 0) +
-					config.hddNodes * (prices.hdd_price || 0) +
-					(config.publicIP ? prices.public_ip_price || 0 : 0);
+				const basePrice = config.vcpu * (prices.vcpu_price || 0) + config.ram * (prices.ram_price || 0) + config.ssdNodes * (prices.ssd_price || 0) + config.hddNodes * (prices.hdd_price || 0) + (config.publicIP ? prices.public_ip_price || 0 : 0);
 
 				const tariffPrice = config.tarifData.reduce((tariffTotal, tarif) => {
 					const activeTarifPrice = tarif.tarifs.reduce((tariffSum, tarifDetail) => {
@@ -255,12 +250,7 @@ export const useCalculatorStore = defineStore(
 		const calculateTotalPriceTab2 = computed(() => {
 			const prices = specification_prices.value;
 			return tab2Configurations.value.reduce((total, config) => {
-				const configPrice =
-					config.vcpu * (prices.vcpu_price || 0) +
-					config.ram * (prices.ram_price || 0) +
-					config.ssdNodes * (prices.ssd_price || 0) +
-					config.hddNodes * (prices.hdd_price || 0) +
-					(config.publicIP ? prices.public_ip_price || 0 : 0);
+				const configPrice = config.vcpu * (prices.vcpu_price || 0) + config.ram * (prices.ram_price || 0) + config.ssdNodes * (prices.ssd_price || 0) + config.hddNodes * (prices.hdd_price || 0) + (config.publicIP ? prices.public_ip_price || 0 : 0);
 				return total + configPrice;
 			}, 0);
 		});

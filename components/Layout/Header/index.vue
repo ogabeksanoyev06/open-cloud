@@ -41,7 +41,7 @@
 							</NuxtLink>
 							<NuxtLink :to="localePath('/vacancy')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/vacancy') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									Вакансия
+									{{ translations['header.link7'] }}
 									<span v-if="route.path === localePath('/vacancy')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -51,7 +51,7 @@
 							</NuxtLink>
 							<NuxtLink :to="localePath('/news')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/news') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									Новости
+									{{ translations['header.link8'] }}
 									<span v-if="route.path === localePath('/news')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -61,7 +61,7 @@
 							</NuxtLink>
 							<NuxtLink :to="localePath('/cases')" class="transition-300 text-grey" :class="{ '!text-black': route.path === localePath('/cases') }">
 								<DropdownMenuItem class="flex justify-between items-center cursor-pointer p-0 hover:!bg-transparent">
-									Наши кейсы
+									{{ translations['header.link9'] }}
 
 									<span v-if="route.path === localePath('/cases')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -151,27 +151,27 @@
 		<aside class="menu-catalog" :class="{ ' !visible !opacity-100 !top-full': isMenuOpen }">
 			<div class="container menu-catalog__container">
 				<div class="grid lg:grid-cols-[400px_minmax(0,1fr)] gap-6 items-start">
-				<div class="overflow-y-auto h-full">
-					<ul class="flex flex-col gap-6 p-6 overflow-hidden">
-						<li
-							v-for="category in categories.results"
-							@click="linkTrigger(category.slug)"
-							:key="category.id"
-							:class="category.id === activeId ? 'before:w-1 text-black' : 'before:w-0 text-grey'"
-							class="cursor-pointer pl-6 flex items-center justify-between duration-200 gap-x-6 relative before:duration-200 before:absolute before:left-0 before:top-0 before:h-full before:bg-green before:rounded-e-full"
-						>
-							<span>{{ category.title }}</span>
-							<transition name="modal-icon">
-								<span v-if="category.id === activeId">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-										<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-									</svg>
-								</span>
-							</transition>
-						</li>
-					</ul>
+					<div class="overflow-y-auto h-full">
+						<ul class="flex flex-col gap-6 p-6 overflow-hidden">
+							<li
+								v-for="category in categories.results"
+								@click="linkTrigger(category.slug)"
+								:key="category.id"
+								:class="category.id === activeId ? 'before:w-1 text-black' : 'before:w-0 text-grey'"
+								class="cursor-pointer pl-6 flex items-center justify-between duration-200 gap-x-6 relative before:duration-200 before:absolute before:left-0 before:top-0 before:h-full before:bg-green before:rounded-e-full"
+							>
+								<span>{{ category.title }}</span>
+								<transition name="modal-icon">
+									<span v-if="category.id === activeId">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+								</transition>
+							</li>
+						</ul>
 					</div>
-					<div class=" overflow-y-auto h-full">
+					<div class="overflow-y-auto h-full">
 						<div class="flex flex-col gap-6 bg-white p-10 rounded-2xl overflow-hidden">
 							<h3 class="text-2xl font-medium">{{ categoriesInner.title }}</h3>
 							<nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -183,7 +183,7 @@
 								</NuxtLink>
 							</nav>
 						</div>
-				</div>
+					</div>
 				</div>
 			</div>
 		</aside>
@@ -208,7 +208,7 @@
 							<NuxtLink :to="localePath('/contacts')">{{ translations['header.link6'] }}</NuxtLink>
 						</nav>
 						<div class="flex flex-col gap-6 mt-auto">
-							<Accordion type="single" class="w-full" collapsible>
+							<Accordion type="single" class="w-full" collapsible v-model="accordionValue">
 								<AccordionItem value="langs">
 									<AccordionTrigger class="px-2 text-base">{{ selectedLang.label }}</AccordionTrigger>
 									<AccordionContent class="">
@@ -301,6 +301,8 @@ import { useRoute } from 'vue-router';
 import { useContactStore } from '~/stores/contact.js';
 import { useCategoriesStore } from '~/stores/categories.js';
 import { useTranslationsStore } from '~/stores/translations.js';
+
+const accordionValue = ref('');
 
 const langs = [
 	{
@@ -431,11 +433,11 @@ onUnmounted(() => {
 	z-index: 1000;
 }
 .menu-catalog__container {
-    display: flex;
-    flex: 1;
-    min-height: calc(100vh - 300px);
-    padding-bottom: 16px;
-    position: relative;
-    width: 100%;
+	display: flex;
+	flex: 1;
+	min-height: calc(100vh - 300px);
+	padding-bottom: 16px;
+	position: relative;
+	width: 100%;
 }
 </style>

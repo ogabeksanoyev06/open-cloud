@@ -34,7 +34,16 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
+								<div class="w-16 h-16 flex items-center justify-center bg-black rounded-xl">
+									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+										<path
+											d="M11.9998 5.63068C6.65587 6.84329 2.6665 11.6224 2.6665 17.3333C2.6665 23.9607 8.03909 29.3333 14.6665 29.3333C20.3774 29.3333 25.1565 25.344 26.3691 20M18.6495 2.92992C23.8876 3.98606 28.0138 8.11224 29.0699 13.3503C29.361 14.7941 28.1393 16 26.6665 16H18.6665C17.1937 16 15.9998 14.8061 15.9998 13.3333V5.33332C15.9998 3.86056 17.2058 2.63883 18.6495 2.92992Z"
+											stroke="#B5E275"
+											stroke-width="2"
+											stroke-linecap="round"
+										/>
+									</svg>
+								</div>
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
@@ -51,8 +60,16 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
-
+								<div class="w-16 h-16 flex items-center justify-center bg-black rounded-xl">
+									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+										<path
+											d="M11.9998 5.63068C6.65587 6.84329 2.6665 11.6224 2.6665 17.3333C2.6665 23.9607 8.03909 29.3333 14.6665 29.3333C20.3774 29.3333 25.1565 25.344 26.3691 20M18.6495 2.92992C23.8876 3.98606 28.0138 8.11224 29.0699 13.3503C29.361 14.7941 28.1393 16 26.6665 16H18.6665C17.1937 16 15.9998 14.8061 15.9998 13.3333V5.33332C15.9998 3.86056 17.2058 2.63883 18.6495 2.92992Z"
+											stroke="#B5E275"
+											stroke-width="2"
+											stroke-linecap="round"
+										/>
+									</svg>
+								</div>
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
@@ -69,8 +86,16 @@
 							</div>
 
 							<div class="flex flex-col gap-6 sm:border sm:border-b-0 max-sm:bg-grey-0 max-sm:rounded-2xl border-grey-1 p-4 sm:p-6 rounded-t-2xl">
-								<nuxt-img src="/images/men.png" alt="" class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl" />
-
+								<div class="w-16 h-16 flex items-center justify-center bg-black rounded-xl">
+									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+										<path
+											d="M11.9998 5.63068C6.65587 6.84329 2.6665 11.6224 2.6665 17.3333C2.6665 23.9607 8.03909 29.3333 14.6665 29.3333C20.3774 29.3333 25.1565 25.344 26.3691 20M18.6495 2.92992C23.8876 3.98606 28.0138 8.11224 29.0699 13.3503C29.361 14.7941 28.1393 16 26.6665 16H18.6665C17.1937 16 15.9998 14.8061 15.9998 13.3333V5.33332C15.9998 3.86056 17.2058 2.63883 18.6495 2.92992Z"
+											stroke="#B5E275"
+											stroke-width="2"
+											stroke-linecap="round"
+										/>
+									</svg>
+								</div>
 								<div class="flex flex-col gap-4">
 									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
 									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
@@ -105,9 +130,9 @@
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 							</div>
 
-							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary ">
+							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">
 								{{ translations['home.help-card-btn'] }}
-								<svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" viewBox="0 0 20 20" fill="none">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<path d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" class="transition-300 group-hover:!stroke-primary" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
 							</Button>
@@ -118,7 +143,7 @@
 								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
 							</div>
 
-							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary ">
+							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">
 								{{ translations['home.help-card-btn'] }}
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<path class="transition-300 group-hover:!stroke-primary" d="M11.6667 13.3333L15 9.99992M15 9.99992L11.6667 6.66659M15 9.99992L5 9.99992" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -169,8 +194,7 @@
 			</div>
 		</section>
 
-		<section>
-		</section>
+		<section></section>
 	</div>
 </template>
 

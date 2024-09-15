@@ -47,6 +47,7 @@ const sendConsultationForm = async () => {
 			phone: formatPhoneNumber(form.phone),
 			company: form.company,
 			email: form.email,
+			message: form.message,
 			tarif: props.tariffId
 		});
 		isOpen.value = false;
@@ -97,6 +98,13 @@ const sendConsultationForm = async () => {
 								<VField name="company">
 									<Label for="company"> Название компании </Label>
 									<Input v-model="form.company" id="company" type="text" placeholder="Компания" />
+								</VField>
+							</div>
+
+							<div class="grid gap-2">
+								<VField name="message">
+									<Label for="message"> Your message </Label>
+									<Textarea v-model="form.message" id="message" type="text" placeholder="Message" />
 								</VField>
 							</div>
 

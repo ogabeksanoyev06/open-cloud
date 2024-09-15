@@ -150,7 +150,7 @@
 				</Button>
 			</div>
 		</div>
-		<div class="lg:sticky top-28 left-0 lg:min-h-[600px] rounded-2xl">
+		<div class="lg:min-h-[600px] rounded-2xl overflow-hidden">
 			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 h-full">
 				<div class="flex items-center justify-between p-4 sm:p-6 !pb-0">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
@@ -208,7 +208,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- {{ transformedConfigurations }} -->
 
 		<vue3-html2pdf
 			:show-layout="false"

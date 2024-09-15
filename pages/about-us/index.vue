@@ -70,18 +70,12 @@
 								disableOnInteraction: false
 							}"
 						>
-							<button
-								@click="categorySwiper?.slideNext()"
-								class="absolute top-1/2 -translate-y-1/2 left-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
-							>
+							<button @click="categorySwiper?.slideNext()" class="absolute top-1/2 -translate-y-1/2 left-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
 									<path d="M14 7.5L10 12.5L14 17.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>
 							</button>
-							<button
-								@click="categorySwiper?.slidePrev()"
-								class="absolute top-1/2 -translate-y-1/2 right-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15"
-							>
+							<button @click="categorySwiper?.slidePrev()" class="absolute top-1/2 -translate-y-1/2 right-0 hidden sm:flex items-center justify-center w-12 h-12 border border-white rounded-full cursor-pointer z-[9999] bg-white/15">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
 									<path d="M10 17.5L14 12.5L10 7.5" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 								</svg>

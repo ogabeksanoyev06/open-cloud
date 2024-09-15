@@ -1,7 +1,7 @@
 <template>
 	<footer class="bg-black bg-[url(~/assets/images/custom_footer_bg.png)] bg-no-repeat bg-cover bg-top text-white">
 		<div class="container">
-			<div class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 py-10 sm:py-20 gap-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 sm:py-20 gap-10">
 				<NuxtLink :to="localePath('/')" class="max-w-[180px]">
 					<img src="/assets/images/logo-2.png" alt="" class="w-full" />
 				</NuxtLink>
@@ -10,7 +10,7 @@
 						<h4 class="font-medium text-base">{{ translations['footer.address-title'] }}:</h4>
 						<p class="text-sm sm:text-base">{{ translations['footer.address-desc'] }}</p>
 					</div>
-					<a class="inline-flex gap-2 bg-black-1 px-6 py-2 rounded" href="" target="_blank">
+					<a class="inline-flex gap-2 bg-black-1 px-6 py-2 rounded" :href="translations['footer.mapLink']" target="_blank">
 						<p>{{ translations['footer.map'] }}</p>
 						<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g id="fi_11515688" clip-path="url(#clip0_229_3343)">
@@ -73,7 +73,7 @@
 					</div>
 				</div>
 				<div class="flex flex-col gap-3 sm:max-w-[250px] ml-auto w-full">
-					<a href="#" class="flex gap-2 border border-grey rounded-[8px] bg-black-1 py-2 px-4">
+					<a v-if="contacts?.nbm?.split('+')[1]" target="_blank" class="flex gap-2 items-start border border-grey rounded-[8px] bg-black-1 py-2 px-4" :href="`tel:+${contacts.nbm.split('+')[1].trim()}`">
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
 							<path
 								d="M18 16V14.3541C18 13.5363 17.5021 12.8008 16.7428 12.4971L14.7086 11.6835C13.7429 11.2971 12.6422 11.7156 12.177 12.646L12 13C12 13 9.5 12.5 7.5 10.5C5.5 8.5 5 6 5 6L5.35402 5.82299C6.28438 5.35781 6.70285 4.25714 6.31654 3.29136L5.50289 1.25722C5.19916 0.497903 4.46374 0 3.64593 0L2 0C0.895431 0 0 0.89543 0 2C0 10.8366 7.16344 18 16 18C17.1046 18 18 17.1046 18 16Z"
@@ -82,10 +82,10 @@
 						</svg>
 						<div class="flex flex-col">
 							<span>{{ translations['footer.phone1'] }}</span>
-							<span>+998 90 955 5995</span>
+							<span> {{ '+' + contacts.nbm.split('+')[1].trim() }} </span>
 						</div>
 					</a>
-					<a href="#" class="flex gap-2 border border-grey rounded-[8px] bg-black-1 py-2 px-4">
+					<a v-if="contacts?.nbm?.split('+')[2]" target="_blank" class="flex gap-2 items-start border border-grey rounded-[8px] bg-black-1 py-2 px-4" :href="`tel:+${contacts.nbm.split('+')[2].trim()}`">
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
 							<path
 								d="M18 16V14.3541C18 13.5363 17.5021 12.8008 16.7428 12.4971L14.7086 11.6835C13.7429 11.2971 12.6422 11.7156 12.177 12.646L12 13C12 13 9.5 12.5 7.5 10.5C5.5 8.5 5 6 5 6L5.35402 5.82299C6.28438 5.35781 6.70285 4.25714 6.31654 3.29136L5.50289 1.25722C5.19916 0.497903 4.46374 0 3.64593 0L2 0C0.895431 0 0 0.89543 0 2C0 10.8366 7.16344 18 16 18C17.1046 18 18 17.1046 18 16Z"
@@ -94,19 +94,21 @@
 						</svg>
 						<div class="flex flex-col">
 							<span>{{ translations['footer.phone2'] }}</span>
-							<span>+998 90 955 5995</span>
+							<span> {{ '+' + contacts.nbm.split('+')[2].trim() }} </span>
 						</div>
 					</a>
-					<a href="#" class="flex gap-2 border border-grey rounded-[8px] bg-black-1 py-2 px-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+					<a :href="`mailto:${contacts.email}`" target="_blank" class="flex gap-2 items-start border border-grey rounded-[8px] bg-black-1 py-2 px-4">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none">
 							<path
-								d="M18 16V14.3541C18 13.5363 17.5021 12.8008 16.7428 12.4971L14.7086 11.6835C13.7429 11.2971 12.6422 11.7156 12.177 12.646L12 13C12 13 9.5 12.5 7.5 10.5C5.5 8.5 5 6 5 6L5.35402 5.82299C6.28438 5.35781 6.70285 4.25714 6.31654 3.29136L5.50289 1.25722C5.19916 0.497903 4.46374 0 3.64593 0L2 0C0.895431 0 0 0.89543 0 2C0 10.8366 7.16344 18 16 18C17.1046 18 18 17.1046 18 16Z"
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M4 0C1.79086 0 0 1.79086 0 4L0 14C0 16.2091 1.79086 18 4 18H16C18.2091 18 20 16.2091 20 14V4C20 1.79086 18.2091 0 16 0L4 0ZM4.41603 4.37592C4.07138 4.14616 3.60573 4.23929 3.37597 4.58393C3.1462 4.92858 3.23933 5.39423 3.58398 5.624L7.36518 8.1448C8.9607 9.20848 11.0393 9.20848 12.6348 8.14479L16.416 5.624C16.7607 5.39423 16.8538 4.92858 16.624 4.58393C16.3943 4.23929 15.9286 4.14616 15.584 4.37592L11.8028 6.89672C10.7111 7.6245 9.2889 7.6245 8.19723 6.89672L4.41603 4.37592Z"
 								fill="#B5E275"
 							/>
 						</svg>
 						<div class="flex flex-col">
 							<span>{{ translations['footer.email'] }}</span>
-							<span>+998 90 955 5995</span>
+							<span> {{ contacts.email }} </span>
 						</div>
 					</a>
 				</div>
@@ -138,8 +140,13 @@
 
 <script setup>
 import { useTranslationsStore } from '~/stores/translations.js';
+import { useContactStore } from '~/stores/contact.js';
+
 const translationsStore = useTranslationsStore();
+const contactStore = useContactStore();
+
 const { translations } = storeToRefs(translationsStore);
+const { contacts } = storeToRefs(contactStore);
 
 const langs = [
 	{

@@ -136,7 +136,7 @@
 				</Button>
 			</div>
 		</div>
-		<div class="lg:sticky top-28 left-0 lg:min-h-[600px] rounded-2xl">
+		<div class="lg:min-h-[600px] rounded-2xl overflow-hidden">
 			<div class="bg-grey-0 rounded-2xl flex flex-col gap-6 h-full">
 				<div class="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6">
 					<h3 class="flex-1 text-lg sm:text-2xl font-medium">Итоговый расчет</h3>
