@@ -24,15 +24,15 @@
 		<div class="container max-w-[1760px]">
 			<div class="bg-white rounded-2xl py-10 sm:py-20">
 				<div class="container max-w-[1200px] w-full flex flex-col gap-10">
-					<nuxt-img src="/images/news.png" class="w-full" alt="" />
-					<div class="flex flex-col gap-6">
+					<div v-html="staticInfo.partners_info" class="w-full img"></div>
+					<!-- <div class="flex flex-col gap-6">
 						<h3 class="text-xl font-medium">
 							{{ translations['partners.desc1'] }}
 						</h3>
 						<p>
 							{{ translations['partners.desc2'] }}
 						</p>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -43,13 +43,23 @@
 </template>
 
 <script setup>
-// import { usePartnersStore } from '~/stores/partners.js';
-
-// const { data: partners } = await useAsyncData('partners', async () => {
-// 	return await usePartnersStore().getPartners();
-// });
-
+import { useStatic } from '~/stores/static.js';
 import { useTranslationsStore } from '~/stores/translations.js';
+
+
+
+
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
+
+const { data: staticInfo } = await useAsyncData('static', async () => {
+	return await useStatic().getStaticInfos();
+});
 </script>
+
+<style>
+.img p img{
+max-width: 1200px;
+width: 100%;
+}
+</style>
