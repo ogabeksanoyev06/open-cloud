@@ -5,13 +5,13 @@
 				<BreadcrumbList>
 					<BreadcrumbItem>
 						<BreadcrumbLink as-child>
-							<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+							<NuxtLink :to="localePath('/')"> {{ translations['mian.page-url-home'] }} </NuxtLink>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
 						<BreadcrumbLink as-child>
-							<NuxtLink :to="localePath('/documentation')"> Документация </NuxtLink>
+							<NuxtLink :to="localePath('/documentation')"> {{ translations['header.link4'] }} </NuxtLink>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />

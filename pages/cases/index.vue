@@ -6,7 +6,7 @@
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>
-								<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+								<NuxtLink :to="localePath('/')"> {{ translations['mian.page-url-home'] }} </NuxtLink>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />

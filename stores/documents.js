@@ -40,10 +40,20 @@ export const useDocumentsStore = defineStore('documents', () => {
 		}
 	}
 
+	const searchProduct = async (params) => {
+		try {
+			let res = await useAxios().getRequest('/documentation/search', params);
+			return res.data;
+		} catch (error) {
+			console.log('error', error);
+		}
+	};
+
 	return {
 		getDocuments,
 		getDocumentsInner,
 		getDocumentationCategories,
+		searchProduct,
 		getDocumentationContent
 	};
 });

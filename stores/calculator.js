@@ -2,12 +2,15 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { useAxios } from '@/api/index';
 import { useCustomToast } from '~/composables/useCustomToast.js';
+import { useTranslationsStore } from '~/stores/translations.js';
 
 export const useCalculatorStore = defineStore(
 	'calculator',
 	() => {
 		const { showToast } = useCustomToast();
 		const tarifData = ref([]);
+		const translationsStore = useTranslationsStore();
+		const { translations } = storeToRefs(translationsStore);
 
 		const tab1Configurations = ref([
 			{
@@ -147,7 +150,7 @@ export const useCalculatorStore = defineStore(
 				});
 			}
 
-			showToast("Konfiguratsiya qo'shildi", 'success');
+			showToast(translations.value['calculctor.conf-add'], 'success');
 		};
 
 		const incrementNodes = (tab, id, type) => {
@@ -191,7 +194,7 @@ export const useCalculatorStore = defineStore(
 			if (index !== -1) {
 				// Konfiguratsiyani o'chirib tashlash
 				configurations.splice(index, 1);
-				showToast("Konfiguratsiya o'chirildi", 'error');
+				showToast(translations.value['calculctor.conf-del'], 'error');
 
 				// TarifData ma'lumotlarini tozalash
 				if (tarifData.value.results) {

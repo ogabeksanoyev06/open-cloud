@@ -6,7 +6,7 @@
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>
-								<NuxtLink class="!text-[#C2C2C3]" :to="localePath('/')"> Главный </NuxtLink>
+								<NuxtLink class="!text-[#C2C2C3]" :to="localePath('/')"> {{ translations['mian.page-url-home'] }} </NuxtLink>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />
@@ -146,9 +146,25 @@
 			<div class="border-x pb-10 sm:pb-20">
 				<h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium mb-10">{{ translations['about.how-we-work'] }}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1" v-for="item in 5" :key="item">
-						<h4 class="font-medium text-xl sm:text-2xl">Оптимизируйте расходы на IT-инфраструктуру</h4>
-						<p class="text-grey">Различные модели оплаты — pay‑as‑you‑go или pay‑as‑you‑allocate. Платите только за те ресурсы, которыми пользуетесь</p>
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1">
+						<h4 class="font-medium text-xl sm:text-2xl">{{ translations['about.how-work-card-text1'] }}</h4>
+						<p class="text-grey">{{ translations['about.how-work-card-des1'] }}</p>
+					</div>
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1">
+						<h4 class="font-medium text-xl sm:text-2xl">{{ translations['about.how-work-card-text2'] }}</h4>
+						<p class="text-grey">{{ translations['about.how-work-card-des2'] }}</p>
+					</div>
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1">
+						<h4 class="font-medium text-xl sm:text-2xl">{{ translations['about.how-work-card-text3'] }}</h4>
+						<p class="text-grey">{{ translations['about.how-work-card-des3'] }}</p>
+					</div>
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1">
+						<h4 class="font-medium text-xl sm:text-2xl">{{ translations['about.how-work-card-text4'] }}</h4>
+						<p class="text-grey">{{ translations['about.how-work-card-des4'] }}</p>
+					</div>
+					<div class="flex flex-col gap-4 p-4 sm:px-10 sm:py-8 grid-item border-grey-1">
+						<h4 class="font-medium text-xl sm:text-2xl">{{ translations['about.how-work-card-text5'] }}</h4>
+						<p class="text-grey">{{ translations['about.how-work-card-des5'] }}</p>
 					</div>
 				</div>
 			</div>

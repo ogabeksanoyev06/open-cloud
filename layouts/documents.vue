@@ -22,7 +22,7 @@
 										<Accordion v-model="activeItemSubSub" type="single" collapsible>
 											<AccordionItem class="border-b-0" v-for="subcategory in item.subcategories" :key="subcategory.id" :value="subcategory.slug">
 												<AccordionTrigger
-													class="text-base !pl-2 text-left font-normal p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
+													class="text-base !pl-2 text-left font-normal mb-4 p-0 hover:no-underline relative before:absolute before:h-10 before:w-0 before:bg-primary before:-left-6 before:rounded-e-sm before:transition-all before:duration-300 hover:before:w-1"
 													:class="{ 'before:w-1': subcategory.slug === activeItemSubSub }"
 													:hasSubcategories="subcategory?.subcategories?.length > 0 ? true : false"
 												>
@@ -76,8 +76,7 @@ const localePath = useLocalePath();
 const { locale } = useI18n();
 const route = useRoute();
 const activeItem = ref(null);
-const activeItemSubSub = ref(null); 
-
+const activeItemSubSub = ref(null);
 
 watch(
 	() => route.params.subcategory,
@@ -87,7 +86,7 @@ watch(
 );
 
 watch(
-	() => route.params.subcategory, 
+	() => route.params.subcategory,
 	(newVal) => {
 		activeItemSubSub.value = newVal;
 	}

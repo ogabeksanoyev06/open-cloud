@@ -27,8 +27,8 @@
 					<div class="absolute inset-x-0 bottom-0 w-full sm:h-[90px]" style="background: linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, #f5f5f7 100%)"></div>
 				</div>
 				<div class="flex flex-wrap items-center justify-between gap-2 p-4 bg-[#1878F3] text-white rounded-[16px]">
-					<h4 class="text-base sm:text-xl font-medium">Отправить резюме по телеграм</h4>
-					<a href="#" target="_blank" class="flex items-center gap-2">
+					<h4 class="text-base sm:text-xl font-medium">{{translations['home.tg-text']}}</h4>
+					<a :href="translations['home.tg-link']" target="_blank" class="flex items-center gap-2">
 						@opencloud_hr
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 							<path d="M7 7L11 12L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -43,6 +43,11 @@
 
 <script setup>
 import { useVacancyStore } from '~/stores/vacancies.js';
+import { useTranslationsStore } from '~/stores/translations.js';
+
+const translationsStore = useTranslationsStore();
+
+const { translations } = storeToRefs(translationsStore);
 const isOpen = ref(false);
 
 const props = defineProps({

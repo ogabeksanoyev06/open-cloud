@@ -27,8 +27,8 @@
 						<div class="flex flex-col gap-4">
 							<div class="p-4 sm:p-6 bg-grey-0 rounded-2xl flex flex-col justify-between gap-10">
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-1'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-1'] }}</p>
 								</div>
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
@@ -45,16 +45,16 @@
 									</svg>
 								</div>
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-4'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-4'] }}</p>
 								</div>
 							</div>
 						</div>
 						<div class="flex flex-col gap-4">
 							<div class="p-4 sm:p-6 bg-grey-0 rounded-2xl flex flex-col justify-between gap-10">
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-2'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-2'] }}</p>
 								</div>
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
@@ -71,16 +71,16 @@
 									</svg>
 								</div>
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-5'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-5'] }}</p>
 								</div>
 							</div>
 						</div>
 						<div class="flex flex-col gap-4">
 							<div class="p-4 sm:p-6 bg-grey-0 rounded-2xl flex flex-col justify-between gap-10">
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-3'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-3'] }}</p>
 								</div>
 								<img src="/assets/images/graph-1.png" class="max-w-[175px] mx-auto" alt="" />
 							</div>
@@ -97,8 +97,8 @@
 									</svg>
 								</div>
 								<div class="flex flex-col gap-4">
-									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['home.advantages-card-title'] }}</h3>
-									<p class="to-grey text-sm sm:text-base">{{ translations['home.advantages-card-desc'] }}</p>
+									<h3 class="font-medium text-lg sm:text-2xl">{{ translations['advantages.title-6'] }}</h3>
+									<p class="to-grey text-sm sm:text-base">{{ translations['advantages.desc-6'] }}</p>
 								</div>
 							</div>
 						</div>
@@ -122,12 +122,11 @@
 					<h3 class="text-xl sm:text-xl md:text-3xl lg:text-4xl font-semibold sm:text-center sm:font-medium text-center">
 						{{ translations['home.help-title'] }}
 					</h3>
-
 					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
-								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
-								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
+								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['mian.faq-title-1'] }}</h3>
+								<p class="to-grey text-base">{{ translations['mian.faq-desc-1'] }}</p>
 							</div>
 
 							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">
@@ -139,8 +138,8 @@
 						</div>
 						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
-								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
-								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
+								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['mian.faq-title-2'] }}</h3>
+								<p class="to-grey text-base">{{ translations['mian.faq-desc-2'] }}</p>
 							</div>
 
 							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">
@@ -152,8 +151,8 @@
 						</div>
 						<div class="flex flex-col items-start gap-6 grid-item group border-grey-1 sm:gap-10 p-6 sm:py-8 sm:px-10">
 							<div class="flex flex-col gap-4">
-								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['home.help-card-title'] }}</h3>
-								<p class="to-grey text-base">{{ translations['home.help-card-desc'] }}</p>
+								<h3 class="text-xl sm:text-2xl font-medium">{{ translations['mian.faq-title-3'] }}</h3>
+								<p class="to-grey text-base">{{ translations['mian.faq-desc-3'] }}</p>
 							</div>
 
 							<Button class="!bg-transparent !p-0 shadow-none group-hover:text-primary">

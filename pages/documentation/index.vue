@@ -6,12 +6,12 @@
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>
-								<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+								<NuxtLink :to="localePath('/')"> {{ translations['mian.page-url-home'] }} </NuxtLink>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />
 						<BreadcrumbItem>
-							<BreadcrumbPage>Документация</BreadcrumbPage>
+							<BreadcrumbPage>{{ translations['header.link4'] }}</BreadcrumbPage>
 						</BreadcrumbItem>
 					</BreadcrumbList>
 				</Breadcrumb>
@@ -20,10 +20,10 @@
 			<section class="border-x sm:pl-10 pt-10">
 				<div class="relative lg:grid lg:grid-cols-[minmax(0,1fr)_240px] md:gap-6 xl:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
 					<div>
-						<div class="mb-6 hidden sm:block">
+						<div class="mb-6">
 							<div class="relative w-full">
-								<Input id="search" type="text" placeholder="Поиск продукты" class="pl-6 pr-12 py-4" v-model="search" @input="updateSearchQuery" />
-								<span class="absolute end-0 inset-y-0 flex items-center justify-center pr-6">
+								<Input @keydown.enter="searchProducts" id="search" type="text" placeholder="Поиск продукты" class="pl-6 pr-12 py-4" v-model="search" @input="updateSearchQuery" />
+								<span @click="searchProducts" class="cursor-pointer absolute end-0 inset-y-0 flex items-center justify-center pr-6">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 										<g clip-path="url(#clip0_1692_7078)">
 											<path
@@ -95,8 +95,6 @@
 import { useRoute, useRouter } from 'vue-router';
 import { useDocumentsStore } from '~/stores/documents.js';
 import { useTranslationsStore } from '~/stores/translations.js';
-import { storeToRefs } from 'pinia';
-import { ref, watch } from 'vue';
 
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
@@ -105,33 +103,15 @@ const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
 
-const search = ref(route.query.search || ''); // Agar search query bo'lmasa, bo'sh string qabul qilinadi
+const search = ref('');
 
-// Search queryni yangilash funksiyasi
-const updateSearchQuery = () => {
-	router.push({
-		query: { ...route.query, search: search.value }
-	});
+const searchProducts = () => {
+	if (search.value.trim()) {
+		router.push({ path: localePath('/search'), query: { search: search.value } });
+	}
 };
 
-// useAsyncData bilan search qiymatini o'qish
-const { data: documents } = await useAsyncData(
-	'documents',
-	async () => {
-		return await useDocumentsStore().getDocuments({
-			search: search.value
-		});
-	},
-	{
-		watch: [() => search.value] // search.value ni kuzatib boradi
-	}
-);
-
-// `search` query o'zgarganda yangilab turish
-watch(
-	() => route.query.search,
-	(newSearch) => {
-		search.value = newSearch || '';
-	}
-);
+const { data: documents } = await useAsyncData('documents', async () => {
+	return await useDocumentsStore().getDocuments();
+});
 </script>

@@ -6,12 +6,12 @@
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink as-child>
-								<NuxtLink :to="localePath('/')"> Главный </NuxtLink>
+								<NuxtLink :to="localePath('/')"> {{ translations['mian.page-url-home'] }} </NuxtLink>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />
 						<BreadcrumbItem>
-							<BreadcrumbPage>Контакты </BreadcrumbPage>
+							<BreadcrumbPage>{{ translations['contacts.title'] }} </BreadcrumbPage>
 						</BreadcrumbItem>
 					</BreadcrumbList>
 				</Breadcrumb>
@@ -106,8 +106,7 @@
 									<div class="grid gap-2 w-full">
 										<VField name="name" rules="required" v-model="form.name">
 											<Label for="name"> {{ translations['contacts.name-label'] }} </Label>
-											<Input v-model="form.name" id="login" type="text" :placeholder="translations['contacts.name-input']" />
-											<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
+											<Input v-model="form.name" id="login" type="text" :placeholder="translations['contacts.name-input']" :class="{ 'border-destructive bg-destructive/5': errors.name }" />
 										</VField>
 									</div>
 									<div class="grid gap-2 w-full">
@@ -117,10 +116,9 @@
 										</VField>
 									</div>
 									<div class="grid gap-2 w-full">
-										<VField name="message" rules="required" v-model="form.message">
+										<VField name="message" v-model="form.message">
 											<Label for="message"> {{ translations['contacts.message-label'] }} </Label>
 											<Textarea class="min-h-[125px]" v-model="form.message" id="message" type="text" :placeholder="translations['contacts.message-input']" />
-											<span class="text-sm text-destructive font-medium">{{ errors.message }}</span>
 										</VField>
 									</div>
 									<Button type="submit" :disabled="loading" class="sm:w-auto w-fit sm:ml-auto">
@@ -175,7 +173,8 @@ async function submitForm() {
 		form.email = '';
 		form.message = '';
 		if (res) {
-			showToast('Tez orada siz bilan boglanamiz!', 'success');
+			let text = translations['mian.success-text'];
+			showToast(text, 'success');
 		}
 		console.log(res);
 	} catch (error) {

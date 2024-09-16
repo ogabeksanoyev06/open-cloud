@@ -2,9 +2,11 @@ import { defineStore } from 'pinia';
 import { useAxios } from '@/api/index';
 
 export const useProductsStore = defineStore('products', () => {
+	const topProducts = ref([]);
 	const getTopProducts = async () => {
 		try {
 			let res = await useAxios().getRequest('/top_products');
+			topProducts.value = res.data;
 			return res.data;
 		} catch (error) {
 			console.log('error', error);
@@ -32,6 +34,7 @@ export const useProductsStore = defineStore('products', () => {
 	return {
 		getTopProducts,
 		getProductsInner,
+		topProducts,
 		getTarifs
 	};
 });

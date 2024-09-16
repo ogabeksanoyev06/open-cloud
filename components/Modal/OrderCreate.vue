@@ -106,18 +106,16 @@ const sendOrderCreate = async () => {
 							<div class="grid gap-2">
 								<VField name="name" rules="required" v-model="form.name">
 									<Label for="name"> <span class="text-destructive">*</span> {{ translations['home.name-input'] }} </Label>
-									<Input v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
-									<span class="text-sm text-destructive font-medium">{{ errors.name }}</span>
+									<Input :class="{ 'border-destructive bg-destructive/5': errors.name }" v-model="form.name" id="login" type="text" :placeholder="translations['home.name-label']" />
 								</VField>
 							</div>
 							<div class="grid gap-2">
 								<VField name="phone" rules="required" v-model="form.phone">
 									<Label for="phone"><span class="text-destructive">*</span> {{ translations['home.phone-input'] }} </Label>
 									<div class="relative">
-										<Input @keypress="isNumber($event)" :placeholder="translations['home.phone-label']" v-model="form.phone" class="pl-6" />
+										<Input @keypress="isNumber($event)" :placeholder="translations['home.phone-label']" v-model="form.phone" class="pl-6" :class="{ 'border-destructive bg-destructive/5': errors.phone }" />
 										<span class="absolute start-0 inset-y-0 flex items-center justify-center px-4">+</span>
 									</div>
-									<span class="text-sm text-destructive font-medium">{{ errors.phone }}</span>
 								</VField>
 							</div>
 							<div class="grid gap-2">

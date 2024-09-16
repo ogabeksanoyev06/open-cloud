@@ -1,7 +1,9 @@
 <template>
 	<div class="container">
 		<div class="sm:py-20 py-10 sm:border-x border-grey-1">
-			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center mb-4 sm:mb-10">Наши партнёры</h1>
+			<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-center mb-4 sm:mb-10">
+				{{ translations['partners.title1'] }}
+			</h1>
 			<Swiper
 				:modules="[SwiperAutoplay]"
 				:space-between="0"

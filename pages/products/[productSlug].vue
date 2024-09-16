@@ -14,7 +14,7 @@
 							<div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
 								<ModalConsultationForm>
 									<Button class="sm:w-auto w-full">
-										Заказать
+										{{ translations['calculctor.order'] }}
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 											<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#272727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -23,7 +23,7 @@
 								</ModalConsultationForm>
 								<ModalConsultationForm>
 									<Button variant="outline" class="sm:w-auto w-full border-grey !bg-transparent !text-primary">
-										Получить демо
+										{{ translations['about.hero-btn'] }}
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 											<path d="M5.83301 14.1666L9.16634 9.99996L5.83301 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 											<path d="M10.833 14.1666L14.1663 9.99996L10.833 5.83329" stroke="#B5E275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
