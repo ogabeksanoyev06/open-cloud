@@ -46,9 +46,6 @@
 import { useStatic } from '~/stores/static.js';
 import { useTranslationsStore } from '~/stores/translations.js';
 
-
-
-
 const translationsStore = useTranslationsStore();
 const { translations } = storeToRefs(translationsStore);
 
