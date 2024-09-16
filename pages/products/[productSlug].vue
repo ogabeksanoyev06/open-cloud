@@ -6,9 +6,9 @@
 					<div class="flex flex-col max-w-[720px] w-full gap-10 relative z-10">
 						<div class="flex flex-col gap-10 py-6 max-sm:pb-0 sm:py-20">
 							<div class="flex flex-col gap-5">
-								<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-white">{{ product.title }}</h1>
+								<h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-medium text-white">{{ product?.title }}</h1>
 								<p class="text-white sm:text-grey-2">
-									{{ product.subtitle }}
+									{{ product?.subtitle }}
 								</p>
 							</div>
 							<div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
@@ -33,13 +33,13 @@
 							</div>
 						</div>
 					</div>
-					<img :src="product.image" alt="" class="max-w-[200px] max-h-[200px] object-contain" />
+					<img :src="product?.image" alt="" class="max-w-[200px] max-h-[200px] object-contain" />
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<section class="pt-10 sm:pt-20 text border-x">
-				<div v-html="product.text" class="max-w-[1166px] mx-auto"></div>
+				<div v-html="product?.text" class="max-w-[1166px] mx-auto"></div>
 			</section>
 			<section class="pt-10 sm:pt-20 border-x" v-if="product?.advantages?.length > 0">
 				<h2 class="text-xl md:text-3xl lg:text-4xl font-medium text-center mb-6 sm:mb-8">
@@ -67,7 +67,7 @@
 							</div>
 							<ModalConsultationForm class="w-full sm:w-auto">
 								<Button class="bg-black text-white hover:bg-black/90 w-full" :disabled="loading">
-									{{translations['home.hero-consultation-btn']}}
+									{{ translations['home.hero-consultation-btn'] }}
 
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 										<path d="M5.83325 14.1665L9.16659 9.99984L5.83325 5.83317" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -85,18 +85,10 @@
 				<div class="flex flex-col gap-4 sm:gap-6 sm:flex-row sm:justify-between sm:items-center mb-6 sm:px-6">
 					<h3 class="text-xl md:text-3xl font-medium">{{ translations['product.tarrifs'] }}</h3>
 					<div class="flex items-center rounded-[12px] p-1 sm:p-2 bg-white">
-						<button
-							@click="selectTypeTarif(0)"
-							:class="{ 'bg-primary': tarifsType === 0 }"
-							class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto"
-						>
+						<button @click="selectTypeTarif(0)" :class="{ 'bg-primary': tarifsType === 0 }" class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto">
 							{{ translations['product.day'] }}
 						</button>
-						<button
-							@click="selectTypeTarif(1)"
-							:class="{ 'bg-primary': tarifsType === 1 }"
-							class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto"
-						>
+						<button @click="selectTypeTarif(1)" :class="{ 'bg-primary': tarifsType === 1 }" class="text-grey text-base py-2 sm:py-3 px-8 sm:px-10 hover:bg-primary rounded-[8px] transition-300 w-1/2 sm:w-auto">
 							{{ translations['product.month'] }}
 						</button>
 					</div>
@@ -313,6 +305,8 @@ const translationsStore = useTranslationsStore();
 
 const { translations } = storeToRefs(translationsStore);
 
+const productStore = useProductsStore();
+
 const route = useRoute();
 
 const tarifsType = ref(0);
@@ -350,7 +344,7 @@ const downloadFile = () => {
 };
 
 const { data: product } = await useAsyncData('product', async () => {
-	return await useProductsStore().getProductsInner(route.params.productSlug);
+	return await productStore.getProductsInner(route.params.productSlug);
 });
 
 const { data: tarifs } = await useAsyncData(

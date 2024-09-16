@@ -11,7 +11,14 @@ export const useProductsStore = defineStore('products', () => {
 		}
 	};
 
-
+	const getProductsInner = async (slug) => {
+		try {
+			let res = await useAxios().getRequest(`/products/${slug}`);
+			return res.data;
+		} catch (error) {
+			console.log('error', error);
+		}
+	};
 
 	const getTarifs = async (slug, type) => {
 		try {
@@ -24,6 +31,7 @@ export const useProductsStore = defineStore('products', () => {
 
 	return {
 		getTopProducts,
+		getProductsInner,
 		getTarifs
 	};
 });
